@@ -1,5 +1,6 @@
 'use strict'
 
+var assert = require('./lib/assert')
 var metrics = require('./lib/metrics')
 var TestAgent = require('./lib/agent')
 var testUtil = require('./lib/util')
@@ -25,3 +26,6 @@ exports.TestAgent = TestAgent
 
 /** @type util */
 exports.util = testUtil
+
+/** @type assert */
+exports.assert = assert

@@ -5,6 +5,8 @@ var TestAgent = require('../../lib/agent')
 var shimmer = require('newrelic/lib/shimmer')
 var tap = require('tap')
 
+require('../../lib/assert').extendTap(tap)
+
 tap.afterEach(function(done) {
   if (TestAgent.instance) {
     TestAgent.instance.unload()
@@ -20,15 +22,6 @@ tap.test('new TestAgent', function(t) {
   t.throws(function() {
     var second = new TestAgent()
   }, Error, 'should enforce singleton nature of Agent')
-
-  t.end()
-})
-
-// Check assertion extentions.
-tap.test('TestAgent.extendTap', function(t) {
-  t.notOk(t.transaction, 'should not extend tap without being told to')
-  TestAgent.extendTap(tap)
-  t.ok(t.transaction, 'should extend tap with transaction assertion')
 
   t.end()
 })
