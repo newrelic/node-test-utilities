@@ -1,0 +1,28 @@
+{
+  "name": "newrelic-tester",
+  "version": "0.0.0",
+  "description": "Test library for New Relic instrumentation modules.",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint *.js lib/*",
+    "test": "tap tests/unit/*.tap.js tests/unit/*/*.tap.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@source.datanerd.us:Nodejs-Agent/node-newrelic-tester"
+  },
+  "author": "New Relic Node.js agent team <nodejs@newrelic.com>",
+  "licenses": [
+    {
+      "type": "proprietary",
+      "url": "https://raw.github.com/newrelic/node-newrelic/master/LICENSE"
+    }
+  ],
+  "devDependencies": {
+    "eslint": "^2.13.1",
+    "tap": "^5.7.3"
+  },
+  "dependencies": {
+    "lodash": "^4.13.1"
+  }
+}
