@@ -1,5 +1,5 @@
 {
-  "name": "newrelic-tester",
+  "name": "@newrelic/test-utilities",
   "version": "0.0.0",
   "description": "Test library for New Relic instrumentation modules.",
   "main": "index.js",
