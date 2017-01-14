@@ -9,6 +9,9 @@
     "test": "npm run unit",
     "unit": "tap tests/unit/*.tap.js tests/unit/*/*.tap.js"
   },
+  "bin": {
+    "versioned-tests": "./bin/version-manager.js"
+  },
   "repository": {
     "type": "git",
     "url": "git@source.datanerd.us:Nodejs-Agent/node-newrelic-tester"
@@ -24,12 +27,18 @@
     "node": ">=0.10.0"
   },
   "devDependencies": {
-    "eslint": "^2.13.1",
+    "eslint": "^3.13.1",
     "jsdoc": "^3.4.0",
     "newrelic": "^1.28.1",
-    "tap": "^5.7.3"
+    "tap": "^9.0.3"
   },
   "dependencies": {
-    "lodash": "^4.13.1"
+    "async": "^2.1.4",
+    "colors": "^1.1.2",
+    "concat-stream": "^1.6.0",
+    "glob": "^7.1.1",
+    "lodash": "^4.13.1",
+    "log-update": "^1.0.2",
+    "semver": "^5.3.0"
   }
 }
