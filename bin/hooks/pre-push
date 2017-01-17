@@ -1,0 +1,5 @@
+#! /bin/bash
+
+# Copy this file into your .git/hooks directory to enable it.
+
+npm run lint
