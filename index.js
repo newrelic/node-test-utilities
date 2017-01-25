@@ -6,12 +6,12 @@ var TestAgent = require('./lib/agent')
 var testUtil = require('./lib/util')
 
 /**
- * The `newrelic-tester` library.
+ * The `@newrelic/test-utilities` library.
  *
  * This library is meant to assist with testing instrumentation modules for New
  * Relic's Node.js agent.
  *
- * @module
+ * @module test-utilities
  */
 
 exports = module.exports = function extendTap(tap) {
