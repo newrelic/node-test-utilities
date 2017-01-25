@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: lib/versioned/matrix.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: lib/versioned/matrix.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict'
+
+var semver = require('semver')
+
+
+/**
+ * @interface TestDescriptor
+ * @private
+ *
+ * @description
+ *  Describes all of the tests to be executed and the required dependencies.
+ *
+ * @property {object} engines
+ *  Mapping of engines (i.e. "node") to semver ranges.
+ *
+ * @property {object} dependencies
+ *  Mapping of package names (i.e. "redis") to semver ranges.
+ *
+ * @property {Array.&lt;string>} files
+ *  Array of file names identifying tests to execute.
+ */
+
+/**
+ * @interface PackageVersions
+ * @private
+ *
+ * @description
+ *  Maps package names to all known versions of that package.
+ */
+
+/**
+ * Constructs a test matrix from the given test descriptor and package versions.
+ *
+ * @constructor
+ * @private
+ * @classdesc
+ *  Provides an iteration class for stepping over every possible test
+ *  combination described.
+ *
+ * @param {Array.&lt;TestDescriptor>} tests
+ *  Array of test descriptors for the whole range of things to be executed.
+ *
+ * @param {PackageVersions} pkgVersions
+ *  All the package versions needed to flesh out the test descriptors.
+ */
+function TestMatrix(tests, pkgVersions) {
+  // The tests object is an array of objects pairing package version ranges with
+  // an array of test files. These look like this:
+  //  [{
+  //    "engines": {"node": ">=4"}
+  //    "dependencies": {"redis": ">=1.0.0"},
+  //    "files": ["redis.tap.js"]
+  //  }]
+  //
+  // The pkgVersions object is a pairing of package names to arrays of versions
+  // that look like this:
+  //  {
+  //    "bluebird": ["1.0", "1.1", "1.2", "1.3"],
+  //    "redis": ["1.2", "1.3", "2.0"]
+  //  }
+  //
+  // We want to convert the tests array into an array of objects with package
+  // version iterators and a test file iterator. This should look something like
+  // this:
+  //  [{
+  //    "packages": [{
+  //      "name": "redis",            // &lt;-- Package name.
+  //      "next": 0,                  // &lt;-- Iteration point.
+  //      "versions": [               // &lt;-- List of versions to iterate through.
+  //        "1.2", "1.3", "2.0"
+  //      ]
+  //    }],
+  //    "tests": {
+  //      "files": ["redis.tap.js"],  // &lt;-- List of test files to iterate through.
+  //      "next": 0                   // &lt;-- File iteration point.
+  //    }
+  //  }]
+  this._matrix = tests ? tests.map(function(test) {
+    if (test.engines &amp;&amp; !semver.satisfies(process.version, test.engines.node)) {
+      return {tests: {files: [], next: 0}, packages: []}
+    }
+
+    var task = {
+      tests: {
+        files: test.files,
+        next: 0
+      },
+      packages: null
+    }
+    task.packages = Object.keys(test.dependencies).map(function(pkg) {
+      var wantedVersions = test.dependencies[pkg]
+      var pkgIterator = {
+        name: pkg,
+        next: 0,
+        versions: pkgVersions[pkg].filter(function(v) {
+          return semver.satisfies(v + '.9999', wantedVersions)
+        })
+      }
+      if (pkgIterator.versions.length === 0) {
+        /* eslint-disable no-console */
+        console.error('Warning: no versions match %s@%s', pkg, wantedVersions)
+        /* eslint-enable no-console */
+      }
+      return pkgIterator
+    })
+    return task
+  }) : []
+  this._matrixPos = 0
+  this._length = null
+}
+
+Object.defineProperty(TestMatrix.prototype, 'length', {
+  get: function() {
+    if (this._length === null) {
+      this._length = this._calculateLength()
+    }
+    return this._length
+  }
+})
+
+/**
+ * Peeks at the next test in the matrix without updating the matrix state.
+ */
+TestMatrix.prototype.peek = function() {
+  // For each suite in the test matrix, for each combination of packages, for
+  // each test file.
+  for (var i = this._matrixPos; i &lt; this._matrix.length; ++i) {
+    var packages = null
+    var task = this._matrix[i]
+
+    if (!packages) {
+      packages = this._peekPackages(task.packages)
+
+      // If there are no more package combinations then this test suite is done
+      // and we should move to the next one in the matrix.
+      if (!packages) {
+        continue
+      }
+    }
+
+    do {
+      var tests = task.tests
+      if (tests.next &lt; tests.files.length) {
+        return {
+          packages: packages,
+          test: tests.files[tests.next]
+        }
+      }
+
+      tests.next = 0
+      packages = this._peekPackages(task.packages)
+    } while (packages)
+  }
+
+  // No tests left!
+  return null
+}
+
+/**
+ * Moves the matrix state to the next combination and returns it.
+ */
+TestMatrix.prototype.next = function() {
+  // For each suite in the test matrix, for each combination of packages, for
+  // each test file.
+  for (this._matrixPos; this._matrixPos &lt; this._matrix.length; ++this._matrixPos) {
+    var task = this._matrix[this._matrixPos]
+
+    if (!this._packages) {
+      this._packages = this._getNextPackages(task.packages)
+
+      // If there are no more package combinations then this test suite is done
+      // and we should move to the next one in the matrix.
+      if (!this._packages) {
+        continue
+      }
+    }
+
+    do {
+      var tests = task.tests
+      if (tests.next &lt; tests.files.length) {
+        return {
+          packages: this._packages,
+          test: tests.files[tests.next++] // Yes, post-increment!
+        }
+      }
+
+      tests.next = 0
+      this._packages = this._getNextPackages(task.packages)
+    } while (this._packages)
+  }
+
+  // No tests left!
+  return null
+}
+
+TestMatrix.prototype._peekPackages = function(pkgs) {
+  // If there are no packages associated with this test suite, return nothing.
+  if (!pkgs || !pkgs.length) {
+    return null
+  }
+
+  // With an array of task packages, we want to determine what the next run of
+  // test should use for each of its packages.
+  var nextPackages = {}
+  var bumpNext = false
+  for (var i = 0; i &lt; pkgs.length; ++i) {
+    var pkg = pkgs[i]
+    var next = pkg.next
+    if (bumpNext) {
+      ++next
+      bumpNext = false
+    }
+    if (next >= pkg.versions.length) {
+      // If this package has looped through all its versions, increment the next
+      // package's pointer and reset this one.
+      if (i === pkgs.length - 1) {
+        // If this is the last package and it has gone through all versions then
+        // there is no "next" package set.
+        return null
+      }
+      bumpNext = true
+      next = 0
+    }
+
+    nextPackages[pkg.name] = pkg.versions[next]
+  }
+
+  return nextPackages
+}
+
+TestMatrix.prototype._getNextPackages = function(pkgs) {
+  // If there are no packages associated with this test suite, return nothing.
+  if (!pkgs || !pkgs.length) {
+    return null
+  }
+
+  // With an array of task packages, we want to determine what the next run of
+  // test should use for each of its packages.
+  var nextPackages = {}
+  for (var i = 0; i &lt; pkgs.length; ++i) {
+    var pkg = pkgs[i]
+    if (pkg.next >= pkg.versions.length) {
+      // If this package has looped through all its versions, increment the next
+      // package's pointer and reset this one.
+      if (i === pkgs.length - 1) {
+        // If this is the last package and it has gone through all versions then
+        // there is no "next" package set.
+        return null
+      }
+      ++pkgs[i + 1].next
+      pkg.next = 0
+    }
+    nextPackages[pkg.name] = pkg.versions[pkg.next]
+  }
+
+  // The next run should use the next version of the first package.
+  ++pkgs[0].next
+
+  return nextPackages
+}
+
+TestMatrix.prototype._calculateLength = function() {
+  //  [{
+  //    "packages": [{
+  //      "name": "redis",            // &lt;-- Package name.
+  //      "next": 0,                  // &lt;-- Iteration point.
+  //      "versions": [               // &lt;-- List of versions to iterate through.
+  //        "1.2", "1.3", "2.0"
+  //      ]
+  //    }],
+  //    "tests": {
+  //      "files": ["redis.tap.js"],  // &lt;-- List of test files to iterate through.
+  //      "next": 0                   // &lt;-- File iteration point.
+  //    }
+  //  }]
+  var totalLength = 0
+  for (var i = 0; i &lt; this._matrix.length; ++i) {
+    var suite = this._matrix[i]
+    var pkgCombinations = 1
+    for (var j = 0; j &lt; suite.packages.length; ++j) {
+      pkgCombinations *= suite.packages[j].versions.length
+    }
+    totalLength += pkgCombinations * suite.tests.files.length
+  }
+  return totalLength
+}
+
+module.exports = TestMatrix
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-test-utilities.html">test-utilities</a></li></ul><h3>Classes</h3><ul><li><a href="TestAgent.html">TestAgent</a></li></ul><h3>Namespaces</h3><ul><li><a href="assert.html">assert</a></li><li><a href="util.html">util</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Jan 24 2017 16:42:43 GMT-0800 (PST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
