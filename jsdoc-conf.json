@@ -1,9 +1,15 @@
 {
+  "opts": {
+    "destination": "docs/",
+    "readme": "./README.md"
+  },
+  "source": {
+    "exclude": ["node_modules", "tests"],
+    "includePattern": ".+\\.js(?:doc)?$"
+  },
   "plugins": [
     "plugins/markdown"
   ],
-  "markdown": {
-  },
   "templates": {
     "cleverLinks": true
   }

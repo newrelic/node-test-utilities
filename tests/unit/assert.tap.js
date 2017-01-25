@@ -1,8 +1,6 @@
 'use strict'
 
-var _ = require('lodash')
 var assert = require('../../lib/assert')
-var Metrics = require('newrelic/lib/metrics')
 var tap = require('tap')
 var TestAgent = require('../../lib/agent')
 
@@ -69,8 +67,8 @@ tap.test('assert.transaction', function(t) {
 
 tap.test('assert.metrics', function(t) {
   var metrics = helper.agent.metrics
-  metrics.getOrCreateMetric('foobar').incrementCallCount();
-  metrics.getOrCreateMetric('fizbang').incrementCallCount();
+  metrics.getOrCreateMetric('foobar').incrementCallCount()
+  metrics.getOrCreateMetric('fizbang').incrementCallCount()
 
   t.doesNotThrow(function() {
     assert.metrics(['foobar'])
@@ -112,8 +110,8 @@ tap.test('assert.metrics', function(t) {
 
 tap.test('assert.exactMetrics', function(t) {
   var metrics = helper.agent.metrics
-  metrics.getOrCreateMetric('foobar').incrementCallCount();
-  metrics.getOrCreateMetric('fizbang').incrementCallCount();
+  metrics.getOrCreateMetric('foobar').incrementCallCount()
+  metrics.getOrCreateMetric('fizbang').incrementCallCount()
 
   t.throws(function() {
     assert.exactMetrics(['foobar'])
