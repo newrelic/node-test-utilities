@@ -4,6 +4,7 @@
 
 require('colors')
 
+var cmd = require('commander')
 var glob = require('glob')
 var path = require('path')
 
@@ -11,28 +12,47 @@ var printers = require('../lib/versioned/printers')
 var Suite = require('../lib/versioned/suite')
 
 
-var testGlob = process.argv[2]
-if (!testGlob) {
-  console.error('Usage: version-manager <test-glob>')
-  process.exit(1)
+cmd
+  .arguments('<test-glob>')
+  .option('-j, --jobs <n>', 'Max parallel test executions [5]', int, 5)
+  .option('-i, --install <n>', 'Max parallel installations [1]', int, 1)
+  .option('-p, --print <mode>', 'Specify print mode [pretty]', printMode, 'pretty')
+  .action(function(testGlob) {
+    console.log('Running tests matching:', testGlob)
+
+    glob(testGlob, {
+      ignore: '**/node_modules/**',
+      absolute: true
+    }, function(err, files) {
+      // Check that all is right with the world.
+      if (err) {
+        console.error('Error globbing:', err)
+        process.exit(2)
+      }
+      if (!files || !files.length) {
+        console.error('No files matched', testGlob)
+        process.exit(0)
+      }
+
+      run(files)
+    })
+  })
+
+cmd.parse(process.argv)
+
+function int(val) {
+  return parseInt(val, 10)
 }
 
-console.log('Running tests matching:', testGlob)
-
-glob(testGlob, {
-  ignore: '**/node_modules/**',
-  absolute: true
-}, function(err, files) {
-  // Check that all is right with the world.
-  if (err) {
-    console.error('Error globbing:', err)
-    process.exit(2)
+function printMode(mode) {
+  if (['pretty', 'simple'].indexOf(mode) === -1) {
+    console.error('Invalid print mode "' + mode + '"')
+    process.exit(5)
   }
-  if (!files || !files.length) {
-    console.error('No files matched', testGlob)
-    process.exit(0)
-  }
+  return mode
+}
 
+function run(files) {
   // Clean up the files we'll be running.
   // TODO: Another case to update with `Set` once Node v0.8 and v0.10 are dropped.
   files = files.sort().map(function(p) {
@@ -44,10 +64,10 @@ glob(testGlob, {
   }, {}))
 
   // Create our test structures.
-  var viewer = process.env.TRAVIS
+  var viewer = process.env.TRAVIS || cmd.print === 'simple'
     ? new printers.SimplePrinter(files, {refresh: 100})
     : new printers.PrettyPrinter(files, {refresh: 100})
-  var runner = new Suite(directories, {limit: 5})
+  var runner = new Suite(directories, {limit: cmd.jobs, installLimit: cmd.install})
   runner.on('update', viewer.update.bind(viewer))
   runner.on('end', viewer.end.bind(viewer))
 
@@ -71,4 +91,4 @@ glob(testGlob, {
       console.log('PASS'.bold.green)
     }
   })
-})
+}
