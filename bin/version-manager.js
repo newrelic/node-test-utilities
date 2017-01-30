@@ -17,6 +17,9 @@ cmd
   .option('-j, --jobs <n>', 'Max parallel test executions [5]', int, 5)
   .option('-i, --install <n>', 'Max parallel installations [1]', int, 1)
   .option('-p, --print <mode>', 'Specify print mode [pretty]', printMode, 'pretty')
+  .option('--major', 'Only iterate on major versions of packages.')
+  .option('--minor', 'Iterate over minor versions of packages (default).')
+  .option('--patch', 'Iterate over every patch version of packages.')
   .action(function(testGlob) {
     console.log('Running tests matching:', testGlob)
 
@@ -63,11 +66,17 @@ function run(files) {
     return dirs
   }, {}))
 
+  var mode = cmd.major ? 'major' : cmd.patch ? 'patch' : 'minor'
+
   // Create our test structures.
   var viewer = process.env.TRAVIS || cmd.print === 'simple'
     ? new printers.SimplePrinter(files, {refresh: 100})
     : new printers.PrettyPrinter(files, {refresh: 100})
-  var runner = new Suite(directories, {limit: cmd.jobs, installLimit: cmd.install})
+  var runner = new Suite(directories, {
+    limit: cmd.jobs,
+    installLimit: cmd.install,
+    versions: mode
+  })
   runner.on('update', viewer.update.bind(viewer))
   runner.on('end', viewer.end.bind(viewer))
 
