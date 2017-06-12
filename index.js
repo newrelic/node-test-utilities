@@ -1,7 +1,6 @@
 'use strict'
 
 var assert = require('./lib/assert')
-var metrics = require('./lib/metrics')
 var TestAgent = require('./lib/agent')
 var testUtil = require('./lib/util')
 
@@ -13,13 +12,6 @@ var testUtil = require('./lib/util')
  *
  * @module test-utilities
  */
-
-exports = module.exports = function extendTap(tap) {
-  metrics.extendTap(tap)
-  TestAgent.extendTap(tap)
-
-  return exports
-}
 
 /** @type TestAgent */
 exports.TestAgent = TestAgent
