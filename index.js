@@ -13,6 +13,12 @@ var testUtil = require('./lib/util')
  * @module test-utilities
  */
 
+exports = module.exports = function extendTap(tap) {
+  TestAgent.extendTap(tap)
+
+  return exports
+}
+
 /** @type TestAgent */
 exports.TestAgent = TestAgent
 
