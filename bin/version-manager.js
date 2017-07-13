@@ -17,6 +17,8 @@ cmd
   .option('-j, --jobs <n>', 'Max parallel test executions [5]', int, 5)
   .option('-i, --install <n>', 'Max parallel installations [1]', int, 1)
   .option('-p, --print <mode>', 'Specify print mode [pretty]', printMode, 'pretty')
+  .option('-s, --save', 'Save the results of the tests, implies `--continue`.')
+  .option('-c, --continue', 'Run through all of the tests, regardless of failure.')
   .option('--major', 'Only iterate on major versions of packages.')
   .option('--minor', 'Iterate over minor versions of packages (default).')
   .option('--patch', 'Iterate over every patch version of packages.')
@@ -48,7 +50,7 @@ function int(val) {
 }
 
 function printMode(mode) {
-  if (['pretty', 'simple'].indexOf(mode) === -1) {
+  if (!/^(?:pretty|simple)$/.test(mode)) {
     console.error('Invalid print mode "' + mode + '"')
     process.exit(5)
   }
@@ -68,31 +70,45 @@ function run(files) {
 
   var mode = cmd.major ? 'major' : cmd.patch ? 'patch' : 'minor'
 
-  // Create our test structures.
-  var viewer = process.env.TRAVIS || cmd.print === 'simple'
-    ? new printers.SimplePrinter(files, {refresh: 100})
-    : new printers.PrettyPrinter(files, {refresh: 100})
-  var runner = new Suite(directories, {
+  // Determine the printer setup we're using.
+  var Printer = process.env.TRAVIS || cmd.print === 'simple'
+    ? printers.SimplePrinter
+    : printers.PrettyPrinter
+  var viewer = null
+  if (cmd.save) {
+    cmd.continue = true
+    printers.push(printers.HtmlPrinter)
+    viewer = new printers.MultiPrinter(files, {
+      refresh: 100,
+      printers: [Printer, printers.HtmlPrinter]
+    })
+  } else {
+    viewer = new Printer(files, {refresh: 100})
+  }
+
+  // Set up the test suite.
+  var suite = new Suite(directories, {
     limit: cmd.jobs,
     installLimit: cmd.install,
-    versions: mode
+    versions: mode,
+    continue: cmd.continue || false
   })
-  runner.on('update', viewer.update.bind(viewer))
-  runner.on('end', viewer.end.bind(viewer))
+  suite.on('update', viewer.update.bind(viewer))
+  suite.on('end', viewer.end.bind(viewer))
 
-  runner.on('packageResolved', function(pkg, versions) {
+  suite.on('packageResolved', function(pkg, versions) {
     console.log(pkg + ': ' + versions.length)
   })
 
   // Off to the races!
-  runner.start(function(err) {
+  suite.start(function(err) {
     if (err) {
       console.log('ERROR'.bold.red)
       console.error(err)
       process.exit(3)
-    } else if (runner.failures.length) {
-      console.log('FAIL'.bold.red + ' (' + runner.failures.length + ')')
-      runner.failures.forEach(function(test) {
+    } else if (suite.failures.length) {
+      console.log('FAIL'.bold.red + ' (' + suite.failures.length + ')')
+      suite.failures.forEach(function(test) {
         console.log('  ' + test.currentRun.test.red)
       })
       process.exit(4)
