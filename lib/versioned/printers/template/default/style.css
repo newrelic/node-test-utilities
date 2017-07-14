@@ -1,0 +1,114 @@
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.suite {
+  margin-bottom: 15px;
+}
+
+.package {
+  margin-bottom: 10px;
+}
+
+.result .output {
+  width: 100%;
+  display: none;
+  white-space: pre;
+  font-family: monospace;
+  line-height: 16px;
+  font-size: 12px;
+  text-align: left;
+  position: absolute;
+  top: 25px;
+  left: 0;
+  color: black;
+  background-color: #f4e4ff;
+  box-shadow: #aaa 0 6px 15px;
+  z-index: 1;
+}
+.result.selected .output {
+  display: block;
+}
+.result .output > div {
+  display: inline-block;
+  width: 45%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre-wrap;
+  vertical-align: top;
+  margin: 5px;
+}
+
+.row {
+  height: 25px;
+  padding: 0 5px;
+  position: relative;
+  width: 100%;
+  width: calc(100% - 10px);
+}
+.row.suite-name {
+  background-color: #546;
+  color: #edf;
+  font-size: 36px;
+  height: 45px;
+}
+
+.row.results-title {
+  font-size: 24px;
+  height: 30px;
+  background-color: #bac;
+}
+.row.results-version {
+  background-color: #dce;
+}
+.row.results-version > .cell {
+  border-right: 1px solid #bbb;
+}
+
+.cell {
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  vertical-align: middle;
+  border-right: 1px solid #ccc;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.cell.file-name {
+  width: 300px;
+  text-align: left;
+  text-overflow: ellipsis;
+}
+
+.cell.result {
+  background-color: #eee;
+  color: #888;
+  cursor: pointer;
+}
+.cell.result:hover {
+  background-color: #ddd;
+}
+.cell.result.success {
+  background-color: #bfb;
+  color: #484;
+}
+.cell.result.success:hover {
+  background-color: #aea;
+}
+.cell.result.success.selected {
+  background-color: #9d9;
+}
+.cell.result.failure, .cell.result.error {
+  background-color: #fbb;
+  color: #844;
+}
+.cell.result.failure:hover, .cell.result.error:hover {
+  background-color: #eaa;
+}
+.cell.result.failure.selected, .cell.result.error.selected {
+  background-color: #d99;
+}
