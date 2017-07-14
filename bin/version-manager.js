@@ -77,7 +77,6 @@ function run(files) {
   var viewer = null
   if (cmd.save) {
     cmd.continue = true
-    printers.push(printers.HtmlPrinter)
     viewer = new printers.MultiPrinter(files, {
       refresh: 100,
       printers: [Printer, printers.HtmlPrinter]
@@ -105,13 +104,14 @@ function run(files) {
     if (err) {
       console.log('ERROR'.bold.red)
       console.error(err)
-      process.exit(3)
+      // TODO: process.exitCode is not supported on Node 0.10
+      process.exitCode = 3
     } else if (suite.failures.length) {
       console.log('FAIL'.bold.red + ' (' + suite.failures.length + ')')
       suite.failures.forEach(function(test) {
         console.log('  ' + test.currentRun.test.red)
       })
-      process.exit(4)
+      process.exitCode = 4
     } else {
       console.log('PASS'.bold.green)
     }
