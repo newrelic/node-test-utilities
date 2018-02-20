@@ -4,6 +4,7 @@ var s = Date.now()
 var TestAgent = require('../../lib/agent')
 var shimmer = require('newrelic/lib/shimmer')
 var tap = require('tap')
+var sinon = require('sinon')
 
 require('../../lib/assert').extendTap(tap)
 
@@ -98,6 +99,21 @@ tap.test('TestAgent instance', function(t) {
       t.equal(helper.getTransaction(), tx, 'should return current tx when in one')
     })
 
+    t.end()
+  })
+
+  t.test('TestAgent#registerInstrumentation', function(t) {
+    var opts = {
+      type: 'web-framework',
+      moduleName: 'test',
+      onRequire: function() {}
+    }
+
+    var spy = sinon.spy(shimmer, 'registerInstrumentation')
+    helper.registerInstrumentation(opts)
+    t.equal(spy.args[0][0], opts, 'should call shimmer.registerInstrumentation')
+
+    spy.restore()
     t.end()
   })
 
