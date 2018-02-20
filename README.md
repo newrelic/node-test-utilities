@@ -82,3 +82,63 @@ tap.test((t) => {
   })
 })
 ```
+
+## Versioned Tests
+
+The `versioned-tests` script can be used to execute a series of tests against
+several versions of dependencies. For example, the command below would run all
+the tests against every minor version of the specified dependencies.
+
+```sh
+$ versioned-tests --minor tests/versioned/*.tap.js
+```
+
+You can then specify the versions you want to run this against by adding a
+`package.json` file in your tests directory. This package file should have a
+`tests` array describing each suite. For example, the one shown below will test
+different files for each version of `mongodb` from `v1.0.0` through to the latest.
+
+```json
+{
+  "name": "mongodb-tests",
+  "version": "0.0.0",
+  "private": true,
+  "tests": [
+    {
+      "engines": {
+        "node": ">=0.10 <7"
+      },
+      "dependencies": {
+        "mongodb": "^1"
+      },
+      "files": [
+        "v1-tests.tap.js"
+      ]
+    },
+    {
+      "engines": {
+        "node": ">=0.10"
+      },
+      "dependencies": {
+        "mongodb": ">=2.1 <3"
+      },
+      "files": [
+        "v2-tests.tap.js",
+        "shared-tests.tap.js"
+      ]
+    },
+    {
+      "engines": {
+        "node": ">=4"
+      },
+      "dependencies": {
+        "mongodb": ">=3"
+      },
+      "files": [
+        "v3-tests.tap.js",
+        "shared-tests.tap.js"
+      ]
+    }
+  ]
+}
+```
