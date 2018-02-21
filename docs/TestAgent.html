@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2>TestAgent</h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>TestAgent<span class="signature">(conf<span class="signature-attributes">opt, nullable</span>, flags<span class="signature-attributes">opt, nullable</span>)</span><span class="type-signature"></span></h2>
         
             <div class="class-description"><p>A helper for managing the newrelic agent in tests.</p>
 <p>This class is a singleton that should be instantiated at the start of each
@@ -49,7 +49,9 @@ can be found as the static member <code>TestAgent.instance</code>.</p>
     <h2>Constructor</h2>
     
 
+    
     <h4 class="name" id="TestAgent"><span class="type-signature"></span>new TestAgent<span class="signature">(conf<span class="signature-attributes">opt, nullable</span>, flags<span class="signature-attributes">opt, nullable</span>)</span><span class="type-signature"></span></h4>
+    
 
     
 
@@ -227,6 +229,8 @@ flags if specified.</p>
 
 
 
+
+
     <h5>Example</h5>
     
     <pre class="prettyprint"><code>var helper = null
@@ -253,7 +257,9 @@ flags if specified.</p>
 
     
 
-     
+    
+
+    
 
     
 
@@ -344,7 +350,9 @@ flags if specified.</p>
 
     
 
+    
     <h4 class="name" id=".makeInstrumented"><span class="type-signature">(static) </span>makeInstrumented<span class="signature">(conf<span class="signature-attributes">opt, nullable</span>, flags<span class="signature-attributes">opt, nullable</span>)</span><span class="type-signature"> &rarr; {<a href="TestAgent.html">TestAgent</a>}</span></h4>
+    
 
     
 
@@ -545,12 +553,16 @@ instrumentation.</p>
 
 
 
+
+
         
             
 
     
 
+    
     <h4 class="name" id="getTransaction"><span class="type-signature"></span>getTransaction<span class="signature">()</span><span class="type-signature"> &rarr; {Transaction}</span></h4>
+    
 
     
 
@@ -649,12 +661,16 @@ instrumentation.</p>
 
 
 
+
+
         
             
 
     
 
+    
     <h4 class="name" id="instrument"><span class="type-signature"></span>instrument<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="TestAgent.html">TestAgent</a>}</span></h4>
+    
 
     
 
@@ -757,12 +773,246 @@ after the test(s) run.</p>
 
 
 
+
+
         
             
 
     
 
+    
+    <h4 class="name" id="registerInstrumentation"><span class="type-signature"></span>registerInstrumentation<span class="signature">(opts)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Registers instrumentation in the shimmer.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>opts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Instrumentation options object.</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Module type ('generic', 'database', 'message', 'web-framework').</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>moduleName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Module name.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>onRequire</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Module instrumentation.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="lib_agent.js.html">lib/agent.js</a>, <a href="lib_agent.js.html#line192">line 192</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="runInTransaction"><span class="type-signature"></span>runInTransaction<span class="signature">(type<span class="signature-attributes">opt</span>, func)</span><span class="type-signature"> &rarr; {*}</span></h4>
+    
 
     
 
@@ -957,12 +1207,16 @@ after the test(s) run.</p>
 
 
 
+
+
         
             
 
     
 
+    
     <h4 class="name" id="unload"><span class="type-signature"></span>unload<span class="signature">()</span><span class="type-signature"></span></h4>
+    
 
     
 
@@ -1043,6 +1297,8 @@ that tests aren't stepping on eachothers' toes.</p>
 
 
 
+
+
         
     
 
@@ -1065,7 +1321,7 @@ that tests aren't stepping on eachothers' toes.</p>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Jan 24 2017 16:42:43 GMT-0800 (PST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Feb 20 2018 16:09:55 GMT-0800 (PST)
 </footer>
 
 <script> prettyPrint(); </script>
