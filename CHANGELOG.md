@@ -1,3 +1,9 @@
+### v1.1.0 (2018-02-20):
+
+- Added `TestAgent#registerInstrumentation` method.
+
+  This method allows third-party instrumentations to be registered in a test environment.
+
 ### v1.0.0 (2018-02-20):
 
 - Added `TestAgent` helper class.
