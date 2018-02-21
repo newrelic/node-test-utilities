@@ -4,7 +4,7 @@
   "description": "Test library for New Relic instrumentation modules.",
   "main": "index.js",
   "scripts": {
-    "docs": "rm -r docs; jsdoc -c ./jsdoc-conf.json -d docs -r *.js lib/",
+    "docs": "git rm -r docs && jsdoc -c ./jsdoc-conf.json -d docs -r *.js lib/ && git add docs",
     "publish-docs": "./bin/publish-docs.sh",
     "lint": "eslint *.js lib/*",
     "test": "npm run unit",
