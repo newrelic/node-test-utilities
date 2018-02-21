@@ -17,8 +17,8 @@ tap.test('TestMatrix construction', function(t) {
       dependencies: {redis: '>=1.0.0'},
       files: ['redis.tap.js', 'other.tap.js']
     }], {
-      bluebird: ['1.0', '1.1', '1.2', '1.3'],
-      redis: ['1.2', '1.3', '2.0']
+      bluebird: ['1.0.8', '1.1.1', '1.2.4', '2.0.7'],
+      redis: ['1.2.3', '1.3.4', '2.0.1']
     })
   }, 'should construct without erroring')
 
@@ -41,8 +41,8 @@ tap.test('TestMatrix methods and members', function(t) {
         dependencies: {redis: '>=1.0.0'},
         files: ['redis.tap.js', 'other.tap.js']
       }], {
-        bluebird: ['1.0', '1.1', '1.2', '1.3'],
-        redis: ['1.2', '1.3', '2.0']
+        bluebird: ['1.0.8', '1.1.1', '1.2.4', '2.0.7'],
+        redis: ['1.2.3', '1.3.4', '2.0.1']
       })
       done()
     } catch (e) {
@@ -65,7 +65,7 @@ tap.test('TestMatrix methods and members', function(t) {
   t.test('TestMatrix#peek', function(t) {
     var peek = matrix.peek()
     t.deepEqual(peek, {
-      packages: {redis: '1.2'},
+      packages: {redis: '1.2.3'},
       test: 'redis.tap.js'
     }, 'should return the next test to execute')
 
@@ -78,19 +78,19 @@ tap.test('TestMatrix methods and members', function(t) {
   t.test('TestMatrix#next', function(t) {
     var next = matrix.next()
     t.deepEqual(next, {
-      packages: {redis: '1.2'},
+      packages: {redis: '1.2.3'},
       test: 'redis.tap.js'
     }, 'should return the next test to execute')
 
     next = matrix.next()
     t.deepEqual(next, {
-      packages: {redis: '1.2'},
+      packages: {redis: '1.2.3'},
       test: 'other.tap.js'
     }, 'should advance the state of the matrix')
 
     next = matrix.next()
     t.deepEqual(next, {
-      packages: {redis: '1.3'},
+      packages: {redis: '1.3.4'},
       test: 'redis.tap.js'
     }, 'should advance the package versions when out of test files')
 

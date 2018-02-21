@@ -12,8 +12,8 @@ tap.test('Test construction', function(t) {
   var test = null
   t.doesNotThrow(function() {
     test = new Test(MOCK_TEST_DIR, {
-      bluebird: ['1.0', '1.1', '1.2', '1.3'],
-      redis: ['1.0', '2.0', '2.1']
+      bluebird: ['1.0.8', '1.1.1', '1.2.4', '2.0.7'],
+      redis: ['1.0.0', '2.0.1', '2.1.0']
     })
   }, 'should not throw when constructed')
 
@@ -28,8 +28,8 @@ tap.test('Test methods and members', function(t) {
   t.beforeEach(function(done) {
     try {
       test = new Test(MOCK_TEST_DIR, {
-        bluebird: ['1.0', '1.1', '1.2', '1.3'],
-        redis: ['1.0', '2.0', '2.1']
+        bluebird: ['1.0.8', '1.1.1', '1.2.4', '2.0.7'],
+        redis: ['1.0.0', '2.0.1', '2.1.0']
       })
       done()
     } catch (e) {
@@ -40,7 +40,7 @@ tap.test('Test methods and members', function(t) {
   t.test('Test#peek', function(t) {
     var peek = test.peek()
     t.deepEqual(peek, {
-      packages: {redis: '1.0'},
+      packages: {redis: '1.0.0'},
       test: MOCK_TEST_DIR + '/redis.mock.js'
     }, 'should return the next test to execute')
 
@@ -53,19 +53,19 @@ tap.test('Test methods and members', function(t) {
     var next = test.next()
 
     t.deepEqual(next, {
-      packages: {redis: '1.0'},
+      packages: {redis: '1.0.0'},
       test: MOCK_TEST_DIR + '/redis.mock.js'
     }, 'should return the next test to execute')
 
     next = test.next()
     t.deepEqual(next, {
-      packages: {redis: '1.0'},
+      packages: {redis: '1.0.0'},
       test: MOCK_TEST_DIR + '/other.mock.js'
     }, 'should advance the state of the test')
 
     next = test.next()
     t.deepEqual(next, {
-      packages: {redis: '2.0'},
+      packages: {redis: '2.0.1'},
       test: MOCK_TEST_DIR + '/redis.mock.js'
     }, 'should advance the package versions when out of test files')
 
@@ -129,8 +129,8 @@ tap.test('Test methods and members', function(t) {
 
       /* eslint-disable max-len */
       t.match(testRun.stdout, new RegExp([
-        '(?:mock-tests@1\\.0\\.0 /.+?/tests/unit/versioned/mock-tests',
-        '└── )?redis@1\\.0\\.0.*?\n?',
+        '(?:\\+\\s|mock-tests@1\\.0\\.0 /.+?/tests/unit/versioned/mock-tests',
+        '└── )?redis@1\\.0\\.0.*?\n?(?:\nupdated \\d+ packages? in \\d(?:\\.\\d+)?s)?',
         'stdout - redis\\.mock\\.js',
         ''
       ].join('\n')), 'should have expected stdout')
