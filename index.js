@@ -14,7 +14,7 @@ var testUtil = require('./lib/util')
  */
 
 exports = module.exports = function extendTap(tap) {
-  TestAgent.extendTap(tap)
+  assert.extendTap(tap)
 
   return exports
 }
