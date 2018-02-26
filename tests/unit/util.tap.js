@@ -38,3 +38,20 @@ tap.test('testUtil.removeListenerByName', function(t) {
 
   t.end()
 })
+
+tap.test('testUtil.getNewRelicLocation', function(t) {
+  var startingPath = process.env.AGENT_PATH
+  t.tearDown(function() {
+    process.env.AGENT_PATH = startingPath
+  })
+
+  var getNewRelicLocation = testUtil.getNewRelicLocation
+
+  delete process.env.AGENT_PATH
+  t.equal(getNewRelicLocation(), 'newrelic', 'should default to installed module')
+
+  process.env.AGENT_PATH = 'foo/bar'
+  t.equal(getNewRelicLocation(), 'foo/bar', 'should use environtment value when set')
+
+  t.end()
+})

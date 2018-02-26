@@ -1,12 +1,14 @@
 'use strict'
-var s = Date.now()
 
-var TestAgent = require('../../lib/agent')
-var shimmer = require('newrelic/lib/shimmer')
-var tap = require('tap')
 var sinon = require('sinon')
+var tap = require('tap')
+var TestAgent = require('../../lib/agent')
+var testUtil = require('../../lib/util')
+
+var shimmer = require(testUtil.getNewRelicLocation() + '/lib/shimmer')
 
 require('../../lib/assert').extendTap(tap)
+
 
 tap.afterEach(function(done) {
   if (TestAgent.instance) {
@@ -21,7 +23,7 @@ tap.test('new TestAgent', function(t) {
   // Check singleton-ness
   t.equal(helper, TestAgent.instance, 'should make instance available on class')
   t.throws(function() {
-    var second = new TestAgent()
+    return new TestAgent()
   }, Error, 'should enforce singleton nature of Agent')
 
   t.end()
