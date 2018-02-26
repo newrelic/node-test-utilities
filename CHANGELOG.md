@@ -1,3 +1,7 @@
+### v1.1.1 (2018-02-23):
+
+- Fixed invalid `TestAgent.extendTap` reference in `index.js` to `assert.extendTap`.
+
 ### v1.1.0 (2018-02-20):
 
 - Added `TestAgent#registerInstrumentation` method.
