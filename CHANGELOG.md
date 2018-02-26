@@ -1,3 +1,7 @@
+### v1.1.2 (2018-02-23):
+
+- Added `agent#registerInstrumentation` method to registering third-party instrumentations in a testing environment.
+
 ### v1.1.1 (2018-02-23):
 
 - Fixed invalid `TestAgent.extendTap` reference in `index.js` to `assert.extendTap`.
