@@ -4,6 +4,7 @@
 
 require('colors')
 
+var a = require('async')
 var cmd = require('commander')
 var glob = require('glob')
 var path = require('path')
@@ -11,37 +12,46 @@ var path = require('path')
 var printers = require('../lib/versioned/printers')
 var Suite = require('../lib/versioned/suite')
 
-
+var testGlobs = []
 cmd
-  .arguments('<test-glob>')
+  .arguments('[test-globs...]')
   .option('-j, --jobs <n>', 'Max parallel test executions [5]', int, 5)
   .option('-i, --install <n>', 'Max parallel installations [1]', int, 1)
   .option('-p, --print <mode>', 'Specify print mode [pretty]', printMode, 'pretty')
   .option('--major', 'Only iterate on major versions of packages.')
   .option('--minor', 'Iterate over minor versions of packages (default).')
   .option('--patch', 'Iterate over every patch version of packages.')
-  .action(function(testGlob) {
-    console.log('Running tests matching:', testGlob)
-
-    glob(testGlob, {
-      ignore: '**/node_modules/**',
-      absolute: true
-    }, function(err, files) {
-      // Check that all is right with the world.
-      if (err) {
-        console.error('Error globbing:', err)
-        process.exit(2)
-      }
-      if (!files || !files.length) {
-        console.error('No files matched', testGlob)
-        process.exit(0)
-      }
-
-      run(files)
-    })
+  .action(function(_testGlobs) {
+    testGlobs = _testGlobs
   })
 
 cmd.parse(process.argv)
+
+a.waterfall([
+  function buildGlobs(cb) {
+    var globs = []
+    testGlobs.forEach(function(file) {
+      if (/(?:package\.json|\.tap\.js)$/.test(file)) {
+        globs.push(file)
+      } else {
+        globs.push(path.join(file, 'package.json'))
+        globs.push(path.join(file, '**/package.json'))
+      }
+    })
+
+    if (!globs.length) {
+      var cwd = process.cwd()
+      globs.push(path.join(cwd, 'test/versioned/**/package.json'))
+      globs.push(path.join(cwd, 'tests/versioned/**/package.json'))
+      globs.push(path.join(cwd, 'node_modules/**/tests/versioned/**/package.json'))
+    }
+
+    console.log('Finding tests in %d globs', globs.length)
+    cb(null, globs)
+  },
+  resolveGlobs,
+  run
+])
 
 function int(val) {
   return parseInt(val, 10)
@@ -53,6 +63,34 @@ function printMode(mode) {
     process.exit(5)
   }
   return mode
+}
+
+function resolveGlobs(globs, cb) {
+  a.map(globs, function(g, cb) {
+    glob(g, {
+      ignore: '**/node_modules/**',
+      absolute: true
+    }, cb)
+  }, function afterGlobbing(err, resolved) {
+    if (err) {
+      console.error('Error globbing:', err)
+      process.exit(2)
+    }
+    var files = resolved.reduce(function mergeResolved(tests, b) {
+      b.forEach(function(file) {
+        if (tests.indexOf(file) === -1) {
+          tests.push(file)
+        }
+      })
+      return tests
+    })
+    if (!files || !files.length) {
+      console.error('No files matched', globs)
+      process.exit(0)
+    }
+
+    cb(null, files)
+  })
 }
 
 function run(files) {
