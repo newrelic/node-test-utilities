@@ -43,6 +43,7 @@ a.waterfall([
       var cwd = process.cwd()
       globs.push(path.join(cwd, 'test/versioned/**/package.json'))
       globs.push(path.join(cwd, 'tests/versioned/**/package.json'))
+      globs.push(path.join(cwd, 'node_modules/**/tests/versioned/package.json'))
       globs.push(path.join(cwd, 'node_modules/**/tests/versioned/**/package.json'))
     }
 
@@ -67,10 +68,7 @@ function printMode(mode) {
 
 function resolveGlobs(globs, cb) {
   a.map(globs, function(g, cb) {
-    glob(g, {
-      ignore: '**/node_modules/**',
-      absolute: true
-    }, cb)
+    glob(g, {absolute: true}, cb)
   }, function afterGlobbing(err, resolved) {
     if (err) {
       console.error('Error globbing:', err)
@@ -78,12 +76,13 @@ function resolveGlobs(globs, cb) {
     }
     var files = resolved.reduce(function mergeResolved(tests, b) {
       b.forEach(function(file) {
-        if (tests.indexOf(file) === -1) {
+        var inNodeModules = (/\/node_modules\/(?!@newrelic\/)/g).test(file)
+        if (!inNodeModules && tests.indexOf(file) === -1) {
           tests.push(file)
         }
       })
       return tests
-    })
+    }, [])
     if (!files || !files.length) {
       console.error('No files matched', globs)
       process.exit(0)
