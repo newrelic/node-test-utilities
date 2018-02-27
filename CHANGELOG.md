@@ -1,3 +1,21 @@
+### v1.2.0 (2018-02-26):
+
+- Added check for `AGENT_PATH` environment variable.
+
+  This environment variable can be used to specify the location of the `newrelic` package that these test utilities will load. It should be the path to the root directory of the agent. If the environment variable is not set, then the `newrelic` module that was installed (e.g. is in a `node_modules` directory) is used instead.
+
+- With this change, the following syntaxes are now valid:
+
+  * `versioned-tests`: Will look for tests with the following globs:
+    * `test/versioned/**/package.json`
+    * `tests/versioned/**/package.json`
+    * `node_modules/**/tests/versioned/**/package.json` <-- For the agent to seamlessly work with the tests of deps!
+  * `versioned-tests test/versioned/hapi`: Will look with these globs:
+    * `test/versioned/hapi/package.json`
+    * `test/versioned/hapi/**/package.json`
+  * `versioned-tests test/versioned/mongodb/package.json`: Will look only at:
+    * `test/versioned/mongodb/package.json`
+
 ### v1.1.2 (2018-02-23):
 
 - Added `agent#registerInstrumentation` method to registering third-party instrumentations in a testing environment.
