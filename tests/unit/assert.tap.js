@@ -37,7 +37,7 @@ tap.test('assert.extendTap', function(t) {
 tap.test('assert.transaction', function(t) {
   t.throws(function() {
     assert.transaction(null)
-  }, {message: /is null/}, 'should throw if no transaction given')
+  }, {message: /is <null>/}, 'should throw if no transaction given')
   t.throws(function() {
     assert.transaction({})
   }, {message: /is not a.*?Transaction/}, 'should throw if not a Transaction')
