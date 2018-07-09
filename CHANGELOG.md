@@ -1,8 +1,17 @@
+
+### v1.2.1 (2018-07-10):
+
+- Fixed default messages for tap assertions.
+
 ### v1.2.0 (2018-02-26):
 
 - Added check for `AGENT_PATH` environment variable.
 
-  This environment variable can be used to specify the location of the `newrelic` package that these test utilities will load. It should be the path to the root directory of the agent. If the environment variable is not set, then the `newrelic` module that was installed (e.g. is in a `node_modules` directory) is used instead.
+  This environment variable can be used to specify the location of the `newrelic`
+  package that these test utilities will load. It should be the path to the root
+  directory of the agent. If the environment variable is not set, then the
+  `newrelic` module that was installed (e.g. is in a `node_modules` directory)
+  is used instead.
 
 - With this change, the following syntaxes are now valid:
 
