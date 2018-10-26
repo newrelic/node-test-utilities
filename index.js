@@ -19,6 +19,9 @@ exports = module.exports = function extendTap(tap) {
   return exports
 }
 
+// Export utility methods directly.
+Object.assign(exports, testUtil)
+
 /** @type TestAgent */
 exports.TestAgent = TestAgent
 

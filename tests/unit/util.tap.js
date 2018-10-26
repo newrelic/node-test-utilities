@@ -1,10 +1,11 @@
 'use strict'
 
-var EventEmitter = require('events').EventEmitter
-var tap = require('tap')
-var testUtil = require('../../lib/util')
+const EventEmitter = require('events').EventEmitter
+const tap = require('tap')
+const TestAgent = require('../../lib/agent')
+const testUtil = require('../../lib/util')
 
-tap.test('testUtil.isFunction', function(t) {
+tap.test('testUtil.isFunction', (t) => {
   t.ok(testUtil.isFunction(function() {}), 'should return true for functions')
   t.notOk(testUtil.isFunction(true), 'should return false for not-functions')
   t.notOk(testUtil.isFunction(1234), 'should return false for not-functions')
@@ -15,7 +16,7 @@ tap.test('testUtil.isFunction', function(t) {
   t.end()
 })
 
-tap.test('testUtil.removeListenerByName', function(t) {
+tap.test('testUtil.removeListenerByName', (t) => {
   t.plan(2)
   var emitter = new EventEmitter()
 
@@ -39,10 +40,10 @@ tap.test('testUtil.removeListenerByName', function(t) {
   t.end()
 })
 
-tap.test('testUtil.getNewRelicLocation', function(t) {
+tap.test('testUtil.getNewRelicLocation', (t) => {
   var startingPath = process.env.AGENT_PATH
   t.tearDown(function() {
-    process.env.AGENT_PATH = startingPath
+    process.env.AGENT_PATH = (startingPath || '')
   })
 
   var getNewRelicLocation = testUtil.getNewRelicLocation
@@ -53,5 +54,30 @@ tap.test('testUtil.getNewRelicLocation', function(t) {
   process.env.AGENT_PATH = 'foo/bar'
   t.equal(getNewRelicLocation(), 'foo/bar', 'should use environtment value when set')
 
+  t.end()
+})
+
+tap.test('testUtil.isLocalhost', (t) => {
+  t.ok(testUtil.isLocalhost('localhost'), 'should be true for localhost')
+  t.ok(testUtil.isLocalhost('127.0.0.1'), 'should be true for home IP')
+  t.notOk(testUtil.isLocalhost('example.com'), 'should be false for domain name')
+  t.end()
+})
+
+tap.test('testUtil.getDelocalizedHostname', (t) => {
+  // Need an agent instance for `getDelocalizedHostname`.
+  const agent = new TestAgent()
+  t.tearDown(() => agent.unload())
+
+  t.equal(
+    testUtil.getDelocalizedHostname('foobar'),
+    'foobar',
+    'should not change non-local names'
+  )
+  t.notEqual(
+    testUtil.getDelocalizedHostname('localhost'),
+    'localhost',
+    'should change localhost'
+  )
   t.end()
 })
