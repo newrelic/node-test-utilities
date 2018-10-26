@@ -28,28 +28,7 @@ cmd
 cmd.parse(process.argv)
 
 a.waterfall([
-  function buildGlobs(cb) {
-    var globs = []
-    testGlobs.forEach(function(file) {
-      if (/(?:package\.json|\.tap\.js)$/.test(file)) {
-        globs.push(file)
-      } else {
-        globs.push(path.join(file, 'package.json'))
-        globs.push(path.join(file, '**/package.json'))
-      }
-    })
-
-    if (!globs.length) {
-      var cwd = process.cwd()
-      globs.push(path.join(cwd, 'test/versioned/**/package.json'))
-      globs.push(path.join(cwd, 'tests/versioned/**/package.json'))
-      globs.push(path.join(cwd, 'node_modules/**/tests/versioned/package.json'))
-      globs.push(path.join(cwd, 'node_modules/**/tests/versioned/**/package.json'))
-    }
-
-    console.log('Finding tests in %d globs', globs.length)
-    cb(null, globs)
-  },
+  buildGlobs,
   resolveGlobs,
   run
 ])
@@ -66,6 +45,31 @@ function printMode(mode) {
   return mode
 }
 
+function buildGlobs(cb) {
+  // Turn the given globs into searches for package.json files.
+  var globs = []
+  testGlobs.forEach(function(file) {
+    if (/(?:package\.json|\.tap\.js)$/.test(file)) {
+      globs.push(file)
+    } else {
+      globs.push(path.join(file, 'package.json'))
+      globs.push(path.join(file, '**/package.json'))
+    }
+  })
+
+  // If no globs were given, then look for globs in the default paths.
+  if (!globs.length) {
+    var cwd = process.cwd()
+    globs.push(path.join(cwd, 'test/versioned/**/package.json'))
+    globs.push(path.join(cwd, 'tests/versioned/**/package.json'))
+    globs.push(path.join(cwd, 'node_modules/**/tests/versioned/package.json'))
+    globs.push(path.join(cwd, 'node_modules/**/tests/versioned/**/package.json'))
+  }
+
+  console.log('Finding tests in %d globs', globs.length)
+  cb(null, globs)
+}
+
 function resolveGlobs(globs, cb) {
   a.map(globs, function(g, cb) {
     glob(g, {absolute: true}, cb)
@@ -76,6 +80,8 @@ function resolveGlobs(globs, cb) {
     }
     var files = resolved.reduce(function mergeResolved(tests, b) {
       b.forEach(function(file) {
+        // Filter out any package.json files from our `node_modules` directory
+        // which aren't from the `@newrelic` scope.
         var inNodeModules = (/\/node_modules\/(?!@newrelic\/)/g).test(file)
         if (!inNodeModules && tests.indexOf(file) === -1) {
           tests.push(file)
