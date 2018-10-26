@@ -127,14 +127,13 @@ tap.test('Test methods and members', function(t) {
 
       t.notOk(testRun.failed, 'should not be marked as failed')
 
-      /* eslint-disable max-len */
       t.match(testRun.stdout, new RegExp([
-        '(?:\\+\\s|mock-tests@1\\.0\\.0 /.+?/tests/unit/versioned/mock-tests',
-        '└── )?redis@1\\.0\\.0.*?\n?(?:\nupdated \\d+ packages? in \\d(?:\\.\\d+)?s)?',
-        'stdout - redis\\.mock\\.js',
-        ''
-      ].join('\n')), 'should have expected stdout')
-      /* eslint-enable max-len */
+        '(?:\\+\\s|mock-tests@1\\.0\\.0 /.+?/tests/unit/versioned/mock-tests\n',
+        '└── )?redis@1\\.0\\.0.*?\n?',
+        '(?:\nupdated \\d+ packages? in \\d(?:\\.\\d+)?s)?\n?',
+        '(?:\nfound \\d+ vulnerabilities)?\n?',
+        '\nstdout - redis\\.mock\\.js\n'
+      ].join('')), 'should have expected stdout')
 
       t.equal(testRun.stderr, 'stderr - redis.mock.js\n', 'should have expected stderr')
 
