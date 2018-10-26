@@ -1,4 +1,14 @@
 
+### v2.0.0 (2018-10-26):
+
+- Dropped support for Node 0.10 and Node 0.12.
+
+- Added `isLocalhost` and `getDelocalizedHostname` to utilities methods.
+
+  These methods are useful for determining the host name as the New Relic agent
+  sees it. When making metrics and event attributes, the delocalized hostname is
+  what the agent will use.
+
 ### v1.2.1 (2018-07-10):
 
 - Fixed default messages for tap assertions.
@@ -18,7 +28,8 @@
   * `versioned-tests`: Will look for tests with the following globs:
     * `test/versioned/**/package.json`
     * `tests/versioned/**/package.json`
-    * `node_modules/**/tests/versioned/**/package.json` <-- For the agent to seamlessly work with the tests of deps!
+    * `node_modules/**/tests/versioned/**/package.json` <-- For the agent to
+      seamlessly work with the tests of deps!
   * `versioned-tests test/versioned/hapi`: Will look with these globs:
     * `test/versioned/hapi/package.json`
     * `test/versioned/hapi/**/package.json`
@@ -27,7 +38,8 @@
 
 ### v1.1.2 (2018-02-23):
 
-- Added `agent#registerInstrumentation` method to registering third-party instrumentations in a testing environment.
+- Added `agent#registerInstrumentation` method to registering third-party
+  instrumentations in a testing environment.
 
 ### v1.1.1 (2018-02-23):
 
