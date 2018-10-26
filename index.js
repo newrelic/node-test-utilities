@@ -13,6 +13,9 @@ var testUtil = require('./lib/util')
  * @module test-utilities
  */
 
+// Export utility methods directly.
+Object.assign(exports, testUtil)
+
 exports = module.exports = function extendTap(tap) {
   assert.extendTap(tap)
 
