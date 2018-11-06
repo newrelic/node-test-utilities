@@ -1,4 +1,8 @@
 
+### v2.0.1 (2018-11-06):
+
+- Versioned test runner now uses `--no-package-lock` when installing test deps.
+
 ### v2.0.0 (2018-10-26):
 
 - Dropped support for Node 0.10 and Node 0.12.
