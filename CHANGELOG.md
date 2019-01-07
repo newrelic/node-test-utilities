@@ -1,4 +1,12 @@
 
+### v3.0.0 (2019-01-07):
+
+- Added `setState` argument to `TestAgent` constructor, which allows for
+automatic data collection in tests by default.
+
+- Removed obsoleted `flags` argument from `TestAgent` constructor. Feature
+flags are now accounted for in standard config.
+
 ### v2.0.1 (2018-11-06):
 
 - Versioned test runner now uses `--no-package-lock` when installing test deps.
