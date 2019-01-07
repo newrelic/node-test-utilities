@@ -26,6 +26,15 @@ tap.test('new TestAgent', function(t) {
     return new TestAgent()
   }, Error, 'should enforce singleton nature of Agent')
 
+  t.equal(helper.agent._state, 'started', 'should default to `started` state')
+
+  t.end()
+})
+
+tap.test('new TestAgent with false setState arg', function(t) {
+  var helper = new TestAgent(null, false)
+  t.equal(helper.agent._state, 'stopped', 'should be in initial `stopped` state')
+
   t.end()
 })
 
@@ -37,6 +46,15 @@ tap.test('TestAgent.makeInstrumented', function(t) {
   t.type(helper, TestAgent, 'should construct a TestAgent')
   t.notEqual(Module._load, origLoad, 'should patch module')
   t.ok(shimmer.debug, 'should enable debug mode')
+
+  t.equal(helper.agent._state, 'started', 'should default to `started` state')
+
+  t.end()
+})
+
+tap.test('TestAgent.makeInstrumented with false setState arg', function(t) {
+  var helper = TestAgent.makeInstrumented(null, false)
+  t.equal(helper.agent._state, 'stopped', 'should be in initial `stopped` state')
 
   t.end()
 })
