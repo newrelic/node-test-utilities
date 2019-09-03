@@ -1,3 +1,6 @@
+### v3.1.0 (2019-09-03):
+
+- Added `--skip` flag to allow for skipping certain test suites.
 
 ### v3.0.0 (2019-01-07):
 
