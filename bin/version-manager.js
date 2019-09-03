@@ -18,6 +18,7 @@ cmd
   .option('-j, --jobs <n>', 'Max parallel test executions [5]', int, 5)
   .option('-i, --install <n>', 'Max parallel installations [1]', int, 1)
   .option('-p, --print <mode>', 'Specify print mode [pretty]', printMode, 'pretty')
+  .option('-s, --skip <keyword>', 'Skip files containing the supplied keyword')
   .option('--major', 'Only iterate on major versions of packages.')
   .option('--minor', 'Iterate over minor versions of packages (default).')
   .option('--patch', 'Iterate over every patch version of packages.')
@@ -82,9 +83,14 @@ function resolveGlobs(globs, cb) {
       b.forEach(function(file) {
         // Filter out any package.json files from our `node_modules` directory
         // which aren't from the `@newrelic` scope.
-        var inNodeModules = (/\/node_modules\/(?!@newrelic\/)/g).test(file)
-        if (!inNodeModules && tests.indexOf(file) === -1) {
-          tests.push(file)
+        const inNodeModules = (/\/node_modules\/(?!@newrelic\/)/g).test(file)
+
+        if (!inNodeModules) {
+          const shouldSkip = cmd.skip && (file.indexOf(cmd.skip) >= 0)
+
+          if (!shouldSkip && tests.indexOf(file) === -1) {
+            tests.push(file)
+          }
         }
       })
       return tests
