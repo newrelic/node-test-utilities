@@ -1,3 +1,18 @@
+### v3.2.0 (2019-11-12):
+
+- Added new format for versioned test
+
+  Dependency version may now be sampled down to a constant number of versions.
+  For example:
+  ```
+  "dependencies": {
+    "redis": {
+      "versions": ">1.0.0",
+      "samples": 10
+    }
+  }
+  ```
+
 ### v3.1.0 (2019-09-03):
 
 - Added `--skip` flag to allow for skipping certain test suites.
