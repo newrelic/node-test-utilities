@@ -27,7 +27,6 @@ cmd
   })
 
 cmd.parse(process.argv)
-let skip = cmd.skip ? cmd.skip.split(',') : []
 
 a.waterfall([
   buildGlobs,
@@ -87,16 +86,13 @@ function resolveGlobs(globs, cb) {
         const inNodeModules = (/\/node_modules\/(?!@newrelic\/)/g).test(file)
 
         if (!inNodeModules) {
-          const shouldSkip = skip.includes(file)
-          const alreadySkipped = tests.include(file)
-          console.log('file, shouldSkip', file, shouldSkip)
+          const shouldSkip = cmd.skip && (file.indexOf(cmd.skip) >= 0)
 
-          if (!shouldSkip && !alreadySkipped) {
+          if (!shouldSkip && tests.indexOf(file) === -1) {
             tests.push(file)
           }
         }
       })
-      console.error('tests: ', tests)
       return tests
     }, [])
     if (!files || !files.length) {
