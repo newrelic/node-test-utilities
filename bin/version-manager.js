@@ -18,7 +18,7 @@ cmd
   .option('-j, --jobs <n>', 'Max parallel test executions [5]', int, 5)
   .option('-i, --install <n>', 'Max parallel installations [1]', int, 1)
   .option('-p, --print <mode>', 'Specify print mode [pretty]', printMode, 'pretty')
-  .option('-s, --skip <keyword>', 'Skip files containing the supplied keyword')
+  .option('-s, --skip <keyword>[,<keyword>]', 'Skip files containing the supplied keyword(s)')
   .option('--major', 'Only iterate on major versions of packages.')
   .option('--minor', 'Iterate over minor versions of packages (default).')
   .option('--patch', 'Iterate over every patch version of packages.')
@@ -27,6 +27,7 @@ cmd
   })
 
 cmd.parse(process.argv)
+let skip = cmd.skip ? cmd.skip.split(',') : []
 
 a.waterfall([
   buildGlobs,
@@ -86,9 +87,10 @@ function resolveGlobs(globs, cb) {
         const inNodeModules = (/\/node_modules\/(?!@newrelic\/)/g).test(file)
 
         if (!inNodeModules) {
-          const shouldSkip = cmd.skip && (file.indexOf(cmd.skip) >= 0)
+          const shouldSkip = skip.some(s => file.indexOf(s) >= 0)
+          const duplicate = tests.includes(file)
 
-          if (!shouldSkip && tests.indexOf(file) === -1) {
+          if (!shouldSkip && !duplicate) {
             tests.push(file)
           }
         }
