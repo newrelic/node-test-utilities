@@ -1,3 +1,7 @@
+### v3.3.0 (2020-05-20):
+
+- Added the ability to skip tests using multiple keywords
+
 ### v3.2.0 (2019-11-12):
 
 - Added new format for versioned test
