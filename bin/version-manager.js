@@ -89,12 +89,14 @@ function resolveGlobs(globs, cb) {
         if (!inNodeModules) {
           const shouldSkip = skip.includes(file)
           const alreadySkipped = tests.include(file)
+          console.log('file, shouldSkip', file, shouldSkip)
 
           if (!shouldSkip && !alreadySkipped) {
             tests.push(file)
           }
         }
       })
+      console.error('tests: ', tests)
       return tests
     }, [])
     if (!files || !files.length) {
