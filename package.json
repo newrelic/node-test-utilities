@@ -18,12 +18,7 @@
     "url": "git@github.com:newrelic/node-test-utilities"
   },
   "author": "New Relic Node.js agent team <nodejs@newrelic.com>",
-  "licenses": [
-    {
-      "type": "proprietary",
-      "url": "https://raw.github.com/newrelic/node-newrelic/master/LICENSE"
-    }
-  ],
+  "license": "Apache-2.0",
   "engines": {
     "node": ">=8.0"
   },
