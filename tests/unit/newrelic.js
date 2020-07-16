@@ -1,3 +1,8 @@
+/*
+ * Copyright 2020 New Relic Corporation. All rights reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 exports.config = {
   app_name           : ['newrelic-tester unit tests'],
   license_key        : 'license key here',
