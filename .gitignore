@@ -29,3 +29,6 @@ package-lock.json
 
 # VS Code settings
 .vscode
+
+# Instanbul code coverage files
+.nyc_output
