@@ -1,6 +1,7 @@
 [![Community Project header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Community_Project.png)](https://opensource.newrelic.com/oss-category/#community-project)
 
-# New Relic Test Utilities
+# New Relic Test Utilities [![Test Utilities CI][1]][2]
+
 Library full of test utilities and helpers for New Relic instrumentation modules.
 The full documentation for this module can be
 [found on GitHub](https://newrelic.github.io/node-test-utilities).
@@ -209,3 +210,6 @@ If you believe you have found a security vulnerability in this project or any of
 New Relic Test Utilities is licensed under the [Apache 2.0](http://apache.org/licenses/LICENSE-2.0.txt) License.
 
 New Relic Test Utilities also uses source code from third-party libraries. You can find full details on which libraries are used and the terms under which they are licensed in the third-party notices document.
+
+[1]: https://github.com/newrelic/node-test-utilities/workflows/Test%20Utilities%20CI/badge.svg
+[2]: https://github.com/newrelic/node-test-utilities/actions?query=workflow%3A%22Test+Utilities+CI%22
