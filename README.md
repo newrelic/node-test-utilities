@@ -1,19 +1,34 @@
+[![Community Project header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Community_Project.png)](https://opensource.newrelic.com/oss-category/#community-project)
 
-# New Relic Test Utilities
+# New Relic Test Utilities [![Test Utilities CI][1]][2]
+
 Library full of test utilities and helpers for New Relic instrumentation modules.
 The full documentation for this module can be
 [found on GitHub](https://newrelic.github.io/node-test-utilities).
 
-## TestAgent Helper
-The {@link TestAgent} class helps set up a New Relic agent suitable for tests.
-With this you can run your tests within transactions without having to actually
-set up a full New Relic application. The helper should be created and torn down
-for each test to ensure you are running in a clean environment each time. In `tap`
+## Installation
+It can be installed and used as such:
+
+```
+npm install @newrelic/test-utilities
+```
+```js
+// index.js
+require('@newrelic/test-utilities')
+```
+
+## Usage
+
+### TestAgent Helper
+The TestAgent class helps set up a New Relic agent suitable for tests. With
+this you can run your tests within transactions without having to actually set
+up a full New Relic application. The helper should be created and torn down for
+each test to ensure you are running in a clean environment each time. In `tap`
 this may look like this:
 
 ```js
 tap.test('some test suite', (t) => {
-  var helper = null
+  let helper = null
   t.beforeEach((done) => {
     helper = utils.TestAgent.makeInstrumented()
     done()
@@ -33,7 +48,7 @@ tap.test('some test suite', (t) => {
 })
 ```
 
-## Assertions
+### Assertions
 There are a number of assertions provided to help write your tests. Each of
 these assertions can either be used directly (`utils.assert.segments(...)`) or
 as tap tests (`t.segments(...)`). In the direct use case they will throw
@@ -41,14 +56,14 @@ exceptions, and thus can be used like any other assertion library. Here are a
 few examples of using them:
 
 ```js
-var tap = require('tap')
-var utils = require('@newrelic/test-utilities')
+let tap = require('tap')
+let utils = require('@newrelic/test-utilities')
 
 // This adds all the assertions to tap's `Test` class.
 utils.assert.extendTap(tap)
 
 tap.test((t) => {
-  var helper = utils.TestAgent.makeInstrumented()
+  let helper = utils.TestAgent.makeInstrumented()
   t.tearDown(() => helper.unload())
 
   helper.runInTransaction((tx) => {
@@ -83,7 +98,7 @@ tap.test((t) => {
 })
 ```
 
-## Versioned Tests
+### Versioned Tests
 
 The `versioned-tests` script can be used to execute a series of tests against
 several versions of dependencies. For example, the command below would run all
@@ -142,3 +157,59 @@ different files for each version of `mongodb` from `v1.0.0` through to the lates
   ]
 }
 ```
+
+## Testing
+The module includes a suite of unit and functional tests which should be used to
+verify that your changes don't break existing functionality.
+
+All tests are stored in `tests/` and are written using
+[Node-Tap](https://www.npmjs.com/package/tap) with the extension `.tap.js`.
+
+To run the full suite, run: `npm test`.
+
+Individual test scripts include:
+
+```
+npm run lint
+npm run unit
+```
+
+## Support
+Should you need assistance with New Relic products, you are in good hands with several support channels.
+
+If the issue has been confirmed as a bug or is a feature request, please file a GitHub issue.
+
+**Support Channels**
+
+* [GitHub Documentation](https://newrelic.github.io/node-test-utilities): Test Utilities specific documentation
+* [New Relic Documentation](https://docs.newrelic.com/docs/agents/nodejs-agent): Comprehensive guidance for using our platform
+* [New Relic Community](https://discuss.newrelic.com/c/support-products-agents/node-js-agent/): The best place to engage in troubleshooting questions
+* [New Relic Developer](https://developer.newrelic.com/): Resources for building a custom observability applications
+* [New Relic University](https://learn.newrelic.com/): A range of online training for New Relic users of every level
+
+
+## Privacy
+At New Relic we take your privacy and the security of your information seriously, and are committed to protecting your information. We must emphasize the importance of not sharing personal data in public forums, and ask all users to scrub logs and diagnostic information for sensitive information, whether personal, proprietary, or otherwise.
+
+We define “Personal Data” as any information relating to an identified or identifiable individual, including, for example, your name, phone number, post code or zip code, Device ID, IP address and email address.
+
+Please review [New Relic’s General Data Privacy Notice](https://newrelic.com/termsandconditions/privacy) for more information.
+
+## Contributing
+We encourage your contributions to improve New Relic Test Utilities! Keep in mind when you submit your pull request, you'll need to sign the CLA via the click-through using CLA-Assistant. You only have to sign the CLA one time per project.
+
+If you have any questions, or to execute our corporate CLA, required if your contribution is on behalf of a company, please drop us an email at opensource@newrelic.com.
+
+**A note about vulnerabilities**
+
+As noted in our [security policy](https://github.com/newrelic/node-test-utilities/security/policy), New Relic is committed to the privacy and security of our customers and their data. We believe that providing coordinated disclosure by security researchers and engaging with the security community are important means to achieve our security goals.
+
+If you believe you have found a security vulnerability in this project or any of New Relic's products or websites, we welcome and greatly appreciate you reporting it to New Relic through [HackerOne](https://hackerone.com/newrelic).
+
+## License
+New Relic Test Utilities is licensed under the [Apache 2.0](http://apache.org/licenses/LICENSE-2.0.txt) License.
+
+New Relic Test Utilities also uses source code from third-party libraries. You can find full details on which libraries are used and the terms under which they are licensed in the third-party notices document.
+
+[1]: https://github.com/newrelic/node-test-utilities/workflows/Test%20Utilities%20CI/badge.svg
+[2]: https://github.com/newrelic/node-test-utilities/actions?query=workflow%3A%22Test+Utilities+CI%22
