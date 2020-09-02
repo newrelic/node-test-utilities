@@ -5,12 +5,12 @@
 
 'use strict'
 
-var sinon = require('sinon')
-var tap = require('tap')
-var TestAgent = require('../../lib/agent')
-var testUtil = require('../../lib/util')
+const sinon = require('sinon')
+const tap = require('tap')
+const TestAgent = require('../../lib/agent')
+const testUtil = require('../../lib/util')
 
-var shimmer = require(testUtil.getNewRelicLocation() + '/lib/shimmer')
+const shimmer = require(testUtil.getNewRelicLocation() + '/lib/shimmer')
 
 require('../../lib/assert').extendTap(tap)
 
@@ -23,7 +23,7 @@ tap.afterEach(function(done) {
 })
 
 tap.test('new TestAgent', function(t) {
-  var helper = new TestAgent()
+  const helper = new TestAgent()
 
   // Check singleton-ness
   t.equal(helper, TestAgent.instance, 'should make instance available on class')
@@ -37,17 +37,17 @@ tap.test('new TestAgent', function(t) {
 })
 
 tap.test('new TestAgent with false setState arg', function(t) {
-  var helper = new TestAgent(null, false)
+  const helper = new TestAgent(null, false)
   t.equal(helper.agent._state, 'stopped', 'should be in initial `stopped` state')
 
   t.end()
 })
 
 tap.test('TestAgent.makeInstrumented', function(t) {
-  var Module = require('module')
-  var origLoad = Module._load
+  const Module = require('module')
+  const origLoad = Module._load
 
-  var helper = TestAgent.makeInstrumented()
+  const helper = TestAgent.makeInstrumented()
   t.type(helper, TestAgent, 'should construct a TestAgent')
   t.notEqual(Module._load, origLoad, 'should patch module')
   t.ok(shimmer.debug, 'should enable debug mode')
@@ -58,14 +58,14 @@ tap.test('TestAgent.makeInstrumented', function(t) {
 })
 
 tap.test('TestAgent.makeInstrumented with false setState arg', function(t) {
-  var helper = TestAgent.makeInstrumented(null, false)
+  const helper = TestAgent.makeInstrumented(null, false)
   t.equal(helper.agent._state, 'stopped', 'should be in initial `stopped` state')
 
   t.end()
 })
 
 tap.test('TestAgent instance', function(t) {
-  var helper = null
+  let helper = null
 
   t.beforeEach(function(done) {
     helper = new TestAgent()
@@ -81,8 +81,8 @@ tap.test('TestAgent instance', function(t) {
   })
 
   t.test('TestAgent#instrument', function(t) {
-    var Module = require('module')
-    var origLoad = Module._load
+    const Module = require('module')
+    const origLoad = Module._load
 
     helper.instrument()
     t.notEqual(Module._load, origLoad, 'should patch module')
@@ -92,8 +92,8 @@ tap.test('TestAgent instance', function(t) {
   })
 
   t.test('TestAgent#unload', function(t) {
-    var Module = require('module')
-    var origLoad = Module._load
+    const Module = require('module')
+    const origLoad = Module._load
 
     helper.instrument()
     helper.unload()
@@ -106,7 +106,7 @@ tap.test('TestAgent instance', function(t) {
   })
 
   t.test('TestAgent#runInTransaction', function(t) {
-    var invoked = false
+    let invoked = false
 
     helper.runInTransaction(function(tx) {
       invoked = true
@@ -128,13 +128,13 @@ tap.test('TestAgent instance', function(t) {
   })
 
   t.test('TestAgent#registerInstrumentation', function(t) {
-    var opts = {
+    const opts = {
       type: 'web-framework',
       moduleName: 'test',
       onRequire: function() {}
     }
 
-    var spy = sinon.spy(shimmer, 'registerInstrumentation')
+    const spy = sinon.spy(shimmer, 'registerInstrumentation')
     helper.registerInstrumentation(opts)
     t.equal(spy.args[0][0], opts, 'should call shimmer.registerInstrumentation')
 
