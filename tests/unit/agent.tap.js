@@ -142,5 +142,14 @@ tap.test('TestAgent instance', function(t) {
     t.end()
   })
 
+  t.test('TestAgent#getAgentApi', (t) => {
+    const api = helper.getAgentApi()
+
+    t.ok(api)
+    t.equal(api.agent, helper.agent)
+
+    t.end()
+  })
+
   t.autoend()
 })
