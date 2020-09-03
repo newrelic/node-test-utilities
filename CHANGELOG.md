@@ -1,19 +1,23 @@
+### v4.1.0 (2020-09-03):
+
+- Added TestAgent.getAgentApi() function that returns an agent API instance for the underlying agent instance.
+
 ### v4.0.0 (2020-07-21):
-* Updated to Apache 2.0 license.
-* Bumped minimum dev dependency of newrelic (agent) to 6.11 for license matching.
-* Updated metric retrieval from agent for `assert.metrics` to match newer agent versions.
+- Updated to Apache 2.0 license.
+- Bumped minimum dev dependency of newrelic (agent) to 6.11 for license matching.
+- Updated metric retrieval from agent for `assert.metrics` to match newer agent versions.
 
   **Breaking:** assertions are now only compatible with newrelic (agent) versions 6+.
-* Added third party notices file and metadata for dependencies.
-* Updated readme with more detail.
-* Added issue templates for bugs and enhancements.
-* Added code of conduct file.
-* Added contributing guide.
-* Added pull request template.
-* Migrated CI to GitHub Actions.
-* Added copyright headers to all source files.
-* Added .vscode to .gitignore.
-* Added additional items to .npmignore.
+- Added third party notices file and metadata for dependencies.
+- Updated readme with more detail.
+- Added issue templates for bugs and enhancements.
+- Added code of conduct file.
+- Added contributing guide.
+- Added pull request template.
+- Migrated CI to GitHub Actions.
+- Added copyright headers to all source files.
+- Added .vscode to .gitignore.
+- Added additional items to .npmignore.
 
 ### v3.3.0 (2020-05-20):
 
