@@ -152,6 +152,20 @@ tap.test('assert.segments', function(t) {
     assert.segments(root, [{name: 'child', children: [{name: 'grandchild'}]}])
   }, 'should work with nested segments')
 
+  const grandChild2 = child.add('grandchild')
+  grandChild2.add('great grandchild')
+  t.doesNotThrow(() => {
+    assert.segments(root, [{
+      name: 'child',
+      children: [{
+        name: 'grandchild',
+        children: [{
+          name: 'great grandchild'
+        }]
+      }]
+    }])
+  }, 'should honor position for identical siblings')
+
   t.throws(function() {
     assert.segments(root, [{name: 'doesNotExist'}])
   }, {
