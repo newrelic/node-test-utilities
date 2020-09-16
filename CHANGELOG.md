@@ -1,3 +1,7 @@
+### v4.1.1 (2020-09-16):
+
+- Improved handling of soft-matching segments for cases where siblings have duplicate names.
+
 ### v4.1.0 (2020-09-03):
 
 - Added TestAgent.getAgentApi() function that returns an agent API instance for the underlying agent instance.
