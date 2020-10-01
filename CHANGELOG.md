@@ -1,3 +1,9 @@
+### v4.1.2 (2020-10-01):
+
+- Creates config instance via Config.createInstance() to pass to agent instead of using Config.initialize().
+
+  Previously, the agent and created segments could end up with different config instances resulting in config updates (such as attribute configuration) not propagating correctly for tests. Now, the agent uses the same initialized singleton similar to regular execution.
+
 ### v4.1.1 (2020-09-16):
 
 - Improved handling of soft-matching segments for cases where siblings have duplicate names.
