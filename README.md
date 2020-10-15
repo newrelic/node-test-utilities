@@ -7,6 +7,7 @@ The full documentation for this module can be
 [found on GitHub](https://newrelic.github.io/node-test-utilities).
 
 ## Installation
+
 It can be installed and used as such:
 
 ```
@@ -17,6 +18,10 @@ npm install @newrelic/test-utilities
 require('@newrelic/test-utilities')
 ```
 
+<!-- ## Getting Started
+
+>[Simple steps to start working with the software similar to a "Hello World"]
+ -->
 ## Usage
 
 ### TestAgent Helper
@@ -175,6 +180,7 @@ npm run unit
 ```
 
 ## Support
+
 Should you need assistance with New Relic products, you are in good hands with several support channels.
 
 If the issue has been confirmed as a bug or is a feature request, please file a GitHub issue.
@@ -193,9 +199,10 @@ At New Relic we take your privacy and the security of your information seriously
 
 We define “Personal Data” as any information relating to an identified or identifiable individual, including, for example, your name, phone number, post code or zip code, Device ID, IP address and email address.
 
-Please review [New Relic’s General Data Privacy Notice](https://newrelic.com/termsandconditions/privacy) for more information.
+For more information, review [New Relic’s General Data Privacy Notice](https://newrelic.com/termsandconditions/privacy).
 
-## Contributing
+## Contribute
+
 We encourage your contributions to improve New Relic Test Utilities! Keep in mind when you submit your pull request, you'll need to sign the CLA via the click-through using CLA-Assistant. You only have to sign the CLA one time per project.
 
 If you have any questions, or to execute our corporate CLA, required if your contribution is on behalf of a company, please drop us an email at opensource@newrelic.com.
@@ -205,6 +212,10 @@ If you have any questions, or to execute our corporate CLA, required if your con
 As noted in our [security policy](https://github.com/newrelic/node-test-utilities/security/policy), New Relic is committed to the privacy and security of our customers and their data. We believe that providing coordinated disclosure by security researchers and engaging with the security community are important means to achieve our security goals.
 
 If you believe you have found a security vulnerability in this project or any of New Relic's products or websites, we welcome and greatly appreciate you reporting it to New Relic through [HackerOne](https://hackerone.com/newrelic).
+
+If you would like to contribute to this project, review [these guidelines](./CONTRIBUTING.md).
+
+To [all contributors](https://github.com/newrelic/node-test-utilities/graphs/contributors), we thank you!  Without your contribution, this project would not be what it is today.  We also host a community project page dedicated to [New Relic Node Test Utilities](https://opensource.newrelic.com/projects/newrelic/node-test-utilities).
 
 ## License
 New Relic Test Utilities is licensed under the [Apache 2.0](http://apache.org/licenses/LICENSE-2.0.txt) License.
