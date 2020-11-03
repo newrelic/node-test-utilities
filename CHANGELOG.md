@@ -1,4 +1,4 @@
-### v5.0.0 (2020-11-02):
+### v5.0.0 (2020-11-03):
 
 - Added Node v14.x to CI.
 - Removed Node v8.x from CI.
