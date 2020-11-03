@@ -1,3 +1,9 @@
+### v5.0.0 (2020-11-03):
+
+- Added Node v14.x to CI.
+- Removed Node v8.x from CI.
+- Updates to README to match New Relic OSS template.
+
 ### v4.1.2 (2020-10-01):
 
 - Creates config instance via Config.createInstance() to pass to agent instead of using Config.initialize().
