@@ -186,7 +186,7 @@ https://creativecommons.org/licenses/by-sa/4.0/
 
 ### lodash
 
-This product includes source derived from [lodash](https://github.com/lodash/lodash) ([v4.17.19](https://github.com/lodash/lodash/tree/v4.17.19)), distributed under the [MIT License](https://github.com/lodash/lodash/blob/v4.17.19/LICENSE):
+This product includes source derived from [lodash](https://github.com/lodash/lodash) ([v4.17.20](https://github.com/lodash/lodash/tree/v4.17.20)), distributed under the [MIT License](https://github.com/lodash/lodash/blob/v4.17.20/LICENSE):
 
 ```
 Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
@@ -323,7 +323,7 @@ THE SOFTWARE.
 
 ### jsdoc
 
-This product includes source derived from [jsdoc](https://github.com/jsdoc/jsdoc) ([v3.6.4](https://github.com/jsdoc/jsdoc/tree/v3.6.4)), distributed under the [Apache-2.0 License](https://github.com/jsdoc/jsdoc/blob/v3.6.4/LICENSE.md):
+This product includes source derived from [jsdoc](https://github.com/jsdoc/jsdoc) ([v3.6.6](https://github.com/jsdoc/jsdoc/tree/v3.6.6)), distributed under the [Apache-2.0 License](https://github.com/jsdoc/jsdoc/blob/v3.6.6/LICENSE.md):
 
 ```
 # License
@@ -433,10 +433,10 @@ https://github.com/jmblog/color-themes-for-google-code-prettify
 
 ### newrelic
 
-This product includes source derived from [newrelic](https://github.com/newrelic/node-newrelic) ([v6.11.0](https://github.com/newrelic/node-newrelic/tree/v6.11.0)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-newrelic/blob/v6.11.0/LICENSE):
+This product includes source derived from [newrelic](https://github.com/newrelic/node-newrelic) ([v6.14.0](https://github.com/newrelic/node-newrelic/tree/v6.14.0)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-newrelic/blob/v6.14.0/LICENSE):
 
 ```
-Apache License
+                                 Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
 

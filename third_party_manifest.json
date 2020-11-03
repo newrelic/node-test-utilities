@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "Thu Jul 16 2020 13:54:52 GMT-0700 (Pacific Daylight Time)",
+  "lastUpdated": "Mon Nov 02 2020 15:54:40 GMT-0800 (Pacific Standard Time)",
   "projectName": "New Relic Test Utilities",
   "projectUrl": "https://github.com/newrelic/node-test-utilities",
   "includeDev": true,
@@ -68,15 +68,15 @@
       "email": "i@izs.me",
       "url": "http://blog.izs.me/"
     },
-    "lodash@4.17.19": {
+    "lodash@4.17.20": {
       "name": "lodash",
-      "version": "4.17.19",
+      "version": "4.17.20",
       "range": "^4.17.5",
       "licenses": "MIT",
       "repoUrl": "https://github.com/lodash/lodash",
-      "versionedRepoUrl": "https://github.com/lodash/lodash/tree/v4.17.19",
+      "versionedRepoUrl": "https://github.com/lodash/lodash/tree/v4.17.20",
       "licenseFile": "node_modules/lodash/LICENSE",
-      "licenseUrl": "https://github.com/lodash/lodash/blob/v4.17.19/LICENSE",
+      "licenseUrl": "https://github.com/lodash/lodash/blob/v4.17.20/LICENSE",
       "licenseTextSource": "file",
       "publisher": "John-David Dalton",
       "email": "john.david.dalton@gmail.com"
@@ -121,28 +121,28 @@
       "publisher": "Nicholas C. Zakas",
       "email": "nicholas+npm@nczconsulting.com"
     },
-    "jsdoc@3.6.4": {
+    "jsdoc@3.6.6": {
       "name": "jsdoc",
-      "version": "3.6.4",
+      "version": "3.6.6",
       "range": "^3.5.5",
       "licenses": "Apache-2.0",
       "repoUrl": "https://github.com/jsdoc/jsdoc",
-      "versionedRepoUrl": "https://github.com/jsdoc/jsdoc/tree/v3.6.4",
+      "versionedRepoUrl": "https://github.com/jsdoc/jsdoc/tree/v3.6.6",
       "licenseFile": "node_modules/jsdoc/LICENSE.md",
-      "licenseUrl": "https://github.com/jsdoc/jsdoc/blob/v3.6.4/LICENSE.md",
+      "licenseUrl": "https://github.com/jsdoc/jsdoc/blob/v3.6.6/LICENSE.md",
       "licenseTextSource": "file",
       "publisher": "Michael Mathews",
       "email": "micmath@gmail.com"
     },
-    "newrelic@6.11.0": {
+    "newrelic@6.14.0": {
       "name": "newrelic",
-      "version": "6.11.0",
+      "version": "6.14.0",
       "range": ">=6.11.0",
       "licenses": "Apache-2.0",
       "repoUrl": "https://github.com/newrelic/node-newrelic",
-      "versionedRepoUrl": "https://github.com/newrelic/node-newrelic/tree/v6.11.0",
+      "versionedRepoUrl": "https://github.com/newrelic/node-newrelic/tree/v6.14.0",
       "licenseFile": "node_modules/newrelic/LICENSE",
-      "licenseUrl": "https://github.com/newrelic/node-newrelic/blob/v6.11.0/LICENSE",
+      "licenseUrl": "https://github.com/newrelic/node-newrelic/blob/v6.14.0/LICENSE",
       "licenseTextSource": "file",
       "publisher": "New Relic Node.js agent team",
       "email": "nodejs@newrelic.com"
