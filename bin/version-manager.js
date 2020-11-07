@@ -114,16 +114,18 @@ function resolveGlobs(globs, cb) {
 
 function run(files) {
   // Clean up the files we'll be running.
-  // TODO: Another case to update with `Set` once Node v0.8 and v0.10 are dropped.
-  files = files.sort().map(function(p) {
-    return path.resolve(p)
+  let filePaths = new Set()
+  files.sort().forEach((file) => {
+    filePaths.add(path.resolve(file))
   })
-  var directories = Object.keys(files.reduce(function(dirs, p) {
-    dirs[path.dirname(p)] = true
-    return dirs
-  }, {}))
 
-  var mode = cmd.major ? 'major' : cmd.patch ? 'patch' : 'minor'
+  let directories = new Set()
+  filePaths.forEach((filePath) => {
+    directories.add(path.dirname(filePath))
+  })
+  directories = Array.from(directories)
+
+  let mode = cmd.major ? 'major' : cmd.patch ? 'patch' : 'minor'
 
   // Create our test structures.
   var viewer = process.env.TRAVIS || cmd.print === 'simple'

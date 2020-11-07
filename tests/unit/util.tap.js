@@ -86,3 +86,26 @@ tap.test('testUtil.getDelocalizedHostname', (t) => {
   )
   t.end()
 })
+
+tap.test('testUtil.maxVersionPerMode', (t) => {
+  const versions = [
+    '1.0.0',
+    '1.0.1',
+    '2.0.0',
+    '2.0.1',
+    '2.1.1'
+  ]
+
+  let result
+
+  result = testUtil.maxVersionPerMode(versions, 'major')
+  t.deepEqual(result, ['1.0.1', '2.1.1'])
+
+  result = testUtil.maxVersionPerMode(versions, 'minor')
+  t.deepEqual(result, ['1.0.1', '2.0.1', '2.1.1'])
+
+  result = testUtil.maxVersionPerMode(versions, 'patch')
+  t.deepEqual(result, versions)
+
+  t.end()
+})
