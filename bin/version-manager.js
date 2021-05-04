@@ -140,7 +140,7 @@ function run(files) {
   runner.on('end', viewer.end.bind(viewer))
 
   runner.on('packageResolved', function(pkg, versions) {
-    console.log(pkg + ': ' + versions.length)
+    console.log(pkg + ': ' + versions.join(', '))
   })
 
   // Off to the races!
