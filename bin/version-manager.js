@@ -74,7 +74,7 @@ function buildGlobs(cb) {
     globs.push(path.join(cwd, 'node_modules/**/tests/versioned/**/package.json'))
   }
 
-  console.log('Finding tests in %d globs', globs.length)
+  console.log('Finding tests in %d globs'.yellow, globs.length)
   cb(null, globs)
 }
 
@@ -139,8 +139,9 @@ function run(files) {
   runner.on('update', viewer.update.bind(viewer))
   runner.on('end', viewer.end.bind(viewer))
 
+  console.log('Finding all versions for a package'.yellow)
   runner.on('packageResolved', function(pkg, versions) {
-    console.log(pkg + ': ' + versions.length)
+    console.log(`${pkg}(${versions.length})`)
   })
 
   // Off to the races!
