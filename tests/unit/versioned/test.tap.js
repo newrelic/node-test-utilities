@@ -201,3 +201,48 @@ tap.test('Test methods and members', function(t) {
     }
   })
 })
+
+tap.test('Test run with allPkgs true', function(t) {
+  const test = new Test(MOCK_TEST_DIR, {
+      bluebird: ['1.0.8', '1.1.1', '1.2.4', '2.0.7'],
+      redis: ['1.0.0', '2.0.1', '2.1.0']
+  }, true)
+
+  var testRun = test.run()
+  testRun.on('end', function() {
+    t.match(testRun.stdout, new RegExp([
+      '\\+ redis@1\\.0\\.0.*?\n?',
+      '(?:\nupdated \\d+ packages? in \\d(?:\\.\\d+)?s)?\n?',
+      '\nstdout - redis\\.mock\\.js\n'
+    ].join('')), 'should have expected stdout from redis.mock.js')
+    t.equal(testRun.stderr, 'stderr - redis.mock.js\n',
+      'should have expected stderr from redis.mock.js')
+
+    const nextRun = test.run()
+
+    nextRun.on('end', function() {
+      t.match(nextRun.stdout, new RegExp([
+        '\\+ redis@1\\.0\\.0.*?\n?',
+        '(?:\nupdated \\d+ packages? in \\d(?:\\.\\d+)?s)?\n?',
+        '\nstdout - other\\.mock\\.js\n'
+      ].join('')), 'should have expected stdout fromt other.mock.js')
+      t.match(nextRun.stderr, new RegExp([
+        'stderr - other\\.mock\\.js',
+        'Failed to execute test: Error: Failed to execute node'
+      ].join('\n')), 'should have expected stderr from other.mock.js')
+
+      t.end()
+    })
+
+    nextRun.on('completed', function() {
+      nextRun.continue()
+    })
+    nextRun.continue()
+  })
+  testRun.on('completed', function() {
+    testRun.continue()
+  })
+  testRun.continue()
+  test.peek()
+  testRun.continue()
+})
