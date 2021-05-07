@@ -24,7 +24,9 @@
   },
   "devDependencies": {
     "eslint": "^4.18.0",
+    "husky": "^6.0.0",
     "jsdoc": "^3.5.5",
+    "lint-staged": "^11.0.0",
     "newrelic": ">=6.11.0",
     "sinon": "^3.3.0",
     "tap": "^10.7.3"
