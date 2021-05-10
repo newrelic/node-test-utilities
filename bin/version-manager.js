@@ -28,6 +28,7 @@ cmd
   .option('--major', 'Only iterate on major versions of packages.')
   .option('--minor', 'Iterate over minor versions of packages (default).')
   .option('--patch', 'Iterate over every patch version of packages.')
+  .option('-a, --all', 'Installs all packages, not just ones that differ in version')
   .action(function(_testGlobs) {
     testGlobs = _testGlobs
   })
@@ -134,7 +135,8 @@ function run(files) {
   var runner = new Suite(directories, {
     limit: cmd.jobs,
     installLimit: cmd.install,
-    versions: mode
+    versions: mode,
+    allPkgs: !!cmd.all
   })
   runner.on('update', viewer.update.bind(viewer))
   runner.on('end', viewer.end.bind(viewer))
