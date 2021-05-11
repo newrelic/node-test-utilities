@@ -1,3 +1,9 @@
+### v5.1.0 (2021-05-11):
+
+- Added enumerating and printing versions of every module being tested.
+- Added flag to install every package on each test run for npm v7 compatibility.
+- Added husky + lint-staged to run linting on all staged files.
+
 ### v5.0.0 (2020-11-03):
 
 - Added Node v14.x to CI.

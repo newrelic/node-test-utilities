@@ -6,3 +6,5 @@ tests
 .vscode
 .eslint*
 .github
+.husky*
+.lintstagedrc.json
