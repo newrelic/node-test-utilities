@@ -133,10 +133,17 @@ tap.test('Test methods and members', function(t) {
       t.notOk(testRun.failed, 'should not be marked as failed')
 
       t.match(testRun.stdout, new RegExp([
-        '(?:\\+\\s|mock-tests@1\\.0\\.0 /.+?/tests/unit/versioned/mock-tests\n',
-        '└── )?redis@1\\.0\\.0.*?\n?',
+        // pre-npm 7 shows the package + redis@1.0.0
+        '(?:\\+\\s+redis@1\\.0\\.0.*)?\n?',
+        // pre npm 7 if running tests on fresh checkout
+        '(?:\nadded \\d+ packages? from \\d contributor in \\d(?:\\.\\d+)?s)?\n?',
+        // pre npm 7 if running tests that already has tests/unit/versioned/mock-tests/node_modules
         '(?:\nupdated \\d+ packages? in \\d(?:\\.\\d+)?s)?\n?',
-        '(?:\nfound \\d+ vulnerabilities)?\n?',
+        // npm 7 + if running tests on fresh checkout
+        '(?:\nadded \\d+ packages? in \\d(?:\\.\\d+)?s)?\n?',
+        // npm 7 + when running tests that already have tests/unit/versioned/mock-tests/node_modules
+        '(?:\nup to date in \\d(?:\\.\\d+)?s)?\n?',
+        // stdout from loading the fake module
         '\nstdout - redis\\.mock\\.js\n'
       ].join('')), 'should have expected stdout')
 
@@ -211,8 +218,17 @@ tap.test('Test run with allPkgs true', function(t) {
   var testRun = test.run()
   testRun.on('end', function() {
     t.match(testRun.stdout, new RegExp([
-      '\\+ redis@1\\.0\\.0.*?\n?',
+      // pre-npm 7 shows the package + redis@1.0.0
+      '(?:\\+\\s+redis@1\\.0\\.0.*)?\n?',
+      // pre npm 7 if running tests on fresh checkout
+      '(?:\nadded \\d+ packages? from \\d contributor in \\d(?:\\.\\d+)?s)?\n?',
+      // pre npm 7 if running tests that already has tests/unit/versioned/mock-tests/node_modules
       '(?:\nupdated \\d+ packages? in \\d(?:\\.\\d+)?s)?\n?',
+      // npm 7 + if running tests on fresh checkout
+      '(?:\nadded \\d+ packages? in \\d(?:\\.\\d+)?s)?\n?',
+      // npm 7 + when running tests that already have tests/unit/versioned/mock-tests/node_modules
+      '(?:\nup to date in \\d(?:\\.\\d+)?s)?\n?',
+      // stdout from loading the fake module
       '\nstdout - redis\\.mock\\.js\n'
     ].join('')), 'should have expected stdout from redis.mock.js')
     t.equal(testRun.stderr, 'stderr - redis.mock.js\n',
@@ -222,10 +238,19 @@ tap.test('Test run with allPkgs true', function(t) {
 
     nextRun.on('end', function() {
       t.match(nextRun.stdout, new RegExp([
-        '\\+ redis@1\\.0\\.0.*?\n?',
+        // pre-npm 7 shows the package + redis@1.0.0
+        '(?:\\+\\s+redis@1\\.0\\.0.*)?\n?',
+        // pre npm 7 if running tests on fresh checkout
+        '(?:\nadded \\d+ packages? from \\d contributor in \\d(?:\\.\\d+)?s)?\n?',
+        // pre npm 7 if running tests that already has tests/unit/versioned/mock-tests/node_modules
         '(?:\nupdated \\d+ packages? in \\d(?:\\.\\d+)?s)?\n?',
+        // npm 7 + if running tests on fresh checkout
+        '(?:\nadded \\d+ packages? in \\d(?:\\.\\d+)?s)?\n?',
+        // npm 7 + when running tests that already have tests/unit/versioned/mock-tests/node_modules
+        '(?:\nup to date in \\d(?:\\.\\d+)?s)?\n?',
+        // stdout from loading the fake module
         '\nstdout - other\\.mock\\.js\n'
-      ].join('')), 'should have expected stdout fromt other.mock.js')
+      ].join('')), 'should have expected stdout from other.mock.js')
       t.match(nextRun.stderr, new RegExp([
         'stderr - other\\.mock\\.js',
         'Failed to execute test: Error: Failed to execute node'
