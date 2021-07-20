@@ -11,14 +11,12 @@ var TestAgent = require('../../lib/agent')
 
 
 var helper = null
-tap.beforeEach(function(done) {
+tap.beforeEach(function() {
   helper = new TestAgent()
-  done()
 })
-tap.afterEach(function(done) {
+tap.afterEach(function() {
   helper.unload()
   helper = null
-  done()
 })
 
 tap.notOk(tap.transaction, 'should not extend tap on require')

@@ -47,7 +47,7 @@ tap.test('testUtil.removeListenerByName', (t) => {
 
 tap.test('testUtil.getNewRelicLocation', (t) => {
   var startingPath = process.env.AGENT_PATH
-  t.tearDown(function() {
+  t.teardown(function() {
     process.env.AGENT_PATH = (startingPath || '')
   })
 
@@ -72,14 +72,14 @@ tap.test('testUtil.isLocalhost', (t) => {
 tap.test('testUtil.getDelocalizedHostname', (t) => {
   // Need an agent instance for `getDelocalizedHostname`.
   const agent = new TestAgent()
-  t.tearDown(() => agent.unload())
+  t.teardown(() => agent.unload())
 
   t.equal(
     testUtil.getDelocalizedHostname('foobar'),
     'foobar',
     'should not change non-local names'
   )
-  t.notEqual(
+  t.not(
     testUtil.getDelocalizedHostname('localhost'),
     'localhost',
     'should change localhost'
@@ -99,13 +99,13 @@ tap.test('testUtil.maxVersionPerMode', (t) => {
   let result
 
   result = testUtil.maxVersionPerMode(versions, 'major')
-  t.deepEqual(result, ['1.0.1', '2.1.1'])
+  t.same(result, ['1.0.1', '2.1.1'])
 
   result = testUtil.maxVersionPerMode(versions, 'minor')
-  t.deepEqual(result, ['1.0.1', '2.0.1', '2.1.1'])
+  t.same(result, ['1.0.1', '2.0.1', '2.1.1'])
 
   result = testUtil.maxVersionPerMode(versions, 'patch')
-  t.deepEqual(result, versions)
+  t.same(result, versions)
 
   t.end()
 })

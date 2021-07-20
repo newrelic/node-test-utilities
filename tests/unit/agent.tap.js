@@ -15,11 +15,10 @@ const shimmer = require(testUtil.getNewRelicLocation() + '/lib/shimmer')
 require('../../lib/assert').extendTap(tap)
 
 
-tap.afterEach(function(done) {
+tap.afterEach(function() {
   if (TestAgent.instance) {
     TestAgent.instance.unload()
   }
-  done()
 })
 
 tap.test('new TestAgent', function(t) {
@@ -49,7 +48,7 @@ tap.test('TestAgent.makeInstrumented', function(t) {
 
   const helper = TestAgent.makeInstrumented()
   t.type(helper, TestAgent, 'should construct a TestAgent')
-  t.notEqual(Module._load, origLoad, 'should patch module')
+  t.not(Module._load, origLoad, 'should patch module')
   t.ok(shimmer.debug, 'should enable debug mode')
 
   t.equal(helper.agent._state, 'started', 'should default to `started` state')
@@ -67,17 +66,15 @@ tap.test('TestAgent.makeInstrumented with false setState arg', function(t) {
 tap.test('TestAgent instance', function(t) {
   let helper = null
 
-  t.beforeEach(function(done) {
+  t.beforeEach(function() {
     helper = new TestAgent()
-    done()
   })
 
-  t.afterEach(function(done) {
+  t.afterEach(function() {
     if (TestAgent.instance === helper) {
       helper.unload()
     }
     helper = null
-    done()
   })
 
   t.test('TestAgent#instrument', function(t) {
@@ -85,7 +82,7 @@ tap.test('TestAgent instance', function(t) {
     const origLoad = Module._load
 
     helper.instrument()
-    t.notEqual(Module._load, origLoad, 'should patch module')
+    t.not(Module._load, origLoad, 'should patch module')
     t.ok(shimmer.debug, 'should enable debug mode')
 
     t.end()

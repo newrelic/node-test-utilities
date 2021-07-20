@@ -30,46 +30,41 @@ tap.test('Test methods and members', function(t) {
   t.autoend()
 
   var test = null
-  t.beforeEach(function(done) {
-    try {
-      test = new Test(MOCK_TEST_DIR, {
-        bluebird: ['1.0.8', '1.1.1', '1.2.4', '2.0.7'],
-        redis: ['1.0.0', '2.0.1', '2.1.0']
-      })
-      done()
-    } catch (e) {
-      done(e)
-    }
+  t.beforeEach(function() {
+    test = new Test(MOCK_TEST_DIR, {
+      bluebird: ['1.0.8', '1.1.1', '1.2.4', '2.0.7'],
+      redis: ['1.0.0', '2.0.1', '2.1.0']
+    })
   })
 
   t.test('Test#peek', function(t) {
     var peek = test.peek()
-    t.deepEqual(peek, {
+    t.same(peek, {
       packages: {redis: '1.0.0'},
       test: MOCK_TEST_DIR + '/redis.mock.js'
     }, 'should return the next test to execute')
 
-    t.deepEqual(peek, test.peek(), 'should not change the state of the test')
-    t.deepEqual(peek, test.peek(), 'should never change the state of the test')
+    t.same(peek, test.peek(), 'should not change the state of the test')
+    t.same(peek, test.peek(), 'should never change the state of the test')
     t.end()
   })
 
   t.test('Test#next', function(t) {
     var next = test.next()
 
-    t.deepEqual(next, {
+    t.same(next, {
       packages: {redis: '1.0.0'},
       test: MOCK_TEST_DIR + '/redis.mock.js'
     }, 'should return the next test to execute')
 
     next = test.next()
-    t.deepEqual(next, {
+    t.same(next, {
       packages: {redis: '1.0.0'},
       test: MOCK_TEST_DIR + '/other.mock.js'
     }, 'should advance the state of the test')
 
     next = test.next()
-    t.deepEqual(next, {
+    t.same(next, {
       packages: {redis: '2.0.1'},
       test: MOCK_TEST_DIR + '/redis.mock.js'
     }, 'should advance the package versions when out of test files')
@@ -121,7 +116,7 @@ tap.test('Test methods and members', function(t) {
     })
 
     testRun.on('end', function() {
-      t.deepEqual(eventCounts, {
+      t.same(eventCounts, {
         installing: 1,
         completed: 2,
         running: 1,
@@ -161,7 +156,7 @@ tap.test('Test methods and members', function(t) {
 
     function nextTest() {
       var nextRun = test.run()
-      t.notEqual(nextRun, testRun, 'should return a new test run')
+      t.not(nextRun, testRun, 'should return a new test run')
 
       nextRun.on('installing',  incrementEvent('installing'))
       nextRun.on('completed',   incrementEvent('completed'))
@@ -185,7 +180,7 @@ tap.test('Test methods and members', function(t) {
       })
 
       nextRun.on('end', function() {
-        t.deepEqual(eventCounts, {
+        t.same(eventCounts, {
           installing: 1,
           completed: 2,
           running: 1,

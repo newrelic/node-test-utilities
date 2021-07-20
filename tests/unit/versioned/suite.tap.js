@@ -27,13 +27,8 @@ tap.test('Suite method and members', function(t) {
   t.autoend()
 
   var suite = null
-  t.beforeEach(function(done) {
-    try {
-      suite = new Suite([MOCK_TEST_DIR])
-      done()
-    } catch (e) {
-      done(e)
-    }
+  t.beforeEach(function() {
+    suite = new Suite([MOCK_TEST_DIR])
   })
 
   t.test('Suite#start', function(t) {
