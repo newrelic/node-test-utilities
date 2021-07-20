@@ -1,3 +1,14 @@
+### v6.0.0 (2021-07-20):
+
+* **BREAKING** Removed support for Node 10.
+
+  The minimum supported version is now Node v12. For further information on our support policy, see: https://docs.newrelic.com/docs/agents/nodejs-agent/getting-started/compatibility-requirements-nodejs-agent.
+
+* Added support for Node 16.
+* Updated package.json to use files list instead of `.npmignore`.
+* Bumped `tap` to ^15.0.9.
+* Upgraded `sinon` to ^11.1.1.
+
 ### v5.1.0 (2021-05-11):
 
 - Added enumerating and printing versions of every module being tested.
