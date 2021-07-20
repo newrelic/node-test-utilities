@@ -135,31 +135,31 @@ The MIT License
 
 Copyright (c) 2013 Max Ogden
 
-Permission is hereby granted, free of charge, 
-to any person obtaining a copy of this software and 
-associated documentation files (the "Software"), to 
-deal in the Software without restriction, including 
-without limitation the rights to use, copy, modify, 
-merge, publish, distribute, sublicense, and/or sell 
-copies of the Software, and to permit persons to whom 
-the Software is furnished to do so, 
+Permission is hereby granted, free of charge,
+to any person obtaining a copy of this software and
+associated documentation files (the "Software"), to
+deal in the Software without restriction, including
+without limitation the rights to use, copy, modify,
+merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom
+the Software is furnished to do so,
 subject to the following conditions:
 
-The above copyright notice and this permission notice 
+The above copyright notice and this permission notice
 shall be included in all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES 
-OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR 
-ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, 
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
+ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ```
 
 ### glob
 
-This product includes source derived from [glob](https://github.com/isaacs/node-glob) ([v7.1.6](https://github.com/isaacs/node-glob/tree/v7.1.6)), distributed under the [ISC License](https://github.com/isaacs/node-glob/blob/v7.1.6/LICENSE):
+This product includes source derived from [glob](https://github.com/isaacs/node-glob) ([v7.1.7](https://github.com/isaacs/node-glob/tree/v7.1.7)), distributed under the [ISC License](https://github.com/isaacs/node-glob/blob/v7.1.7/LICENSE):
 
 ```
 The ISC License
@@ -188,7 +188,7 @@ https://creativecommons.org/licenses/by-sa/4.0/
 
 ### lodash
 
-This product includes source derived from [lodash](https://github.com/lodash/lodash) ([v4.17.20](https://github.com/lodash/lodash/tree/v4.17.20)), distributed under the [MIT License](https://github.com/lodash/lodash/blob/v4.17.20/LICENSE):
+This product includes source derived from [lodash](https://github.com/lodash/lodash) ([v4.17.21](https://github.com/lodash/lodash/tree/v4.17.21)), distributed under the [MIT License](https://github.com/lodash/lodash/blob/v4.17.21/LICENSE):
 
 ```
 Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
@@ -354,7 +354,7 @@ SOFTWARE.
 
 ### jsdoc
 
-This product includes source derived from [jsdoc](https://github.com/jsdoc/jsdoc) ([v3.6.6](https://github.com/jsdoc/jsdoc/tree/v3.6.6)), distributed under the [Apache-2.0 License](https://github.com/jsdoc/jsdoc/blob/v3.6.6/LICENSE.md):
+This product includes source derived from [jsdoc](https://github.com/jsdoc/jsdoc) ([v3.6.7](https://github.com/jsdoc/jsdoc/tree/v3.6.7)), distributed under the [Apache-2.0 License](https://github.com/jsdoc/jsdoc/blob/v3.6.7/LICENSE.md):
 
 ```
 # License
@@ -464,7 +464,7 @@ https://github.com/jmblog/color-themes-for-google-code-prettify
 
 ### lint-staged
 
-This product includes source derived from [lint-staged](https://github.com/okonet/lint-staged) ([v11.0.0](https://github.com/okonet/lint-staged/tree/v11.0.0)), distributed under the [MIT License](https://github.com/okonet/lint-staged/blob/v11.0.0/LICENSE):
+This product includes source derived from [lint-staged](https://github.com/okonet/lint-staged) ([v11.0.1](https://github.com/okonet/lint-staged/tree/v11.0.1)), distributed under the [MIT License](https://github.com/okonet/lint-staged/blob/v11.0.1/LICENSE):
 
 ```
 The MIT License (MIT)
@@ -493,7 +493,7 @@ SOFTWARE.
 
 ### newrelic
 
-This product includes source derived from [newrelic](https://github.com/newrelic/node-newrelic) ([v7.3.1](https://github.com/newrelic/node-newrelic/tree/v7.3.1)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-newrelic/blob/v7.3.1/LICENSE):
+This product includes source derived from [newrelic](https://github.com/newrelic/node-newrelic) ([v7.5.2](https://github.com/newrelic/node-newrelic/tree/v7.5.2)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-newrelic/blob/v7.5.2/LICENSE):
 
 ```
                                  Apache License
@@ -701,7 +701,7 @@ This product includes source derived from [newrelic](https://github.com/newrelic
 
 ### sinon
 
-This product includes source derived from [sinon](https://github.com/sinonjs/sinon) ([v3.3.0](https://github.com/sinonjs/sinon/tree/v3.3.0)), distributed under the [BSD-3-Clause License](https://github.com/sinonjs/sinon/blob/v3.3.0/LICENSE):
+This product includes source derived from [sinon](https://github.com/sinonjs/sinon) ([v11.1.1](https://github.com/sinonjs/sinon/tree/v11.1.1)), distributed under the [BSD-3-Clause License](https://github.com/sinonjs/sinon/blob/v11.1.1/LICENSE):
 
 ```
 (The BSD License)
@@ -736,7 +736,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ### tap
 
-This product includes source derived from [tap](https://github.com/tapjs/node-tap) ([v10.7.3](https://github.com/tapjs/node-tap/tree/v10.7.3)), distributed under the [ISC License](https://github.com/tapjs/node-tap/blob/v10.7.3/LICENSE):
+This product includes source derived from [tap](https://github.com/tapjs/node-tap) ([v15.0.9](https://github.com/tapjs/node-tap/tree/v15.0.9)), distributed under the [ISC License](https://github.com/tapjs/node-tap/blob/v15.0.9/LICENSE):
 
 ```
 The ISC License
