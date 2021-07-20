@@ -8,7 +8,7 @@
     "publish-docs": "./bin/publish-docs.sh",
     "lint": "eslint *.js lib/*",
     "test": "npm run unit",
-    "unit": "tap tests/unit/*.tap.js tests/unit/*/*.tap.js",
+    "unit": "tap tests/unit/*.tap.js tests/unit/*/*.tap.js --no-coverage --reporter classic",
     "prepare": "husky install"
   },
   "bin": {
