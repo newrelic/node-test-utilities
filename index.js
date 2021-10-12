@@ -5,9 +5,9 @@
 
 'use strict'
 
-var assert = require('./lib/assert')
-var TestAgent = require('./lib/agent')
-var testUtil = require('./lib/util')
+const assert = require('./lib/assert')
+const TestAgent = require('./lib/agent')
+const testUtil = require('./lib/util')
 
 /**
  * The `@newrelic/test-utilities` library.
