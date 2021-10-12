@@ -1,12 +1,11 @@
 #! /usr/bin/env node
-
 /*
  * Copyright 2020 New Relic Corporation. All rights reserved.
  * SPDX-License-Identifier: Apache-2.0
  */
 
 'use strict'
-/* eslint-disable no-console */
+/* eslint-disable no-console, no-process-exit */
 
 require('colors')
 
@@ -29,18 +28,14 @@ cmd
   .option('--minor', 'Iterate over minor versions of packages (default).')
   .option('--patch', 'Iterate over every patch version of packages.')
   .option('-a, --all', 'Installs all packages, not just ones that differ in version')
-  .action(function(_testGlobs) {
+  .action((_testGlobs) => {
     testGlobs = _testGlobs
   })
 
 cmd.parse(process.argv)
 let skip = cmd.skip ? cmd.skip.split(',') : []
 
-a.waterfall([
-  buildGlobs,
-  resolveGlobs,
-  run
-])
+a.waterfall([buildGlobs, resolveGlobs, run])
 
 function int(val) {
   return parseInt(val, 10)
@@ -57,7 +52,7 @@ function printMode(mode) {
 function buildGlobs(cb) {
   // Turn the given globs into searches for package.json files.
   var globs = []
-  testGlobs.forEach(function(file) {
+  testGlobs.forEach((file) => {
     if (/(?:package\.json|\.tap\.js)$/.test(file)) {
       globs.push(file)
     } else {
@@ -79,38 +74,43 @@ function buildGlobs(cb) {
   cb(null, globs)
 }
 
+/* eslint max-nested-callbacks: ["error", 4] */
 function resolveGlobs(globs, cb) {
-  a.map(globs, function(g, cb) {
-    glob(g, {absolute: true}, cb)
-  }, function afterGlobbing(err, resolved) {
-    if (err) {
-      console.error('Error globbing:', err)
-      process.exit(2)
-    }
-    var files = resolved.reduce(function mergeResolved(tests, b) {
-      b.forEach(function(file) {
-        // Filter out any package.json files from our `node_modules` directory
-        // which aren't from the `@newrelic` scope.
-        const inNodeModules = (/\/node_modules\/(?!@newrelic\/)/g).test(file)
+  a.map(
+    globs,
+    (g, globsCb) => {
+      glob(g, { absolute: true }, globsCb)
+    },
+    function afterGlobbing(err, resolved) {
+      if (err) {
+        console.error('Error globbing:', err)
+        process.exit(2)
+      }
+      var files = resolved.reduce(function mergeResolved(tests, b) {
+        b.forEach((file) => {
+          // Filter out any package.json files from our `node_modules` directory
+          // which aren't from the `@newrelic` scope.
+          const inNodeModules = /\/node_modules\/(?!@newrelic\/)/g.test(file)
 
-        if (!inNodeModules) {
-          const shouldSkip = skip.some(s => file.indexOf(s) >= 0)
-          const duplicate = tests.includes(file)
+          if (!inNodeModules) {
+            const shouldSkip = skip.some((s) => file.indexOf(s) >= 0)
+            const duplicate = tests.includes(file)
 
-          if (!shouldSkip && !duplicate) {
-            tests.push(file)
+            if (!shouldSkip && !duplicate) {
+              tests.push(file)
+            }
           }
-        }
-      })
-      return tests
-    }, [])
-    if (!files || !files.length) {
-      console.error('No files matched', globs)
-      process.exit(0)
-    }
+        })
+        return tests
+      }, [])
+      if (!files || !files.length) {
+        console.error('No files matched', globs)
+        process.exit(0)
+      }
 
-    cb(null, files)
-  })
+      cb(null, files)
+    }
+  )
 }
 
 function run(files) {
@@ -129,9 +129,10 @@ function run(files) {
   let mode = cmd.major ? 'major' : cmd.patch ? 'patch' : 'minor'
 
   // Create our test structures.
-  var viewer = process.env.TRAVIS || cmd.print === 'simple'
-    ? new printers.SimplePrinter(files, {refresh: 100})
-    : new printers.PrettyPrinter(files, {refresh: 100})
+  var viewer =
+    process.env.TRAVIS || cmd.print === 'simple'
+      ? new printers.SimplePrinter(files, { refresh: 100 })
+      : new printers.PrettyPrinter(files, { refresh: 100 })
   var runner = new Suite(directories, {
     limit: cmd.jobs,
     installLimit: cmd.install,
@@ -142,20 +143,24 @@ function run(files) {
   runner.on('end', viewer.end.bind(viewer))
 
   console.log('Finding all versions for a package'.yellow)
-  runner.on('packageResolved', function(pkg, versions) {
+  runner.on('packageResolved', (pkg, versions) => {
     console.log(`${pkg}(${versions.length})`)
   })
 
   // Off to the races!
-  runner.start(function(err) {
+  runner.start((err) => {
     if (err) {
       console.log('ERROR'.bold.red)
       console.error(err)
       process.exit(3)
     } else if (runner.failures.length) {
       console.log('FAIL'.bold.red + ' (' + runner.failures.length + ')')
-      runner.failures.forEach(function(test) {
-        console.log('  ' + test.currentRun.test.red)
+      runner.failures.forEach((test) => {
+        console.log(
+          `   packages: ${test.currentRun.packageVersions.join(', ')} file: ${
+            test.currentRun.test.red
+          }`
+        )
       })
       process.exit(4)
     } else {
