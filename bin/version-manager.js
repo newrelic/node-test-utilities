@@ -25,6 +25,7 @@ cmd
   .option('-i, --install <n>', 'Max parallel installations [1]', int, 1)
   .option('-p, --print <mode>', 'Specify print mode [pretty]', printMode, 'pretty')
   .option('-s, --skip <keyword>[,<keyword>]', 'Skip files containing the supplied keyword(s)')
+  .option('-P, --pattern <keyword>[,<keyword>]', 'Only execute tests containing the supplied keyword(s).')
   .option('--major', 'Only iterate on major versions of packages.')
   .option('--minor', 'Iterate over minor versions of packages (default).')
   .option('--patch', 'Iterate over every patch version of packages.')
@@ -35,6 +36,7 @@ cmd
 
 cmd.parse(process.argv)
 let skip = cmd.skip ? cmd.skip.split(',') : []
+const pattern = cmd.pattern ? cmd.pattern.split(',') : []
 
 a.waterfall([
   buildGlobs,
@@ -120,6 +122,7 @@ function run(files) {
     filePaths.add(path.resolve(file))
   })
 
+
   let directories = new Set()
   filePaths.forEach((filePath) => {
     directories.add(path.dirname(filePath))
@@ -136,7 +139,8 @@ function run(files) {
     limit: cmd.jobs,
     installLimit: cmd.install,
     versions: mode,
-    allPkgs: !!cmd.all
+    allPkgs: !!cmd.all,
+    testPattern: pattern
   })
   runner.on('update', viewer.update.bind(viewer))
   runner.on('end', viewer.end.bind(viewer))
