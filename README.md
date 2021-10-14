@@ -113,6 +113,13 @@ the tests against every minor version of the specified dependencies.
 $ versioned-tests --minor tests/versioned/*.tap.js
 ```
 
+The following command will run only those test files whose names include the
+keyword *redis*:
+
+```sh
+$ versioned-tests tests/versioned/*.tap.js -P redis
+```
+
 You can then specify the versions you want to run this against by adding a
 `package.json` file in your tests directory. This package file should have a
 `tests` array describing each suite. For example, the one shown below will test
