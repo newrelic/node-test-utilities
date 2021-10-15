@@ -168,3 +168,36 @@ tap.test('TestMatrix methods and members', function (t) {
     t.end()
   })
 })
+
+tap.test('Should return raw dependency version when does not directly match any retrieved', (t) => {
+  const tests = [
+    {
+      dependencies: { redis: 'latest' },
+      files: ['redis.tap.js', 'other.tap.js']
+    },
+    {
+      dependencies: { redis: 'random' },
+      files: ['redis.tap.js', 'other.tap.js']
+    }
+  ]
+
+  const retrievedPackageVersions = {
+    redis: ['1.2.3', '1.3.4', '2.0.1']
+  }
+
+  const matrix = new TestMatrix(tests, retrievedPackageVersions)
+
+  const test1 = matrix.next()
+  t.equal(test1.packages.redis, 'latest')
+
+  const test2 = matrix.next()
+  t.equal(test2.packages.redis, 'latest')
+
+  const test3 = matrix.next()
+  t.equal(test3.packages.redis, 'random')
+
+  const test4 = matrix.next()
+  t.equal(test4.packages.redis, 'random')
+
+  t.end()
+})
