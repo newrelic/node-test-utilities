@@ -245,7 +245,7 @@ tap.test('Test run with allPkgs true', function (t) {
       bluebird: ['1.0.8', '1.1.1', '1.2.4', '2.0.7'],
       redis: ['1.0.0', '2.0.1', '2.1.0']
     },
-    true
+    { allPkgs: true }
   )
 
   var testRun = test.run()
@@ -333,8 +333,9 @@ tap.test('Can filter tests by keyword', function (t) {
       bluebird: ['1.0.8', '1.1.1', '1.2.4', '2.0.7'],
       redis: ['1.0.0', '2.0.1', '2.1.0']
     },
-    undefined,
-    'redis'
+    {
+      testPatterns: ['redis']
+    }
   )
 
   t.equal(test.matrix._matrix[1].tests.files.length, 1, 'should include only one test file')
