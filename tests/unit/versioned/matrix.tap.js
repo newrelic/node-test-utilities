@@ -5,12 +5,12 @@
 
 'use strict'
 
-var tap = require('tap')
+const tap = require('tap')
 
-var TestMatrix = require('../../../lib/versioned/matrix')
+const TestMatrix = require('../../../lib/versioned/matrix')
 
 tap.test('TestMatrix construction', function (t) {
-  var matrix = null
+  let matrix = null
 
   t.doesNotThrow(function () {
     matrix = new TestMatrix(
@@ -36,10 +36,48 @@ tap.test('TestMatrix construction', function (t) {
   t.end()
 })
 
+tap.test(
+  'TestMatrix global samples should only be used when local samples is greater than global',
+  function (t) {
+    const matrix = new TestMatrix(
+      [
+        {
+          dependencies: {
+            'test': {
+              samples: 1,
+              versions: '>=1.0.0'
+            },
+            'dep': {
+              samples: 3,
+              versions: '*'
+            },
+            'string-dep': '*'
+          }
+        }
+      ],
+      {
+        'string-dep': ['0.0.0', '0.0.1', '0.0.2', '100.0.0'],
+        'test': ['1.0.0', '1.0.1', '1.0.2'],
+        'dep': ['0.0.1', '0.0.2', '0.0.3', '1.0.0', '1.0.1', '1.0.2']
+      },
+      2
+    )
+
+    const { packages } = matrix._matrix[0]
+
+    t.same(packages, [
+      { name: 'test', next: 0, versions: ['1.0.2'] },
+      { name: 'dep', next: 0, versions: ['0.0.1', '1.0.2'] },
+      { name: 'string-dep', next: 0, versions: ['0.0.0', '100.0.0'] }
+    ])
+    t.end()
+  }
+)
+
 tap.test('TestMatrix methods and members', function (t) {
   t.autoend()
 
-  var matrix = null
+  let matrix = null
 
   t.beforeEach(function () {
     matrix = new TestMatrix(
@@ -71,7 +109,7 @@ tap.test('TestMatrix methods and members', function (t) {
   })
 
   t.test('TestMatrix#peek', function (t) {
-    var peek = matrix.peek()
+    const peek = matrix.peek()
     t.same(
       peek,
       {
@@ -87,7 +125,7 @@ tap.test('TestMatrix methods and members', function (t) {
   })
 
   t.test('TestMatrix#next', function (t) {
-    var next = matrix.next()
+    let next = matrix.next()
     t.same(
       next,
       {

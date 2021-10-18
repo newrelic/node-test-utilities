@@ -28,6 +28,7 @@ cmd
   .option('--minor', 'Iterate over minor versions of packages (default).')
   .option('--patch', 'Iterate over every patch version of packages.')
   .option('-a, --all', 'Installs all packages, not just ones that differ in version')
+  .option('--samples <n>', 'Global samples setting to override what is in tests package', int)
   .action((_testGlobs) => {
     testGlobs = _testGlobs
   })
@@ -137,7 +138,8 @@ function run(files) {
     limit: cmd.jobs,
     installLimit: cmd.install,
     versions: mode,
-    allPkgs: !!cmd.all
+    allPkgs: !!cmd.all,
+    globalSamples: cmd.samples
   })
   runner.on('update', viewer.update.bind(viewer))
   runner.on('end', viewer.end.bind(viewer))
