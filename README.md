@@ -107,7 +107,8 @@ tap.test((t) => {
 
 The `versioned-tests` script can be used to execute a series of tests against
 several versions of dependencies. For example, the command below would run all
-the tests against every minor version of the specified dependencies.
+the tests suffixed with `.tap.js` against every minor version of the specified
+dependencies.
 
 ```sh
 $ versioned-tests --minor tests/versioned/*.tap.js
@@ -117,7 +118,7 @@ The following command will run only those test files whose names include the
 keyword *redis*:
 
 ```sh
-$ versioned-tests tests/versioned/*.tap.js -P redis
+$ versioned-tests tests/versioned/ -P redis
 ```
 
 You can then specify the versions you want to run this against by adding a
