@@ -1,3 +1,27 @@
+### v6.1.0 (2021-10-19)
+
+* Added the `-P, --pattern` flag to allow filtering tests by keyword(s).
+
+* Added support for running specific test files by name or globbing pattern.
+
+* Added a `--samples` value to CLI to allow an override of sampling for a given test run.
+
+  Global sample value will be used when it is less than the samples value set on a given package in the tests stanza.
+
+* Added ability to run versioned tests against version tags. For example: `newrelic@latest`.
+
+  When a version such as `package@latest` is specified in the versioned test `package.json` declarations, it won't directly satisfy semver matches against the package versions manually pulled down and cached. The runner now attempts to directly install the configured version, which also results in a test failure if the package fails to install. Previously, failure to be able to install a dependency would log a warning and then just not run any tests and let CI pass.
+
+* Upgraded setup-node CI job to v2 and changed the linting node version to lts/* for future proofing.
+
+* Added @newrelic/eslint-config to rely on a centralized eslint ruleset.
+
+* Added a pre-commit hook to check if package.json changes and run oss third-party manifest and oss third-party notices.
+
+  This will ensure the third_party_manifest.json and THIRD_PARTY_NOTICES.md are up to date.
+
+* Changed runner output to only list package versions when a test fails.
+
 ### v6.0.0 (2021-07-20):
 
 * **BREAKING** Removed support for Node 10.
