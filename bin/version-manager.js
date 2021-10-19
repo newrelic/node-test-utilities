@@ -24,6 +24,10 @@ cmd
   .option('-i, --install <n>', 'Max parallel installations [1]', int, 1)
   .option('-p, --print <mode>', 'Specify print mode [pretty]', printMode, 'pretty')
   .option('-s, --skip <keyword>[,<keyword>]', 'Skip files containing the supplied keyword(s)')
+  .option(
+    '-P, --pattern <keyword>[,<keyword>]',
+    'Only execute tests containing the supplied keyword(s).'
+  )
   .option('--major', 'Only iterate on major versions of packages.')
   .option('--minor', 'Iterate over minor versions of packages (default).')
   .option('--patch', 'Iterate over every patch version of packages.')
@@ -35,6 +39,7 @@ cmd
 
 cmd.parse(process.argv)
 const skip = cmd.skip ? cmd.skip.split(',') : []
+const patterns = cmd.pattern ? cmd.pattern.split(',') : []
 
 a.waterfall([buildGlobs, resolveGlobs, run])
 
@@ -55,6 +60,9 @@ function buildGlobs(cb) {
   const globs = []
   testGlobs.forEach((file) => {
     if (/(?:package\.json|\.tap\.js)$/.test(file)) {
+      if (/\.js$/.test(file)) {
+        patterns.push(path.basename(file))
+      }
       globs.push(file)
     } else {
       globs.push(path.join(file, 'package.json'))
@@ -139,6 +147,7 @@ function run(files) {
     installLimit: cmd.install,
     versions: mode,
     allPkgs: !!cmd.all,
+    testPatterns: patterns,
     globalSamples: cmd.samples
   })
   runner.on('update', viewer.update.bind(viewer))
