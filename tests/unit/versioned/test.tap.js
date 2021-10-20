@@ -354,7 +354,7 @@ tap.test('should filter based on multiple keywords', function (t) {
     }
   )
 
-  t.equal(test.matrix._matrix[1].tests.files.length, 2, 'should include only one test file')
+  t.equal(test.matrix._matrix[1].tests.files.length, 2, 'should include both test files')
   t.end()
 })
 
