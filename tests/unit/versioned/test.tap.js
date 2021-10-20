@@ -5,15 +5,15 @@
 
 'use strict'
 
-var path = require('path')
-var tap = require('tap')
+const path = require('path')
+const tap = require('tap')
 
-var Test = require('../../../lib/versioned/test')
+const Test = require('../../../lib/versioned/test')
 
-var MOCK_TEST_DIR = path.resolve(__dirname, 'mock-tests')
+const MOCK_TEST_DIR = path.resolve(__dirname, 'mock-tests')
 
 tap.test('Test construction', function (t) {
-  var test = null
+  let test = null
   t.doesNotThrow(function () {
     test = new Test(MOCK_TEST_DIR, {
       bluebird: ['1.0.8', '1.1.1', '1.2.4', '2.0.7'],
@@ -28,7 +28,7 @@ tap.test('Test construction', function (t) {
 tap.test('Test methods and members', function (t) {
   t.autoend()
 
-  var test = null
+  let test = null
   t.beforeEach(function () {
     test = new Test(MOCK_TEST_DIR, {
       bluebird: ['1.0.8', '1.1.1', '1.2.4', '2.0.7'],
@@ -37,7 +37,7 @@ tap.test('Test methods and members', function (t) {
   })
 
   t.test('Test#peek', function (t) {
-    var peek = test.peek()
+    const peek = test.peek()
     t.same(
       peek,
       {
@@ -53,7 +53,7 @@ tap.test('Test methods and members', function (t) {
   })
 
   t.test('Test#next', function (t) {
-    var next = test.next()
+    let next = test.next()
 
     t.same(
       next,
@@ -100,14 +100,14 @@ tap.test('Test methods and members', function (t) {
   t.test('Test#run', function (t) {
     t.plan(23)
 
-    var peek = test.peek()
-    var testRun = test.run()
+    const peek = test.peek()
+    const testRun = test.run()
     t.type(testRun, 'TestRun', 'should return a TestRun instance')
 
-    var nextPeek = test.peek()
+    const nextPeek = test.peek()
     t.notSame(peek, nextPeek, 'should advance the state of the test')
 
-    var eventCounts = {}
+    const eventCounts = {}
 
     testRun.on('installing', incrementEvent('installing'))
     testRun.on('completed', incrementEvent('completed'))
@@ -180,7 +180,7 @@ tap.test('Test methods and members', function (t) {
     }
 
     function nextTest() {
-      var nextRun = test.run()
+      const nextRun = test.run()
       t.not(nextRun, testRun, 'should return a new test run')
 
       nextRun.on('installing', incrementEvent('installing'))
@@ -248,7 +248,7 @@ tap.test('Test run with allPkgs true', function (t) {
     { allPkgs: true }
   )
 
-  var testRun = test.run()
+  const testRun = test.run()
   testRun.on('end', function () {
     t.match(
       testRun.stdout,
@@ -342,6 +342,22 @@ tap.test('Will not filter tests when keywords are an empty list', function (t) {
   t.end()
 })
 
+tap.test('should filter based on multiple keywords', function (t) {
+  const test = new Test(
+    MOCK_TEST_DIR,
+    {
+      bluebird: ['1.0.8', '1.1.1', '1.2.4', '2.0.7'],
+      redis: ['1.0.0', '2.0.1', '2.1.0']
+    },
+    {
+      testPatterns: ['other.mock.js', 'redis']
+    }
+  )
+
+  t.equal(test.matrix._matrix[1].tests.files.length, 2, 'should include both test files')
+  t.end()
+})
+
 tap.test('Can filter tests by keyword', function (t) {
   const test = new Test(
     MOCK_TEST_DIR,
@@ -360,5 +376,21 @@ tap.test('Can filter tests by keyword', function (t) {
     'redis.mock.js',
     'should only include the redis test file'
   )
+  t.end()
+})
+
+tap.test('should filter tests completely out when 0 matches based on patterns', function (t) {
+  const test = new Test(
+    MOCK_TEST_DIR,
+    {
+      bluebird: ['1.0.8'],
+      redis: ['1.0.0']
+    },
+    {
+      testPatterns: ['no-match']
+    }
+  )
+
+  t.equal(test.matrix._matrix.length, 0, 'should completely filter out matrix')
   t.end()
 })
