@@ -1,3 +1,9 @@
+### v6.1.1 (2021-10-20)
+
+* Fix pattern matching regression when parsing names of test files.
+
+* Refactored test pattern filtering by extracting to its own function. Also added a few missing test pattern test cases.
+
 ### v6.1.0 (2021-10-19)
 
 * Added the `-P, --pattern` flag to allow filtering tests by keyword(s).
