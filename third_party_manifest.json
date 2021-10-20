@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "Mon Oct 18 2021 14:13:23 GMT-0700 (Pacific Daylight Time)",
+  "lastUpdated": "Wed Oct 20 2021 11:16:57 GMT-0700 (Pacific Daylight Time)",
   "projectName": "New Relic Test Utilities",
   "projectUrl": "https://github.com/newrelic/node-test-utilities",
   "includeOptDeps": false,
@@ -109,15 +109,15 @@
     }
   },
   "devDependencies": {
-    "@newrelic/eslint-config@0.0.2": {
+    "@newrelic/eslint-config@0.0.3": {
       "name": "@newrelic/eslint-config",
-      "version": "0.0.2",
+      "version": "0.0.3",
       "range": "^0.0.3",
       "licenses": "Apache-2.0",
       "repoUrl": "https://github.com/newrelic/eslint-config-newrelic",
-      "versionedRepoUrl": "https://github.com/newrelic/eslint-config-newrelic/tree/v0.0.2",
+      "versionedRepoUrl": "https://github.com/newrelic/eslint-config-newrelic/tree/v0.0.3",
       "licenseFile": "node_modules/@newrelic/eslint-config/LICENSE",
-      "licenseUrl": "https://github.com/newrelic/eslint-config-newrelic/blob/v0.0.2/LICENSE",
+      "licenseUrl": "https://github.com/newrelic/eslint-config-newrelic/blob/v0.0.3/LICENSE",
       "licenseTextSource": "file",
       "publisher": "New Relic Node.js agent team",
       "email": "nodejs@newrelic.com"
