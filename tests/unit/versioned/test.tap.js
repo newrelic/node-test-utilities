@@ -326,6 +326,22 @@ tap.test('Test run with allPkgs true', function (t) {
   testRun.continue()
 })
 
+tap.test('Will not filter tests when keywords are an empty list', function (t) {
+  const test = new Test(
+    MOCK_TEST_DIR,
+    {
+      bluebird: ['1.0.8', '1.1.1', '1.2.4', '2.0.7'],
+      redis: ['1.0.0', '2.0.1', '2.1.0']
+    },
+    {
+      testPatterns: []
+    }
+  )
+
+  t.equal(test.matrix._matrix[1].tests.files.length, 2, 'should include both test files')
+  t.end()
+})
+
 tap.test('Can filter tests by keyword', function (t) {
   const test = new Test(
     MOCK_TEST_DIR,
