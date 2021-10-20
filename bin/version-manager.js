@@ -59,11 +59,11 @@ function buildGlobs(cb) {
   // Turn the given globs into searches for package.json files.
   const globs = []
   testGlobs.forEach((file) => {
-    if (/(?:package\.json|\.tap\.js)$/.test(file)) {
+    if (/(?:package\.json|\.js)$/.test(file)) {
+      globs.push(file)
       if (/\.js$/.test(file)) {
         patterns.push(path.basename(file))
       }
-      globs.push(file)
     } else {
       globs.push(path.join(file, 'package.json'))
       globs.push(path.join(file, '**/package.json'))
