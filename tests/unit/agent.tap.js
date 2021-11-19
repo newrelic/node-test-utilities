@@ -101,6 +101,7 @@ tap.test('TestAgent instance', (t) => {
     t.equal(Module._load, origLoad, 'should unpatch module')
     t.notOk(shimmer.debug, 'should disable debug mode')
     t.equal(TestAgent.instance, null, 'should clear the TestAgent instance')
+    t.same(shimmer.registeredInstrumentations, {}, 'should clear registered instrumentation')
 
     t.end()
   })
