@@ -1,3 +1,11 @@
+### v6.2.0 (2021-11-19)
+
+* Added clearing of registered instrumentation to `unload`.
+
+* Added `getContextManager` to retrieve the active context manager in agent versions 8.6.0+.
+
+* Bumped `newrelic` dev dependency to `^8.6.0`.
+
 ### v6.1.1 (2021-10-20)
 
 * Fix pattern matching regression when parsing names of test files.
