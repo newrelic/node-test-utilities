@@ -14,35 +14,38 @@ const shimmer = require(testUtil.getNewRelicLocation() + '/lib/shimmer')
 
 require('../../lib/assert').extendTap(tap)
 
-
-tap.afterEach(function() {
+tap.afterEach(() => {
   if (TestAgent.instance) {
     TestAgent.instance.unload()
   }
 })
 
-tap.test('new TestAgent', function(t) {
+tap.test('new TestAgent', (t) => {
   const helper = new TestAgent()
 
   // Check singleton-ness
   t.equal(helper, TestAgent.instance, 'should make instance available on class')
-  t.throws(function() {
-    return new TestAgent()
-  }, Error, 'should enforce singleton nature of Agent')
+  t.throws(
+    () => {
+      return new TestAgent()
+    },
+    Error,
+    'should enforce singleton nature of Agent'
+  )
 
   t.equal(helper.agent._state, 'started', 'should default to `started` state')
 
   t.end()
 })
 
-tap.test('new TestAgent with false setState arg', function(t) {
+tap.test('new TestAgent with false setState arg', (t) => {
   const helper = new TestAgent(null, false)
   t.equal(helper.agent._state, 'stopped', 'should be in initial `stopped` state')
 
   t.end()
 })
 
-tap.test('TestAgent.makeInstrumented', function(t) {
+tap.test('TestAgent.makeInstrumented', (t) => {
   const Module = require('module')
   const origLoad = Module._load
 
@@ -56,28 +59,28 @@ tap.test('TestAgent.makeInstrumented', function(t) {
   t.end()
 })
 
-tap.test('TestAgent.makeInstrumented with false setState arg', function(t) {
+tap.test('TestAgent.makeInstrumented with false setState arg', (t) => {
   const helper = TestAgent.makeInstrumented(null, false)
   t.equal(helper.agent._state, 'stopped', 'should be in initial `stopped` state')
 
   t.end()
 })
 
-tap.test('TestAgent instance', function(t) {
+tap.test('TestAgent instance', (t) => {
   let helper = null
 
-  t.beforeEach(function() {
+  t.beforeEach(() => {
     helper = new TestAgent()
   })
 
-  t.afterEach(function() {
+  t.afterEach(() => {
     if (TestAgent.instance === helper) {
       helper.unload()
     }
     helper = null
   })
 
-  t.test('TestAgent#instrument', function(t) {
+  t.test('TestAgent#instrument', (t) => {
     const Module = require('module')
     const origLoad = Module._load
 
@@ -88,7 +91,7 @@ tap.test('TestAgent instance', function(t) {
     t.end()
   })
 
-  t.test('TestAgent#unload', function(t) {
+  t.test('TestAgent#unload', (t) => {
     const Module = require('module')
     const origLoad = Module._load
 
@@ -98,14 +101,15 @@ tap.test('TestAgent instance', function(t) {
     t.equal(Module._load, origLoad, 'should unpatch module')
     t.notOk(shimmer.debug, 'should disable debug mode')
     t.equal(TestAgent.instance, null, 'should clear the TestAgent instance')
+    t.same(shimmer.registeredInstrumentations, {}, 'should clear registered instrumentation')
 
     t.end()
   })
 
-  t.test('TestAgent#runInTransaction', function(t) {
+  t.test('TestAgent#runInTransaction', (t) => {
     let invoked = false
 
-    helper.runInTransaction(function(tx) {
+    helper.runInTransaction((tx) => {
       invoked = true
       t.ok(tx, 'should provide a transaction')
       t.transaction(tx, 'should give transaction to function')
@@ -115,20 +119,20 @@ tap.test('TestAgent instance', function(t) {
     t.end()
   })
 
-  t.test('TestAgent#getTransaction', function(t) {
+  t.test('TestAgent#getTransaction', (t) => {
     t.equal(helper.getTransaction(), null, 'should return null when outside tx')
-    helper.runInTransaction(function(tx) {
+    helper.runInTransaction((tx) => {
       t.equal(helper.getTransaction(), tx, 'should return current tx when in one')
     })
 
     t.end()
   })
 
-  t.test('TestAgent#registerInstrumentation', function(t) {
+  t.test('TestAgent#registerInstrumentation', (t) => {
     const opts = {
       type: 'web-framework',
       moduleName: 'test',
-      onRequire: function() {}
+      onRequire: () => {}
     }
 
     const spy = sinon.spy(shimmer, 'registerInstrumentation')
@@ -144,6 +148,17 @@ tap.test('TestAgent instance', function(t) {
 
     t.ok(api)
     t.equal(api.agent, helper.agent)
+
+    t.end()
+  })
+
+  t.test('TestAgent#getContextManager', (t) => {
+    const contextManager = helper.getContextManager()
+
+    t.ok(contextManager)
+    t.ok(contextManager.getContext)
+    t.ok(contextManager.setContext)
+    t.ok(contextManager.runInContext)
 
     t.end()
   })
