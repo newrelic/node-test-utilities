@@ -152,5 +152,16 @@ tap.test('TestAgent instance', (t) => {
     t.end()
   })
 
+  t.test('TestAgent#getContextManager', (t) => {
+    const contextManager = helper.getContextManager()
+
+    t.ok(contextManager)
+    t.ok(contextManager.getContext)
+    t.ok(contextManager.setContext)
+    t.ok(contextManager.runInContext)
+
+    t.end()
+  })
+
   t.autoend()
 })
