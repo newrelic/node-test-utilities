@@ -61,9 +61,6 @@ function buildGlobs(cb) {
   testGlobs.forEach((file) => {
     if (/(?:package\.json|\.js)$/.test(file)) {
       globs.push(file)
-      if (/\.js$/.test(file)) {
-        patterns.push(path.basename(file))
-      }
     } else {
       globs.push(path.join(file, 'package.json'))
       globs.push(path.join(file, '**/package.json'))
