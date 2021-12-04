@@ -9,15 +9,13 @@
 
 require('colors')
 
-const a = require('async')
 const cmd = require('commander')
-const glob = require('glob')
 const path = require('path')
 
 const printers = require('../lib/versioned/printers')
 const Suite = require('../lib/versioned/suite')
+const { buildGlobs, resolveGlobs } = require('../lib/versioned/globber')
 
-let testGlobs = []
 cmd
   .arguments('[test-globs...]')
   .option('-j, --jobs <n>', 'Max parallel test executions [5]', int, 5)
@@ -33,15 +31,28 @@ cmd
   .option('--patch', 'Iterate over every patch version of packages.')
   .option('-a, --all', 'Installs all packages, not just ones that differ in version')
   .option('--samples <n>', 'Global samples setting to override what is in tests package', int)
-  .action((_testGlobs) => {
-    testGlobs = _testGlobs
+  .action(async (testGlobs) => {
+    const skip = cmd.skip ? cmd.skip.split(',') : []
+    const patterns = cmd.pattern ? cmd.pattern.split(',') : []
+    const globs = buildGlobs(testGlobs, patterns)
+    console.log('Finding tests in %d globs'.yellow, globs.length)
+    let files
+    try {
+      files = await resolveGlobs(globs, skip)
+    } catch (err) {
+      console.error('Error globbing:', err)
+      process.exit(2)
+    } finally {
+      if (!files || !files.length) {
+        console.error('No files matched', globs)
+        process.exit(0)
+      } else {
+        run(files, patterns)
+      }
+    }
   })
 
-cmd.parse(process.argv)
-const skip = cmd.skip ? cmd.skip.split(',') : []
-const patterns = cmd.pattern ? cmd.pattern.split(',') : []
-
-a.waterfall([buildGlobs, resolveGlobs, run])
+cmd.parse(process.argv) // runs the action handler
 
 function int(val) {
   return parseInt(val, 10)
@@ -55,71 +66,7 @@ function printMode(mode) {
   return mode
 }
 
-function buildGlobs(cb) {
-  // Turn the given globs into searches for package.json files.
-  const globs = []
-  testGlobs.forEach((file) => {
-    if (/(?:package\.json|\.js)$/.test(file)) {
-      globs.push(file)
-    } else {
-      globs.push(path.join(file, 'package.json'))
-      globs.push(path.join(file, '**/package.json'))
-    }
-  })
-
-  // If no globs were given, then look for globs in the default paths.
-  if (!globs.length) {
-    const cwd = process.cwd()
-    globs.push(path.join(cwd, 'test/versioned/**/package.json'))
-    globs.push(path.join(cwd, 'tests/versioned/**/package.json'))
-    globs.push(path.join(cwd, 'node_modules/**/tests/versioned/package.json'))
-    globs.push(path.join(cwd, 'node_modules/**/tests/versioned/**/package.json'))
-  }
-
-  console.log('Finding tests in %d globs'.yellow, globs.length)
-  cb(null, globs)
-}
-
-/* eslint max-nested-callbacks: ["error", 4] */
-function resolveGlobs(globs, cb) {
-  a.map(
-    globs,
-    (g, globsCb) => {
-      glob(g, { absolute: true }, globsCb)
-    },
-    function afterGlobbing(err, resolved) {
-      if (err) {
-        console.error('Error globbing:', err)
-        process.exit(2)
-      }
-      const files = resolved.reduce(function mergeResolved(tests, b) {
-        b.forEach((file) => {
-          // Filter out any package.json files from our `node_modules` directory
-          // which aren't from the `@newrelic` scope.
-          const inNodeModules = /\/node_modules\/(?!@newrelic\/)/g.test(file)
-
-          if (!inNodeModules) {
-            const shouldSkip = skip.some((s) => file.indexOf(s) >= 0)
-            const duplicate = tests.includes(file)
-
-            if (!shouldSkip && !duplicate) {
-              tests.push(file)
-            }
-          }
-        })
-        return tests
-      }, [])
-      if (!files || !files.length) {
-        console.error('No files matched', globs)
-        process.exit(0)
-      }
-
-      cb(null, files)
-    }
-  )
-}
-
-function run(files) {
+function run(files, patterns) {
   // Clean up the files we'll be running.
   const filePaths = new Set()
   files.sort().forEach((file) => {
