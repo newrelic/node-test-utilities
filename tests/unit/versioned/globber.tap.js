@@ -26,12 +26,17 @@ tap.test('globber', (t) => {
 
     t.test('glob pattern', (t) => {
       t.autoend()
-      // TODO
+      t.autoend()
+      const globs = globber.buildGlobs([`${TEST_DIR}/*.js`])
+      t.equal(globs.length, 1)
+      t.match(globs, [`${TEST_DIR}/*.js`])
     })
 
     t.test('specific file', (t) => {
       t.autoend()
-      // TODO
+      const globs = globber.buildGlobs([`${TEST_DIR}/other.mock.js`])
+      t.equal(globs.length, 1)
+      t.match(globs, [`${TEST_DIR}/other.mock.js`])
     })
   })
 
@@ -40,7 +45,6 @@ tap.test('globber', (t) => {
 
     t.test('default behavior', async (t) => {
       t.autoend()
-
       const files = await globber.resolveGlobs([`${TEST_DIR}/*.js`])
       t.equal(files.length, 2)
       t.match(files, [`${TEST_DIR}/other.mock.js`, `${TEST_DIR}/redis.mock.js`])
@@ -51,14 +55,18 @@ tap.test('globber', (t) => {
       // TODO
     })
 
-    t.test('handle skips', (t) => {
+    t.test('handle skips', async (t) => {
       t.autoend()
-      // TODO
+      const files = await globber.resolveGlobs([`${TEST_DIR}/*.js`], [`${TEST_DIR}/redis.mock.js`])
+      t.equal(files.length, 1)
+      t.match(files, [`${TEST_DIR}/other.mock.js`])
     })
 
-    t.test('handle duplicates', (t) => {
+    t.test('handle duplicates', async (t) => {
       t.autoend()
-      // TODO
+      const files = await globber.resolveGlobs([`${TEST_DIR}/*.js`, `${TEST_DIR}/*.js`])
+      t.equal(files.length, 2)
+      t.match(files, [`${TEST_DIR}/other.mock.js`, `${TEST_DIR}/redis.mock.js`])
     })
   })
 })
