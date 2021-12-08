@@ -31,10 +31,17 @@ tap.test('globber', (t) => {
       t.end()
     })
 
-    t.test('handle quotes', (t) => {
+    t.test('handle single quotes', (t) => {
       const globs = globber.buildGlobs([`'${TEST_DIR}/*.js'`])
       t.equal(globs.length, 1)
-      t.match(globs, [`'${TEST_DIR}/*.js'`])
+      t.match(globs, [`${TEST_DIR}/*.js`])
+      t.end()
+    })
+
+    t.test('handle double quotes', (t) => {
+      const globs = globber.buildGlobs([`"${TEST_DIR}/*.js"`])
+      t.equal(globs.length, 1)
+      t.match(globs, [`${TEST_DIR}/*.js`])
       t.end()
     })
 
