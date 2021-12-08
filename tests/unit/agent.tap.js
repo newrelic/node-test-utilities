@@ -163,5 +163,15 @@ tap.test('TestAgent instance', (t) => {
     t.end()
   })
 
+  t.test('TestAgent#getShim', (t) => {
+    const shim = helper.getShim()
+
+    t.ok(shim)
+    t.equal(shim.agent, helper.agent)
+    t.equal(shim.moduleName, 'Test Agent')
+
+    t.end()
+  })
+
   t.autoend()
 })
