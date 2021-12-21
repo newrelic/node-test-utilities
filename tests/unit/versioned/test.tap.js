@@ -7,6 +7,7 @@
 
 const path = require('path')
 const tap = require('tap')
+const fs = require('fs')
 
 const Test = require('../../../lib/versioned/test')
 
@@ -392,5 +393,25 @@ tap.test('should filter tests completely out when 0 matches based on patterns', 
   )
 
   t.equal(test.matrix._matrix.length, 0, 'should completely filter out matrix')
+  t.end()
+})
+
+tap.test('alert when files are not included in the test specification', function (t) {
+  const testFile = path.join(MOCK_TEST_DIR, 'ignoreme.mock.js')
+  fs.writeFileSync(testFile, 'hello world')
+  t.throws(() => {
+    const test = new Test(
+      MOCK_TEST_DIR,
+      {
+        bluebird: ['1.0.8'],
+        redis: ['1.0.0']
+      },
+      {
+        strict: true
+      }
+    )
+    return test
+  })
+  fs.unlinkSync(testFile)
   t.end()
 })
