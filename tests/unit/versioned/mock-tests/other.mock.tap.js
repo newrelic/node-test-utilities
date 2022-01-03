@@ -5,6 +5,5 @@
 
 'use strict'
 
-console.log('stdout - redis.mock.js')
-console.error('stderr - redis.mock.js')
-process.exit(0)
+console.log('stdout - other.mock.tap.js')
+console.error('stderr - other.mock.tap.js')
