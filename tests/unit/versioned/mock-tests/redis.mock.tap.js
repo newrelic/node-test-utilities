@@ -7,3 +7,5 @@
 
 console.log('stdout - redis.mock.tap.js')
 console.error('stderr - redis.mock.tap.js')
+/* eslint-disable no-process-exit */
+process.exit(0)
