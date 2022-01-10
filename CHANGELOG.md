@@ -1,3 +1,15 @@
+### v6.3.0 (2022-01-10)
+
+* Added workflow to automate preparing release notes by reusing the newrelic/node-newrelic/.github/workflows/prep-release.yml@main workflow from agent repository.
+
+* Added job to automatically add issues/pr to Node.js Engineering board
+
+- Fix overeager pattern-filter interpretation.
+
+* Added `getShim` method for retrieving a test Shim instance.
+
+  This enables test setup involving instrumentation like scenarios (adding segments, etc.) without reaching into the internal tracer.
+
 ### v6.2.0 (2021-11-19)
 
 * Added clearing of registered instrumentation to `unload`.
