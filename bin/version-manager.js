@@ -121,6 +121,11 @@ function run(files, patterns) {
       })
       process.exit(4)
     } else {
+      const missingFiles = runner.tests.filter((test) => test.missingFiles.length)
+      if (missingFiles.length && runner.opts.strict) {
+        console.log('FAIL'.bold.red)
+        process.exit(1)
+      }
       console.log('PASS'.bold.green)
     }
   })
