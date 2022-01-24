@@ -7,6 +7,7 @@
 
 const path = require('path')
 const tap = require('tap')
+const fs = require('fs')
 
 const Test = require('../../../lib/versioned/test')
 
@@ -42,7 +43,7 @@ tap.test('Test methods and members', function (t) {
       peek,
       {
         packages: { redis: '1.0.0' },
-        test: MOCK_TEST_DIR + '/redis.mock.js'
+        test: MOCK_TEST_DIR + '/redis.mock.tap.js'
       },
       'should return the next test to execute'
     )
@@ -59,7 +60,7 @@ tap.test('Test methods and members', function (t) {
       next,
       {
         packages: { redis: '1.0.0' },
-        test: MOCK_TEST_DIR + '/redis.mock.js'
+        test: MOCK_TEST_DIR + '/redis.mock.tap.js'
       },
       'should return the next test to execute'
     )
@@ -69,7 +70,7 @@ tap.test('Test methods and members', function (t) {
       next,
       {
         packages: { redis: '1.0.0' },
-        test: MOCK_TEST_DIR + '/other.mock.js'
+        test: MOCK_TEST_DIR + '/other.mock.tap.js'
       },
       'should advance the state of the test'
     )
@@ -79,7 +80,7 @@ tap.test('Test methods and members', function (t) {
       next,
       {
         packages: { redis: '2.0.1' },
-        test: MOCK_TEST_DIR + '/redis.mock.js'
+        test: MOCK_TEST_DIR + '/redis.mock.tap.js'
       },
       'should advance the package versions when out of test files'
     )
@@ -161,13 +162,13 @@ tap.test('Test methods and members', function (t) {
             // npm 7 + when running tests that already have tests/unit/versioned/mock-tests/node_modules
             '(?:\nup to date in \\d(?:\\.\\d+)?s)?\n?',
             // stdout from loading the fake module
-            '\nstdout - redis\\.mock\\.js\n'
+            '\nstdout - redis\\.mock\\.tap\\.js\n'
           ].join('')
         ),
         'should have expected stdout'
       )
 
-      t.equal(testRun.stderr, 'stderr - redis.mock.js\n', 'should have expected stderr')
+      t.equal(testRun.stderr, 'stderr - redis.mock.tap.js\n', 'should have expected stderr')
 
       nextTest()
     })
@@ -219,14 +220,14 @@ tap.test('Test methods and members', function (t) {
         )
 
         t.ok(nextRun.failed, 'should be marked as a failed run')
-        t.equal(nextRun.stdout, 'stdout - other.mock.js\n', 'should have expected stdout')
+        t.equal(nextRun.stdout, 'stdout - other.mock.tap.js\n', 'should have expected stdout')
 
         /* eslint-disable max-len */
         t.match(
           nextRun.stderr,
           new RegExp(
             [
-              'stderr - other\\.mock\\.js',
+              'stderr - other\\.mock\\.tap\\.js',
               'Failed to execute test: Error: Failed to execute node'
             ].join('\n')
           ),
@@ -265,15 +266,15 @@ tap.test('Test run with allPkgs true', function (t) {
           // npm 7 + when running tests that already have tests/unit/versioned/mock-tests/node_modules
           '(?:\nup to date in \\d(?:\\.\\d+)?s)?\n?',
           // stdout from loading the fake module
-          '\nstdout - redis\\.mock\\.js\n'
+          '\nstdout - redis\\.mock\\.tap\\.js\n'
         ].join('')
       ),
-      'should have expected stdout from redis.mock.js'
+      'should have expected stdout from redis.mock.tap.js'
     )
     t.equal(
       testRun.stderr,
-      'stderr - redis.mock.js\n',
-      'should have expected stderr from redis.mock.js'
+      'stderr - redis.mock.tap.js\n',
+      'should have expected stderr from redis.mock.tap.js'
     )
 
     const nextRun = test.run()
@@ -294,20 +295,20 @@ tap.test('Test run with allPkgs true', function (t) {
             // npm 7 + when running tests that already have tests/unit/versioned/mock-tests/node_modules
             '(?:\nup to date in \\d(?:\\.\\d+)?s)?\n?',
             // stdout from loading the fake module
-            '\nstdout - other\\.mock\\.js\n'
+            '\nstdout - other\\.mock\\.tap\\.js\n'
           ].join('')
         ),
-        'should have expected stdout from other.mock.js'
+        'should have expected stdout from other.mock.tap.js'
       )
       t.match(
         nextRun.stderr,
         new RegExp(
           [
-            'stderr - other\\.mock\\.js',
+            'stderr - other\\.mock\\.tap\\.js',
             'Failed to execute test: Error: Failed to execute node'
           ].join('\n')
         ),
-        'should have expected stderr from other.mock.js'
+        'should have expected stderr from other.mock.tap.js'
       )
 
       t.end()
@@ -350,7 +351,7 @@ tap.test('should filter based on multiple keywords', function (t) {
       redis: ['1.0.0', '2.0.1', '2.1.0']
     },
     {
-      testPatterns: ['other.mock.js', 'redis']
+      testPatterns: ['other.mock.tap.js', 'redis']
     }
   )
 
@@ -373,7 +374,7 @@ tap.test('Can filter tests by keyword', function (t) {
   t.equal(test.matrix._matrix[1].tests.files.length, 1, 'should include only one test file')
   t.equal(
     test.matrix._matrix[1].tests.files[0],
-    'redis.mock.js',
+    'redis.mock.tap.js',
     'should only include the redis test file'
   )
   t.end()
@@ -393,4 +394,26 @@ tap.test('should filter tests completely out when 0 matches based on patterns', 
 
   t.equal(test.matrix._matrix.length, 0, 'should completely filter out matrix')
   t.end()
+})
+
+tap.test('check for unspecified test files', function (t) {
+  t.autoend()
+  const testFile = path.join(MOCK_TEST_DIR, 'ignoreme.mock.tap.js')
+
+  t.beforeEach(() => {
+    fs.writeFileSync(testFile, 'hello world')
+  })
+
+  t.afterEach(() => {
+    fs.unlinkSync(testFile)
+  })
+
+  t.test('alert when files are not included in the test specification', function (t) {
+    const test = new Test(MOCK_TEST_DIR, {
+      bluebird: ['1.0.8'],
+      redis: ['1.0.0']
+    })
+    t.equal(test.missingFiles.length, 1)
+    t.end()
+  })
 })

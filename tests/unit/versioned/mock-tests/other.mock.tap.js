@@ -5,6 +5,7 @@
 
 'use strict'
 
-console.log('stdout - other.mock.js')
-console.error('stderr - other.mock.js')
+console.log('stdout - other.mock.tap.js')
+console.error('stderr - other.mock.tap.js')
+/* eslint-disable no-process-exit */
 process.exit(1)
