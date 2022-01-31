@@ -1,3 +1,9 @@
+### v6.4.0 (2022-01-31)
+
+* Added a warning and/or error when tests present in testing directory are not included in test specification.
+
+* Updated `add-to-board` to use org level `NODE_AGENT_GH_TOKEN`
+
 ### v6.3.0 (2022-01-10)
 
 * Added workflow to automate preparing release notes by reusing the newrelic/node-newrelic/.github/workflows/prep-release.yml@main workflow from agent repository.
