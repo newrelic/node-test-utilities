@@ -1,6 +1,6 @@
 ### v6.4.0 (2022-01-31)
 
-- Warn or throw an error if tests present in testing directory are not included in test specification.
+* Added a warning and/or error when tests present in testing directory are not included in test specification.
 
 * Updated `add-to-board` to use org level `NODE_AGENT_GH_TOKEN`
 
