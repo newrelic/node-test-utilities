@@ -166,7 +166,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ### glob
 
-This product includes source derived from [glob](https://github.com/isaacs/node-glob) ([v7.1.7](https://github.com/isaacs/node-glob/tree/v7.1.7)), distributed under the [ISC License](https://github.com/isaacs/node-glob/blob/v7.1.7/LICENSE):
+This product includes source derived from [glob](https://github.com/isaacs/node-glob) ([v7.2.0](https://github.com/isaacs/node-glob/tree/v7.2.0)), distributed under the [ISC License](https://github.com/isaacs/node-glob/blob/v7.2.0/LICENSE):
 
 ```
 The ISC License
@@ -1024,7 +1024,7 @@ SOFTWARE.
 
 ### newrelic
 
-This product includes source derived from [newrelic](https://github.com/newrelic/node-newrelic) ([v8.1.0](https://github.com/newrelic/node-newrelic/tree/v8.1.0)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-newrelic/blob/v8.1.0/LICENSE):
+This product includes source derived from [newrelic](https://github.com/newrelic/node-newrelic) ([v8.6.0](https://github.com/newrelic/node-newrelic/tree/v8.6.0)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-newrelic/blob/v8.6.0/LICENSE):
 
 ```
                                  Apache License
