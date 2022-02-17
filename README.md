@@ -197,7 +197,7 @@ If the issue has been confirmed as a bug or is a feature request, please file a 
 
 * [GitHub Documentation](https://newrelic.github.io/node-test-utilities): Test Utilities specific documentation
 * [New Relic Documentation](https://docs.newrelic.com/docs/agents/nodejs-agent): Comprehensive guidance for using our platform
-* [New Relic Community](https://discuss.newrelic.com/c/support-products-agents/node-js-agent/): The best place to engage in troubleshooting questions
+* [New Relic Community](https://discuss.newrelic.com/tags/c/telemetry-data-platform/agents/nodeagent): The best place to engage in troubleshooting questions
 * [New Relic Developer](https://developer.newrelic.com/): Resources for building a custom observability applications
 * [New Relic University](https://learn.newrelic.com/): A range of online training for New Relic users of every level
 
