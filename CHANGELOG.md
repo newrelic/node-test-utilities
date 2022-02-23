@@ -1,3 +1,16 @@
+### v6.4.1 (2022-02-23)
+
+* Fixed link to discuss.newrelic.com in README
+
+* Resolved several dev-dependency audit warnings.
+
+--- NOTES NEEDS REVIEW ---
+<h3>Snyk has created this PR to upgrade glob from 7.1.7 to 7.2.0.</h3>
+
+![merge advice](https://app.snyk.io/badges/merge-advice/?package_manager=npm&package_name=glob&from_version=7.1.7&to_version=7.2.0&pr_id=48cfef53-df2c-4e4d-85cd-3a33a512e6e1&visibility=true&has_feature_flag=false)
+:information_source: Keep your dependencies up-to-date. This makes it easier to fix existing vulnerabilities and to more quickly identify and fix newly disclosed vulnerabilities when they affect your project.
+--------------------------
+
 ### v6.4.0 (2022-01-31)
 
 * Added a warning and/or error when tests present in testing directory are not included in test specification.
