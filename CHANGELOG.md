@@ -1,3 +1,11 @@
+### v6.4.1 (2022-02-23)
+
+* Fixed link to discuss.newrelic.com in README.
+
+* Resolved several dev-dependency audit warnings.
+
+* Bumped `glob` to ^7.2.0.
+
 ### v6.4.0 (2022-01-31)
 
 * Added a warning and/or error when tests present in testing directory are not included in test specification.
