@@ -108,6 +108,15 @@ tap.test('TestMatrix methods and members', function (t) {
     t.end()
   })
 
+  t.test('TestMatrix#versionsByPkg', function (t) {
+    t.same(
+      matrix.versionsByPkg,
+      ['redis(3): 1.2.3, 1.3.4, 2.0.1'],
+      'should properly format each pkg -> version matrix'
+    )
+    t.end()
+  })
+
   t.test('TestMatrix#peek', function (t) {
     const peek = matrix.peek()
     t.same(
