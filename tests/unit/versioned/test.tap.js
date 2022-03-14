@@ -12,14 +12,15 @@ const fs = require('fs')
 const Test = require('../../../lib/versioned/test')
 
 const MOCK_TEST_DIR = path.resolve(__dirname, 'mock-tests')
+const pkgVersions = {
+  bluebird: { versions: ['1.0.8', '1.1.1', '1.2.4', '2.0.7'], latest: '2.0.7' },
+  redis: { versions: ['1.0.0', '2.0.1', '2.1.0'], latest: '2.1.0' }
+}
 
 tap.test('Test construction', function (t) {
   let test = null
   t.doesNotThrow(function () {
-    test = new Test(MOCK_TEST_DIR, {
-      bluebird: ['1.0.8', '1.1.1', '1.2.4', '2.0.7'],
-      redis: ['1.0.0', '2.0.1', '2.1.0']
-    })
+    test = new Test(MOCK_TEST_DIR, pkgVersions)
   }, 'should not throw when constructed')
 
   t.type(test, Test, 'should construct a Test instance')
@@ -31,10 +32,7 @@ tap.test('Test methods and members', function (t) {
 
   let test = null
   t.beforeEach(function () {
-    test = new Test(MOCK_TEST_DIR, {
-      bluebird: ['1.0.8', '1.1.1', '1.2.4', '2.0.7'],
-      redis: ['1.0.0', '2.0.1', '2.1.0']
-    })
+    test = new Test(MOCK_TEST_DIR, pkgVersions)
   })
 
   t.test('Test#peek', function (t) {
@@ -240,14 +238,7 @@ tap.test('Test methods and members', function (t) {
 })
 
 tap.test('Test run with allPkgs true', function (t) {
-  const test = new Test(
-    MOCK_TEST_DIR,
-    {
-      bluebird: ['1.0.8', '1.1.1', '1.2.4', '2.0.7'],
-      redis: ['1.0.0', '2.0.1', '2.1.0']
-    },
-    { allPkgs: true }
-  )
+  const test = new Test(MOCK_TEST_DIR, pkgVersions, { allPkgs: true })
 
   const testRun = test.run()
   testRun.on('end', function () {
@@ -328,48 +319,27 @@ tap.test('Test run with allPkgs true', function (t) {
 })
 
 tap.test('Will not filter tests when keywords are an empty list', function (t) {
-  const test = new Test(
-    MOCK_TEST_DIR,
-    {
-      bluebird: ['1.0.8', '1.1.1', '1.2.4', '2.0.7'],
-      redis: ['1.0.0', '2.0.1', '2.1.0']
-    },
-    {
-      testPatterns: []
-    }
-  )
+  const test = new Test(MOCK_TEST_DIR, pkgVersions, {
+    testPatterns: []
+  })
 
   t.equal(test.matrix._matrix[1].tests.files.length, 2, 'should include both test files')
   t.end()
 })
 
 tap.test('should filter based on multiple keywords', function (t) {
-  const test = new Test(
-    MOCK_TEST_DIR,
-    {
-      bluebird: ['1.0.8', '1.1.1', '1.2.4', '2.0.7'],
-      redis: ['1.0.0', '2.0.1', '2.1.0']
-    },
-    {
-      testPatterns: ['other.mock.tap.js', 'redis']
-    }
-  )
+  const test = new Test(MOCK_TEST_DIR, pkgVersions, {
+    testPatterns: ['other.mock.tap.js', 'redis']
+  })
 
   t.equal(test.matrix._matrix[1].tests.files.length, 2, 'should include both test files')
   t.end()
 })
 
 tap.test('Can filter tests by keyword', function (t) {
-  const test = new Test(
-    MOCK_TEST_DIR,
-    {
-      bluebird: ['1.0.8', '1.1.1', '1.2.4', '2.0.7'],
-      redis: ['1.0.0', '2.0.1', '2.1.0']
-    },
-    {
-      testPatterns: ['redis']
-    }
-  )
+  const test = new Test(MOCK_TEST_DIR, pkgVersions, {
+    testPatterns: ['redis']
+  })
 
   t.equal(test.matrix._matrix[1].tests.files.length, 1, 'should include only one test file')
   t.equal(
@@ -381,16 +351,9 @@ tap.test('Can filter tests by keyword', function (t) {
 })
 
 tap.test('should filter tests completely out when 0 matches based on patterns', function (t) {
-  const test = new Test(
-    MOCK_TEST_DIR,
-    {
-      bluebird: ['1.0.8'],
-      redis: ['1.0.0']
-    },
-    {
-      testPatterns: ['no-match']
-    }
-  )
+  const test = new Test(MOCK_TEST_DIR, pkgVersions, {
+    testPatterns: ['no-match']
+  })
 
   t.equal(test.matrix._matrix.length, 0, 'should completely filter out matrix')
   t.end()
@@ -409,10 +372,7 @@ tap.test('check for unspecified test files', function (t) {
   })
 
   t.test('alert when files are not included in the test specification', function (t) {
-    const test = new Test(MOCK_TEST_DIR, {
-      bluebird: ['1.0.8'],
-      redis: ['1.0.0']
-    })
+    const test = new Test(MOCK_TEST_DIR, pkgVersions)
     t.equal(test.missingFiles.length, 1)
     t.end()
   })
