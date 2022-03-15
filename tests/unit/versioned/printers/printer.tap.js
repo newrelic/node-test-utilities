@@ -100,22 +100,6 @@ tap.test('printVersionedMatrix', function (t) {
       [
         {
           engines: { node: '<0.1.0' },
-          dependencies: { redis: '*' },
-          files: ['redis.tap.js', 'other.tap.js']
-        },
-        {
-          dependencies: { redis: '>=1.0.0' },
-          files: ['redis.tap.js', 'other.tap.js']
-        }
-      ],
-      {
-        redis: ['1.2.3', '1.3.4', '2.0.1']
-      }
-    )
-    const redisMatrix = new TestMatrix(
-      [
-        {
-          engines: { node: '<0.1.0' },
           dependencies: { bluebird: '*' },
           files: ['other.tap.js']
         },
@@ -128,13 +112,73 @@ tap.test('printVersionedMatrix', function (t) {
         bluebird: ['1.0.3', '1.3.4', '2.0.1', '3.8.1', '4.0.0']
       }
     )
+    const redisMatrix = new TestMatrix(
+      [
+        {
+          engines: { node: '<0.1.0' },
+          dependencies: { redis: '*' },
+          files: ['redis.tap.js', 'other.tap.js']
+        },
+        {
+          dependencies: { redis: '>=1.0.0' },
+          files: ['redis.tap.js', 'other.tap.js']
+        }
+      ],
+      {
+        redis: ['1.2.3', '1.3.4', '2.0.1']
+      }
+    )
     printer.tests.bluebird.test = { matrix: bluebirdMatrix }
     printer.tests.redis.test = { matrix: redisMatrix }
     printer.printVersionedMatrix()
     t.same(console.log.args, [
       ['Versions executed\n'],
-      ['redis(3): 1.2.3, 1.3.4, 2.0.1'],
-      ['bluebird(5): 1.0.3, 1.3.4, 2.0.1, 3.8.1, 4.0.0'],
+      ['Folder: bluebird'],
+      ['\t * bluebird(5): 1.0.3, 1.3.4, 2.0.1, 3.8.1, 4.0.0'],
+      ['Folder: redis'],
+      ['\t * redis(3): 1.2.3, 1.3.4, 2.0.1'],
+      ['===============================================================']
+    ])
+    t.end()
+  })
+
+  t.test('should print skipped when no versions for a package exist', (t) => {
+    const bluebirdMatrix = new TestMatrix(
+      [
+        {
+          engines: { node: '<0.1.0' },
+          dependencies: { bluebird: '1.0.0' },
+          files: ['other.tap.js']
+        }
+      ],
+      {
+        bluebird: ['2.0.0']
+      }
+    )
+    const redisMatrix = new TestMatrix(
+      [
+        {
+          engines: { node: '<0.1.0' },
+          dependencies: { redis: '*' },
+          files: ['redis.tap.js', 'other.tap.js']
+        },
+        {
+          dependencies: { redis: '>=1.0.0' },
+          files: ['redis.tap.js', 'other.tap.js']
+        }
+      ],
+      {
+        redis: ['1.2.3', '1.3.4', '2.0.1']
+      }
+    )
+    printer.tests.bluebird.test = { matrix: bluebirdMatrix }
+    printer.tests.redis.test = { matrix: redisMatrix }
+    printer.printVersionedMatrix()
+    t.same(console.log.args, [
+      ['Versions executed\n'],
+      ['Folder: bluebird(SKIPPED)'],
+      ['Folder: redis'],
+      ['\t * redis(3): 1.2.3, 1.3.4, 2.0.1'],
       ['===============================================================']
     ])
     t.end()
