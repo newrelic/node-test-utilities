@@ -26,8 +26,8 @@ tap.test('TestMatrix construction', function (t) {
         }
       ],
       {
-        bluebird: ['1.0.8', '1.1.1', '1.2.4', '2.0.7'],
-        redis: ['1.2.3', '1.3.4', '2.0.1']
+        bluebird: { versions: ['1.0.8', '1.1.1', '1.2.4', '2.0.7'], latest: '2.0.7' },
+        redis: { versions: ['1.2.3', '1.3.4', '2.0.1'], latest: '2.0.1' }
       }
     )
   }, 'should construct without erroring')
@@ -56,9 +56,9 @@ tap.test(
         }
       ],
       {
-        'string-dep': ['0.0.0', '0.0.1', '0.0.2', '100.0.0'],
-        'test': ['1.0.0', '1.0.1', '1.0.2'],
-        'dep': ['0.0.1', '0.0.2', '0.0.3', '1.0.0', '1.0.1', '1.0.2']
+        'string-dep': { versions: ['0.0.0', '0.0.1', '0.0.2', '100.0.0'], latest: '100.0.0' },
+        'test': { versions: ['1.0.0', '1.0.1', '1.0.2'], latest: '1.0.2' },
+        'dep': { versions: ['0.0.1', '0.0.2', '0.0.3', '1.0.0', '1.0.1', '1.0.2'], latest: '1.0.2' }
       },
       2
     )
@@ -93,8 +93,8 @@ tap.test('TestMatrix methods and members', function (t) {
         }
       ],
       {
-        bluebird: ['1.0.8', '1.1.1', '1.2.4', '2.0.7'],
-        redis: ['1.2.3', '1.3.4', '2.0.1']
+        bluebird: { versions: ['1.0.8', '1.1.1', '1.2.4', '2.0.7'], latest: '2.0.7' },
+        redis: { versions: ['1.2.3', '1.3.4', '2.0.1'], latest: '2.0.1' }
       }
     )
   })
@@ -191,16 +191,16 @@ tap.test('Should return raw dependency version when does not directly match any 
   ]
 
   const retrievedPackageVersions = {
-    redis: ['1.2.3', '1.3.4', '2.0.1']
+    redis: { versions: ['1.2.3', '1.3.4', '2.0.1'], latest: '2.0.1' }
   }
 
   const matrix = new TestMatrix(tests, retrievedPackageVersions)
 
   const test1 = matrix.next()
-  t.equal(test1.packages.redis, 'latest')
+  t.equal(test1.packages.redis, '2.0.1')
 
   const test2 = matrix.next()
-  t.equal(test2.packages.redis, 'latest')
+  t.equal(test2.packages.redis, '2.0.1')
 
   const test3 = matrix.next()
   t.equal(test3.packages.redis, 'random')
