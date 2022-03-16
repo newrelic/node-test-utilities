@@ -1,3 +1,10 @@
+### v6.5.0 (2022-03-16)
+
+* Fixed how version resolution occurs when semver ranges are not the latest major version.
+ * Fixed how `latest` gets resolved by actually using the latest version.
+
+* Added printing list of packages and their versions at the end of a run.
+
 ### v6.4.1 (2022-02-23)
 
 * Fixed link to discuss.newrelic.com in README.
