@@ -1,4 +1,4 @@
-### v6.5.0 (2022-03-16)
+### v6.5.0 (2022-03-21)
 
 * Fixed how version resolution occurs when semver ranges are not the latest major version.
 
