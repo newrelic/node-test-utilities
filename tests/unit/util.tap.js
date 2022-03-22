@@ -140,5 +140,32 @@ tap.test('testUtil.maxVersionPerMode', (t) => {
     t.end()
   })
 
+  t.test('should sort versions properly', (t) => {
+    const meta = { semverRanges: [], staticVersions: [], latest: true }
+    const versions = ['14.0.0', '14.0.3', '2.0.0', '0.10.0', '10.0.0', '15.0.0', '2.1.0', '2.0.1']
+
+    const majorResult = testUtil.maxVersionPerMode(versions, 'major', meta)
+    t.same(
+      majorResult,
+      ['0.10.0', '2.1.0', '10.0.0', '14.0.3', '15.0.0'],
+      'should sort major properly'
+    )
+
+    const minorResult = testUtil.maxVersionPerMode(versions, 'minor', meta)
+    t.same(
+      minorResult,
+      ['0.10.0', '2.0.1', '2.1.0', '10.0.0', '14.0.3', '15.0.0'],
+      'should sort minor properly'
+    )
+
+    const patchResult = testUtil.maxVersionPerMode(versions, 'patch', meta)
+    t.same(
+      patchResult,
+      ['0.10.0', '2.0.0', '2.0.1', '2.1.0', '10.0.0', '14.0.0', '14.0.3', '15.0.0'],
+      'should sort patch properly'
+    )
+    t.end()
+  })
+
   t.end()
 })
