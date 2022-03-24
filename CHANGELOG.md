@@ -1,3 +1,7 @@
+### v6.5.1 (2022-03-24)
+
+* Sort package versions properly when returning max version by every semver range.
+
 ### v6.5.0 (2022-03-21)
 
 * Fixed how version resolution occurs when semver ranges are not the latest major version.
