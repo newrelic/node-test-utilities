@@ -1,3 +1,7 @@
+### v6.5.2 (2022-03-24)
+
+* Fixed `util.maxVersionPerMode` sorting by handling numbers as semver versions and not floats.
+
 ### v6.5.1 (2022-03-24)
 
 * Fixed `util.maxVersionPerMode` by sorting versions to ensure the last package is the latest.
