@@ -1,3 +1,7 @@
+### v6.5.1 (2022-03-24)
+
+* Fixed `util.maxVersionPerMode` by sorting versions to ensure the last package is the latest.
+
 ### v6.5.0 (2022-03-21)
 
 * Fixed how version resolution occurs when semver ranges are not the latest major version.
@@ -26,7 +30,7 @@
 
 * Added job to automatically add issues/pr to Node.js Engineering board
 
-- Fix overeager pattern-filter interpretation.
+* Fixed overeager pattern-filter interpretation.
 
 * Added `getShim` method for retrieving a test Shim instance.
 
