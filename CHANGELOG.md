@@ -30,7 +30,7 @@
 
 * Added job to automatically add issues/pr to Node.js Engineering board
 
-* Fix overeager pattern-filter interpretation.
+* Fixed overeager pattern-filter interpretation.
 
 * Added `getShim` method for retrieving a test Shim instance.
 
