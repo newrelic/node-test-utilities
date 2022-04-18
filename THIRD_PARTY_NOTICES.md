@@ -45,7 +45,7 @@ code, the source code can be found at [https://github.com/newrelic/node-test-uti
 
 ### async
 
-This product includes source derived from [async](https://github.com/caolan/async) ([v2.6.3](https://github.com/caolan/async/tree/v2.6.3)), distributed under the [MIT License](https://github.com/caolan/async/blob/v2.6.3/LICENSE):
+This product includes source derived from [async](https://github.com/caolan/async) ([v3.2.3](https://github.com/caolan/async/tree/v3.2.3)), distributed under the [MIT License](https://github.com/caolan/async/blob/v3.2.3/LICENSE):
 
 ```
 Copyright (c) 2010-2018 Caolan McMahon
