@@ -1,19 +1,19 @@
 {
-  "lastUpdated": "Thu Mar 24 2022 09:33:47 GMT-0700 (Pacific Daylight Time)",
+  "lastUpdated": "Mon Apr 18 2022 13:14:43 GMT-0700 (Pacific Daylight Time)",
   "projectName": "New Relic Test Utilities",
   "projectUrl": "https://github.com/newrelic/node-test-utilities",
   "includeOptDeps": false,
   "includeDev": true,
   "dependencies": {
-    "async@2.6.3": {
+    "async@3.2.3": {
       "name": "async",
-      "version": "2.6.3",
-      "range": "^2.6.0",
+      "version": "3.2.3",
+      "range": "^3.2.3",
       "licenses": "MIT",
       "repoUrl": "https://github.com/caolan/async",
-      "versionedRepoUrl": "https://github.com/caolan/async/tree/v2.6.3",
+      "versionedRepoUrl": "https://github.com/caolan/async/tree/v3.2.3",
       "licenseFile": "node_modules/async/LICENSE",
-      "licenseUrl": "https://github.com/caolan/async/blob/v2.6.3/LICENSE",
+      "licenseUrl": "https://github.com/caolan/async/blob/v3.2.3/LICENSE",
       "licenseTextSource": "file",
       "publisher": "Caolan McMahon"
     },
