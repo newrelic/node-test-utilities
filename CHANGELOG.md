@@ -1,3 +1,15 @@
+### v6.5.3 (2022-04-20)
+
+* Bumped async to ^3.2.3.
+
+  Updated usage of `queue.drain` which was a 3.x breaking change.
+
+* Resolved dev-only audit warnings.
+
+* Bumped moment from 2.29.1 to 2.29.2.
+
+* Bumped `tap` to ^16.0.1.
+
 ### v6.5.2 (2022-03-24)
 
 * Fixed `util.maxVersionPerMode` sorting by handling numbers as semver versions and not floats.
