@@ -1,3 +1,7 @@
+### v6.5.4 (2022-05-27)
+
+* Updated version runner to fail if package fails to install and not attempt to clean the npm cache.
+
 ### v6.5.3 (2022-04-20)
 
 * Bumped async to ^3.2.3.
