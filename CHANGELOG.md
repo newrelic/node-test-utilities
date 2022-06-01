@@ -1,3 +1,7 @@
+### v6.5.5 (2022-06-01)
+
+* Add TEST_CHILD_TIMEOUT environment variable to modify test timeout limits.
+
 ### v6.5.4 (2022-05-27)
 
 * Updated version runner to fail if package fails to install and not attempt to clean the npm cache.
