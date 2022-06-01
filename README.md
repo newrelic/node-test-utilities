@@ -171,6 +171,14 @@ different files for each version of `mongodb` from `v1.0.0` through to the lates
 }
 ```
 
+The versioned tests runner has a timeout for tests that defaults to one minute. That is, if running a test -- including installing its dependencies! -- takes longer than a minute, then that test is considered to have failed. You can change this timeout with the `TEST_CHILD_TIMEOUT` environment variable, which is interpreted as a number of milliseconds. For example, to set a test timeout of ten minutes, you could invoke the test runner like this:
+
+```sh
+$ TEST_CHILD_TIMEOUT=600000 versioned-tests
+```
+
+As ten minutes is 600,000 milliseconds.
+
 ## Testing
 The module includes a suite of unit and functional tests which should be used to
 verify that your changes don't break existing functionality.
