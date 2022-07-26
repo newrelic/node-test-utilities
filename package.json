@@ -23,7 +23,7 @@
   "author": "New Relic Node.js agent team <nodejs@newrelic.com>",
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=12.0"
+    "node": ">=14.0"
   },
   "files": [
     "lib/**",
