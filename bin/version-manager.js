@@ -11,6 +11,7 @@ require('colors')
 
 const cmd = require('commander')
 const path = require('path')
+const os = require('os')
 
 const printers = require('../lib/versioned/printers')
 const Suite = require('../lib/versioned/suite')
@@ -18,7 +19,7 @@ const { buildGlobs, resolveGlobs } = require('../lib/versioned/globber')
 
 cmd
   .arguments('[test-globs...]')
-  .option('-j, --jobs <n>', 'Max parallel test executions [5]', int, 5)
+  .option('-j, --jobs <n>', 'Max parallel test executions. Defaults to max available CPUs.', int)
   .option('-i, --install <n>', 'Max parallel installations [1]', int, 1)
   .option('-p, --print <mode>', 'Specify print mode [pretty]', printMode, 'pretty')
   .option('-s, --skip <keyword>[,<keyword>]', 'Skip files containing the supplied keyword(s)')
@@ -68,6 +69,12 @@ function printMode(mode) {
 }
 
 function run(files, patterns) {
+  let maxParallelRuns = cmd.jobs
+  if (!maxParallelRuns) {
+    maxParallelRuns = os.cpus().length
+    console.log(`Defaulting to max parallel runs of: ${maxParallelRuns} based on avaiable CPUs.`)
+  }
+
   // Clean up the files we'll be running.
   const filePaths = new Set()
   files.sort().forEach((file) => {
@@ -87,8 +94,9 @@ function run(files, patterns) {
     process.env.TRAVIS || cmd.print === 'simple'
       ? new printers.SimplePrinter(files, { refresh: 100 })
       : new printers.PrettyPrinter(files, { refresh: 100 })
+
   const runner = new Suite(directories, {
-    limit: cmd.jobs,
+    limit: maxParallelRuns,
     installLimit: cmd.install,
     versions: mode,
     allPkgs: !!cmd.all,
