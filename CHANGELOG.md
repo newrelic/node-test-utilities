@@ -1,3 +1,17 @@
+### v7.0.0 (2022-07-27)
+
+* Added support for Node 18.
+
+* **BREAKING** Removed support for Node 12.
+
+  The minimum supported version is now Node v14. For further information on our support policy, see: https://docs.newrelic.com/docs/agents/nodejs-agent/getting-started/compatibility-requirements-nodejs-agent.
+
+* Updated test runner to use max CPUs available to run test folders in parallel when the `--jobs` parameter is not specified.
+
+* Bumped [moment](https://github.com/moment/moment) from 2.29.2 to 2.29.4 in package-lock.
+
+* Bumped [protobufjs](https://github.com/protobufjs/protobuf.js) from 6.11.2 to 6.11.3 in package-lock.
+
 ### v6.5.5 (2022-06-01)
 
 * Added TEST_CHILD_TIMEOUT environment variable to modify test timeout limits.
