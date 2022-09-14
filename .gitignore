@@ -29,5 +29,8 @@ node_modules
 # VS Code settings
 .vscode
 
+# JetBrains settings
+.idea
+
 # Instanbul code coverage files
 .nyc_output
