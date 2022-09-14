@@ -1,0 +1,14 @@
+{
+  "name": "mock-tests",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "tests": [{
+    "engines": {"node": "<0.1.0"},
+    "dependencies": {"redis": "*"},
+    "files": ["redis.mock.tap.js", "other.mock.tap.js"]
+  }, {
+    "dependencies": {"redis": ">=1.0.0"},
+    "files": ["redis.mock.tap.js", "other.mock.tap.js"]
+  }]
+}
