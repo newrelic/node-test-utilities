@@ -1,3 +1,7 @@
+### v7.1.0 (2022-09-14)
+
+* Added the capacity of running ES module tests with the ESM loader from agent or a path to an ESM loader set as process.env.NR_LOADER.
+
 ### v7.0.0 (2022-07-27)
 
 * Added support for Node 18.
