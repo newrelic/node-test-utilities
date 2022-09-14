@@ -34,6 +34,9 @@ tap.test('Test construction', function (t) {
 tap.test('ESM Tests', (t) => {
   t.autoend()
   const cp = require('child_process')
+  const esmVersions = {
+    redis: { versions: ['1.0.0'] }
+  }
 
   t.before(() => {
     sinon.spy(cp, 'spawn')
@@ -50,23 +53,19 @@ tap.test('ESM Tests', (t) => {
   t.test('should properly construct test with type of module', (t) => {
     let test = null
     t.doesNotThrow(function () {
-      test = new Test(ESM_MOCK_DIR, pkgVersions)
+      test = new Test(ESM_MOCK_DIR, esmVersions)
     }, 'should not throw when constructed')
 
     t.type(test, Test, 'should construct a Test instance')
-    t.equal(test.type, 'module', 'should default type to commonjs')
+    t.equal(test.type, 'module', 'should default type to module')
     t.end()
   })
 
   t.test('should default loader to test-loader.mjs when NR_LOADER is not specified', (t) => {
-    const test = new Test(ESM_MOCK_DIR, pkgVersions)
+    const test = new Test(ESM_MOCK_DIR, esmVersions)
     const testRun = test.run()
     const { env } = cp.spawn.args[0][2]
-    t.equal(
-      env.nr_esm_loader,
-      `${process.cwd()}/test/lib/test-loader.mjs`,
-      'should use default loader'
-    )
+    t.equal(env.NR_LOADER, `${process.cwd()}/test/lib/test-loader.mjs`, 'should use default loader')
     // must force the mocked test run to complete so tap can shut down
     testRun.continue()
     testRun.once('completed', function () {
@@ -76,12 +75,12 @@ tap.test('ESM Tests', (t) => {
   })
 
   t.test('should use NR_LOADER when specified', (t) => {
-    const test = new Test(ESM_MOCK_DIR, pkgVersions)
+    const test = new Test(ESM_MOCK_DIR, esmVersions)
     process.env.NR_LOADER = 'bogus-loader.mjs'
     const testRun = test.run()
     const { env } = cp.spawn.args[0][2]
     t.equal(
-      env.nr_esm_loader,
+      env.NR_LOADER,
       `${process.cwd()}/bogus-loader.mjs`,
       'should use NR_LOADER but resolves path'
     )
