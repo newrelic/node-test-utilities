@@ -1,6 +1,6 @@
 ### v7.1.0 (2022-09-14)
 
-Added the capacity of running the ESM loader ESM module tests using this project's test runner.
+* Added the capacity of running ESM module tests with the ESM loader in `node-newrelic` or a path to an ESM loader set as process.env.NR_LOADER.
 
 ### v7.0.0 (2022-07-27)
 
