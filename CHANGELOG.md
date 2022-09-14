@@ -1,3 +1,7 @@
+### v7.1.0 (2022-09-14)
+
+Added the capacity of running the ESM loader ESM module tests using this project's test runner.
+
 ### v7.0.0 (2022-07-27)
 
 * Added support for Node 18.
