@@ -1,3 +1,7 @@
+### v7.1.1 (2022-09-15)
+
+* Added detection for node version < 18, to supply correct loader flag
+
 ### v7.1.0 (2022-09-14)
 
 * Added the capacity of running ES module tests with the ESM loader from agent or a path to an ESM loader set as process.env.NR_LOADER.
