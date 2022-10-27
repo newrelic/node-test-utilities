@@ -10,7 +10,7 @@
     "lint:fix": "eslint --fix *.js lib/*",
     "test": "npm run unit",
     "third-party-updates": "oss third-party manifest && oss third-party notices && git add THIRD_PARTY_NOTICES.md third_party_manifest.json",
-    "unit": "tap tests/unit/*.tap.js tests/unit/*/*.tap.js --no-coverage --reporter classic",
+    "unit": "c8 -o ./coverage/unit tap tests/unit/*.tap.js tests/unit/*/*.tap.js --no-coverage --reporter classic",
     "prepare": "husky install"
   },
   "bin": {
@@ -33,6 +33,7 @@
   "devDependencies": {
     "@newrelic/eslint-config": "^0.0.3",
     "@newrelic/newrelic-oss-cli": "^0.1.2",
+    "c8": "^7.12.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-header": "^3.1.1",
