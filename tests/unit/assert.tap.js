@@ -10,12 +10,15 @@ const tap = require('tap')
 const TestAgent = require('../../lib/agent')
 
 let helper = null
+let config = {}
+
 tap.beforeEach(function () {
-  helper = new TestAgent()
+  helper = new TestAgent(config)
 })
 tap.afterEach(function () {
   helper.unload()
   helper = null
+  config = {}
 })
 
 tap.notOk(tap.transaction, 'should not extend tap on require')
@@ -23,6 +26,7 @@ tap.notOk(tap.metrics, 'should not extend tap on require')
 tap.notOk(tap.exactMetrics, 'should not extend tap on require')
 tap.notOk(tap.segments, 'should not extend tap on require')
 tap.notOk(tap.exactSegments, 'should not extend tap on require')
+tap.notOk(tap.clmAttrs, 'should not extend tap on require')
 
 tap.test('assert.extendTap', function (t) {
   assert.extendTap(tap)
@@ -32,6 +36,7 @@ tap.test('assert.extendTap', function (t) {
   tap.type(tap.exactMetrics, 'function', 'should extend tap with more assertions')
   tap.type(tap.segments, 'function', 'should extend tap with more assertions')
   tap.type(tap.exactSegments, 'function', 'should extend tap with more assertions')
+  tap.type(tap.clmAttrs, 'function', 'should extend tap with CLM assertions')
 
   t.end()
 })
@@ -321,4 +326,33 @@ tap.test('assert.exactSegments', function (t) {
   )
 
   t.end()
+})
+;[true, false].forEach((isCLMEnabled) => {
+  config = { code_level_metrics: { isCLMEnabled } }
+  tap.test(isCLMEnabled ? 'should add attributes' : 'should not add attributes', function (t) {
+    const tx = helper.runInTransaction(function createTransaction(tx) {
+      return tx
+    })
+    const root = tx.trace.root
+    const child = root.add('child')
+    const sibling = root.add('sibling')
+    const filepath = 'tests/unit/assert.tap.js'
+
+    t.clmAttrs({
+      segments: [
+        {
+          segment: child,
+          name: 'child',
+          filepath
+        },
+        {
+          segment: sibling,
+          name: 'sibling',
+          filepath
+        }
+      ],
+      enabled: isCLMEnabled
+    })
+    t.end()
+  })
 })
