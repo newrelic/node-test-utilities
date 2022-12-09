@@ -65,11 +65,11 @@ tap.test('globber', (t) => {
 
     t.test('filter out node modules', async (t) => {
       const files = await globber.resolveGlobs(
-        [`${TEST_DIR}/**/package.json`],
+        [`${TEST_DIR}/scoped-pkgs/**/package.json`],
         [`${TEST_DIR}/package.json`]
       )
       t.equal(files.length, 1)
-      t.match(files, [`${TEST_DIR}/node_modules/@newrelic/package.json`])
+      t.match(files, [`${TEST_DIR}/scoped-pkgs/node_modules/@newrelic/package.json`])
       t.end()
     })
 

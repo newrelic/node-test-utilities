@@ -40,3 +40,10 @@ jobs:
       run: npm install
     - name: Run Unit Tests
       run: npm run unit
+    - name: Post Unit Test Coverage
+      uses: codecov/codecov-action@v3
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        directory: ./coverage/unit/
+        files: lcov.info
+        flags: unit-tests-${{ matrix.node-version }}

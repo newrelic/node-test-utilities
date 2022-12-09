@@ -11,7 +11,7 @@
     "lint:lockfile": "lockfile-lint --path package-lock.json --type npm --allowed-hosts npm --validate-https --validate-integrity",
     "test": "npm run unit",
     "third-party-updates": "oss third-party manifest && oss third-party notices && git add THIRD_PARTY_NOTICES.md third_party_manifest.json",
-    "unit": "tap tests/unit/*.tap.js tests/unit/*/*.tap.js --no-coverage --reporter classic",
+    "unit": "c8 -o ./coverage/unit tap tests/unit/*.tap.js tests/unit/*/*.tap.js --no-coverage --reporter classic",
     "prepare": "husky install"
   },
   "bin": {
@@ -34,6 +34,7 @@
   "devDependencies": {
     "@newrelic/eslint-config": "^0.0.3",
     "@newrelic/newrelic-oss-cli": "^0.1.2",
+    "c8": "^7.12.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-header": "^3.1.1",
@@ -53,7 +54,7 @@
     "colors": "^1.1.2",
     "commander": "^2.14.1",
     "concat-stream": "^1.6.0",
-    "glob": "^7.2.0",
+    "glob": "^7.2.3",
     "lodash": "^4.17.5",
     "log-update": "^1.0.2",
     "semver": "^5.5.0"

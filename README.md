@@ -1,6 +1,8 @@
-[![Community Project header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Community_Project.png)](https://opensource.newrelic.com/oss-category/#community-project)
+[![Community Project header](https://github.com/newrelic/opensource-website/raw/main/src/images/categories/Community_Project.png)](https://opensource.newrelic.com/oss-category/#community-project)
 
-# New Relic Test Utilities [![Test Utilities CI][1]][2]
+# New Relic Test Utilities 
+
+[![npm status badge][3]][4] [![Test Utilities CI][1]][2] [![codecov][5]][6]
 
 Library full of test utilities and helpers for New Relic instrumentation modules.
 The full documentation for this module can be
@@ -240,3 +242,7 @@ New Relic Test Utilities also uses source code from third-party libraries. You c
 
 [1]: https://github.com/newrelic/node-test-utilities/workflows/Test%20Utilities%20CI/badge.svg
 [2]: https://github.com/newrelic/node-test-utilities/actions?query=workflow%3A%22Test+Utilities+CI%22
+[3]: https://img.shields.io/npm/v/@newrelic/test-utilities.svg
+[4]: https://www.npmjs.com/package/@newrelic/test-utilities
+[5]: https://codecov.io/gh/newrelic/node-test-utilities/branch/main/graph/badge.svg
+[6]: https://codecov.io/gh/newrelic/node-test-utilities
