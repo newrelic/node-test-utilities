@@ -8,6 +8,7 @@
 const assert = require('../../lib/assert')
 const tap = require('tap')
 const TestAgent = require('../../lib/agent')
+const testUtils = require('../../lib/util')
 
 let helper = null
 let config = {}
@@ -327,31 +328,43 @@ tap.test('assert.exactSegments', function (t) {
 
   t.end()
 })
-;[true, false].forEach((isCLMEnabled) => {
-  config = { code_level_metrics: { isCLMEnabled } }
-  tap.test(isCLMEnabled ? 'should add attributes' : 'should not add attributes', function (t) {
+;[true, false].forEach((enabled) => {
+  config = { code_level_metrics: { enabled } }
+  tap.test(enabled ? 'should add attributes' : 'should not add attributes', function (t) {
+    const symbols = testUtils.symbols
+    const addCLMAttributes = testUtils.clmUtils
     const tx = helper.runInTransaction(function createTransaction(tx) {
       return tx
     })
+
     const root = tx.trace.root
     const child = root.add('child')
     const sibling = root.add('sibling')
     const filepath = 'tests/unit/assert.tap.js'
 
+    function enabledFunction() {}
+
+    if (enabled) {
+      enabledFunction[symbols.clm] = true
+      addCLMAttributes(enabledFunction, child)
+      addCLMAttributes(enabledFunction, sibling)
+    }
+
     t.clmAttrs({
       segments: [
         {
+          name: enabled ? 'enabledFunction' : 'child',
           segment: child,
-          name: 'child',
           filepath
         },
         {
+          name: enabled ? 'enabledFunction' : 'sibling',
           segment: sibling,
-          name: 'sibling',
           filepath
         }
       ],
-      enabled: isCLMEnabled
+      enabled,
+      test: t // passing this for more readable assertions
     })
     t.end()
   })
