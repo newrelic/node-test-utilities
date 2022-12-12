@@ -1,6 +1,6 @@
 {
   "name": "@newrelic/test-utilities",
-  "version": "7.1.1",
+  "version": "7.2.0",
   "description": "Test library for New Relic instrumentation modules.",
   "main": "index.js",
   "scripts": {
