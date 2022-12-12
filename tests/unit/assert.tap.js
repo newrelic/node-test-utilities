@@ -330,7 +330,7 @@ tap.test('assert.exactSegments', function (t) {
 })
 ;[true, false].forEach((enabled) => {
   config = { code_level_metrics: { enabled } }
-  tap.test(enabled ? 'should add attributes' : 'should not add attributes', function (t) {
+  tap.test(enabled ? 'should add CLM attributes' : 'should not add attributes', function (t) {
     const symbols = testUtils.symbols
     const addCLMAttributes = testUtils.clmUtils
     const tx = helper.runInTransaction(function createTransaction(tx) {
@@ -363,8 +363,7 @@ tap.test('assert.exactSegments', function (t) {
           filepath
         }
       ],
-      enabled,
-      test: t // passing this for more readable assertions
+      enabled
     })
     t.end()
   })
