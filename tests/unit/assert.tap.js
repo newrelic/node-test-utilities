@@ -332,7 +332,7 @@ tap.test('assert.exactSegments', function (t) {
   config = { code_level_metrics: { enabled } }
   tap.test(enabled ? 'should add CLM attributes' : 'should not add attributes', function (t) {
     const symbols = testUtils.symbols
-    const addCLMAttributes = testUtils.clmUtils
+    const { addCLMAttributes } = testUtils.clmUtils
     const tx = helper.runInTransaction(function createTransaction(tx) {
       return tx
     })
