@@ -191,3 +191,19 @@ tap.test('testUtil.maxVersionPerMode', (t) => {
 
   t.end()
 })
+
+tap.test('new helpers are available', (t) => {
+  t.type(testUtil.clmUtils, 'object', 'util should export clmUtils as an object')
+  t.type(
+    testUtil.clmUtils.assignCLMSymbol,
+    'function',
+    'clmUtils should expose an assignCLMSymbol function'
+  )
+  t.type(
+    testUtil.clmUtils.addCLMAttributes,
+    'function',
+    'clmUtils should expose an addCLMAttributes function'
+  )
+  t.type(testUtil.symbols, 'object', 'util should export symbols as an object')
+  t.end()
+})
