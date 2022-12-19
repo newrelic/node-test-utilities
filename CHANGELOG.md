@@ -1,3 +1,8 @@
+### v7.2.1 (2022-12-19)
+
+Streamlined CLM assertions to inherit tap from context. 
+Bypassed tapper/asserter abstractions so that CLM test failures are exposed.
+
 ### v7.2.0 (2022-12-12)
 
 * Added `assertCLMAttrs` testing method to utils, so it can be used to test CLM behavior in external repos
