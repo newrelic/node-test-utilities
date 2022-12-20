@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "Fri Dec 09 2022 14:39:50 GMT-0500 (Eastern Standard Time)",
+  "lastUpdated": "Wed Dec 14 2022 13:44:13 GMT-0500 (Eastern Standard Time)",
   "projectName": "New Relic Test Utilities",
   "projectUrl": "https://github.com/newrelic/node-test-utilities",
   "includeOptDeps": false,
@@ -58,7 +58,7 @@
     "glob@7.2.3": {
       "name": "glob",
       "version": "7.2.3",
-      "range": "^7.2.0",
+      "range": "^7.2.3",
       "licenses": "ISC",
       "repoUrl": "https://github.com/isaacs/node-glob",
       "versionedRepoUrl": "https://github.com/isaacs/node-glob/tree/v7.2.3",
@@ -247,29 +247,15 @@
       "publisher": "Andrey Okonetchnikov",
       "email": "andrey@okonet.ru"
     },
-    "lockfile-lint@4.9.6": {
-      "name": "lockfile-lint",
-      "version": "4.9.6",
-      "range": "^4.9.6",
-      "licenses": "Apache-2.0",
-      "repoUrl": "https://github.com/lirantal/lockfile-lint",
-      "versionedRepoUrl": "https://github.com/lirantal/lockfile-lint/tree/v4.9.6",
-      "licenseFile": "node_modules/lockfile-lint/LICENSE",
-      "licenseUrl": "https://github.com/lirantal/lockfile-lint/blob/v4.9.6/LICENSE",
-      "licenseTextSource": "file",
-      "publisher": "Liran Tal",
-      "email": "liran.tal@gmail.com",
-      "url": "https://github.com/lirantal"
-    },
-    "newrelic@8.17.1": {
+    "newrelic@9.7.3": {
       "name": "newrelic",
-      "version": "8.17.1",
-      "range": "^8.6.0",
+      "version": "9.7.3",
+      "range": "^9.7.3",
       "licenses": "Apache-2.0",
       "repoUrl": "https://github.com/newrelic/node-newrelic",
-      "versionedRepoUrl": "https://github.com/newrelic/node-newrelic/tree/v8.17.1",
+      "versionedRepoUrl": "https://github.com/newrelic/node-newrelic/tree/v9.7.3",
       "licenseFile": "node_modules/newrelic/LICENSE",
-      "licenseUrl": "https://github.com/newrelic/node-newrelic/blob/v8.17.1/LICENSE",
+      "licenseUrl": "https://github.com/newrelic/node-newrelic/blob/v9.7.3/LICENSE",
       "licenseTextSource": "file",
       "publisher": "New Relic Node.js agent team",
       "email": "nodejs@newrelic.com"

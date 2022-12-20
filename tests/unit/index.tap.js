@@ -5,10 +5,10 @@
 
 'use strict'
 
-var tap = require('tap')
+const tap = require('tap')
 
-tap.test('loading the module', function(t) {
-  var util
+tap.test('loading the module', function (t) {
+  let util
 
   t.doesNotThrow(function doesNotThrow() {
     util = require('../../index.js')
