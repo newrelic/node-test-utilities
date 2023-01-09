@@ -7442,7 +7442,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ### tap
 
-This product includes source derived from [tap](https://github.com/tapjs/node-tap) ([v16.3.2](https://github.com/tapjs/node-tap/tree/v16.3.2)), distributed under the [ISC License](https://github.com/tapjs/node-tap/blob/v16.3.2/LICENSE):
+This product includes source derived from [tap](https://github.com/tapjs/node-tap) ([v16.3.3](https://github.com/tapjs/node-tap/tree/v16.3.3)), distributed under the [ISC License](https://github.com/tapjs/node-tap/blob/v16.3.3/LICENSE):
 
 ```
 The ISC License

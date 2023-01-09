@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "Tue Dec 20 2022 09:53:07 GMT-0500 (Eastern Standard Time)",
+  "lastUpdated": "Mon Jan 09 2023 10:38:40 GMT-0500 (GMT-05:00)",
   "projectName": "New Relic Test Utilities",
   "projectUrl": "https://github.com/newrelic/node-test-utilities",
   "includeOptDeps": false,
@@ -298,15 +298,15 @@
       "licenseTextSource": "file",
       "publisher": "Christian Johansen"
     },
-    "tap@16.3.2": {
+    "tap@16.3.3": {
       "name": "tap",
-      "version": "16.3.2",
-      "range": "^16.0.1",
+      "version": "16.3.3",
+      "range": "^16.3.3",
       "licenses": "ISC",
       "repoUrl": "https://github.com/tapjs/node-tap",
-      "versionedRepoUrl": "https://github.com/tapjs/node-tap/tree/v16.3.2",
+      "versionedRepoUrl": "https://github.com/tapjs/node-tap/tree/v16.3.3",
       "licenseFile": "node_modules/tap/LICENSE",
-      "licenseUrl": "https://github.com/tapjs/node-tap/blob/v16.3.2/LICENSE",
+      "licenseUrl": "https://github.com/tapjs/node-tap/blob/v16.3.3/LICENSE",
       "licenseTextSource": "file",
       "publisher": "Isaac Z. Schlueter",
       "email": "i@izs.me",
