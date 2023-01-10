@@ -1,3 +1,10 @@
+### v7.2.1 (2023-01-10)
+
+* Bumps [json5](https://github.com/json5/json5) from 2.2.1 to 2.2.2.
+* Streamlined CLM assertions to inherit tap from context. 
+* Bypassed tapper/asserter abstractions so that CLM test failures are exposed.
+* Added lockfile checks to CI workflow to prevent malicious changes
+
 ### v7.2.0 (2022-12-12)
 
 * Added `assertCLMAttrs` testing method to utils, so it can be used to test CLM behavior in external repos
