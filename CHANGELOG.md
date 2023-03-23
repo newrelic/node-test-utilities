@@ -2,7 +2,7 @@
 
 * Provided ability to register only core instrumentation or both core and 3rd party instrumentation.  `TestAgent.makeFullyInstrumented` will register both.  `TestAgent.makeInstrumented` will only register core instrumentation.
 
-* Update README header image to latest OSS office required images
+* Updated README header image to latest OSS office required images
 
 ### v7.2.1 (2023-01-10)
 
