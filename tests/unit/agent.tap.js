@@ -46,6 +46,12 @@ tap.test('new TestAgent with false setState arg', (t) => {
 })
 
 tap.test('TestAgent.makeInstrumented', (t) => {
+  const spy = sinon.spy(shimmer, 'bootstrapInstrumentation')
+
+  t.teardown(() => {
+    spy.restore()
+  })
+
   const Module = require('module')
   const origLoad = Module._load
 
@@ -53,9 +59,9 @@ tap.test('TestAgent.makeInstrumented', (t) => {
   t.type(helper, TestAgent, 'should construct a TestAgent')
   t.not(Module._load, origLoad, 'should patch module')
   t.ok(shimmer.debug, 'should enable debug mode')
+  t.notOk(spy.callCount, 'should not called bootstrapInstrumentation')
 
   t.equal(helper.agent._state, 'started', 'should default to `started` state')
-
   t.end()
 })
 
@@ -63,6 +69,32 @@ tap.test('TestAgent.makeInstrumented with false setState arg', (t) => {
   const helper = TestAgent.makeInstrumented(null, false)
   t.equal(helper.agent._state, 'stopped', 'should be in initial `stopped` state')
 
+  t.end()
+})
+
+tap.test('TestAgent.makeInstrumented instrumentFull flag', (t) => {
+  const spy = sinon.spy(shimmer, 'bootstrapInstrumentation')
+
+  t.teardown(() => {
+    spy.restore()
+  })
+  const helper = TestAgent.makeInstrumented(null, null, true)
+  t.type(helper, TestAgent, 'should construct a TestAgent')
+
+  t.equal(spy.callCount, 1, 'should call bootstrapInstrumentation once')
+  t.end()
+})
+
+tap.test('TestAgent.makeFullyInstrumented', (t) => {
+  const spy = sinon.spy(shimmer, 'bootstrapInstrumentation')
+
+  t.teardown(() => {
+    spy.restore()
+  })
+
+  const helper = TestAgent.makeFullyInstrumented()
+  t.type(helper, TestAgent, 'should construct a TestAgent')
+  t.equal(spy.callCount, 1, 'should call bootstrapInstrumentation once')
   t.end()
 })
 
@@ -129,17 +161,19 @@ tap.test('TestAgent instance', (t) => {
   })
 
   t.test('TestAgent#registerInstrumentation', (t) => {
+    const spy = sinon.spy(shimmer, 'registerInstrumentation')
+    t.teardown(() => {
+      spy.restore()
+    })
     const opts = {
       type: 'web-framework',
       moduleName: 'test',
       onRequire: () => {}
     }
 
-    const spy = sinon.spy(shimmer, 'registerInstrumentation')
     helper.registerInstrumentation(opts)
     t.equal(spy.args[0][0], opts, 'should call shimmer.registerInstrumentation')
 
-    spy.restore()
     t.end()
   })
 
