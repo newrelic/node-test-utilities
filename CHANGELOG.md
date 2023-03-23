@@ -1,3 +1,9 @@
+### v7.3.0 (2023-03-23)
+
+* Provided ability to register only core instrumentation or both core and 3rd party instrumentation.  `TestAgent.makeFullyInstrumented` will register both.  `TestAgent.makeInstrumented` will only register core instrumentation.
+
+* Update README header image to latest OSS office required images
+
 ### v7.2.1 (2023-01-10)
 
 * Bumps [json5](https://github.com/json5/json5) from 2.2.1 to 2.2.2.
