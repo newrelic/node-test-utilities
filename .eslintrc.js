@@ -5,6 +5,9 @@
 
 'use strict'
 module.exports = {
+  parserOptions: {
+    ecmaVersion: '2020'
+  },
   extends: '@newrelic',
   rules: {
     'consistent-return': 'off'
