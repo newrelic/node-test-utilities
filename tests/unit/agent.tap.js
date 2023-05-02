@@ -198,12 +198,21 @@ tap.test('TestAgent instance', (t) => {
   })
 
   t.test('TestAgent#getShim', (t) => {
-    const shim = helper.getShim()
+    TestAgent.instance.instrument(true)
+    const koa = require('koa')
+    const shim = helper.getShim(koa)
 
     t.ok(shim)
     t.equal(shim.agent, helper.agent)
-    t.equal(shim.moduleName, 'Test Agent')
+    t.equal(shim.moduleName, 'koa')
 
+    t.end()
+  })
+
+  t.test('TestAgent#getShim returns null when no shim for pkg', (t) => {
+    function foo() {}
+    const shim = helper.getShim(foo)
+    t.notOk(shim)
     t.end()
   })
 

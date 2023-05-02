@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "Thu Mar 23 2023 14:03:39 GMT-0400 (Eastern Daylight Time)",
+  "lastUpdated": "Fri Apr 28 2023 16:55:25 GMT-0400 (Eastern Daylight Time)",
   "projectName": "New Relic Test Utilities",
   "projectUrl": "https://github.com/newrelic/node-test-utilities",
   "includeOptDeps": false,
@@ -233,6 +233,17 @@
       "licenseTextSource": "file",
       "publisher": "Michael Mathews",
       "email": "micmath@gmail.com"
+    },
+    "koa@2.14.2": {
+      "name": "koa",
+      "version": "2.14.2",
+      "range": "^2.14.2",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/koajs/koa",
+      "versionedRepoUrl": "https://github.com/koajs/koa/tree/v2.14.2",
+      "licenseFile": "node_modules/koa/LICENSE",
+      "licenseUrl": "https://github.com/koajs/koa/blob/v2.14.2/LICENSE",
+      "licenseTextSource": "file"
     },
     "lint-staged@11.2.6": {
       "name": "lint-staged",
