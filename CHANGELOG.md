@@ -1,3 +1,7 @@
+### v7.3.1 (2023-05-03)
+
+* Updated `TestAgent.getShim` to require an exported module and pull the shim symbol.
+
 ### v7.3.0 (2023-03-23)
 
 * Provided ability to register only core instrumentation or both core and 3rd party instrumentation.  `TestAgent.makeFullyInstrumented` will register both.  `TestAgent.makeInstrumented` will only register core instrumentation.
