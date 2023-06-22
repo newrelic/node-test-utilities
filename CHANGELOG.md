@@ -1,3 +1,14 @@
+### v7.3.2 (2023-06-22)
+
+Proposed release notes
+
+* Updated `semver` to 7.5.2
+* Updated `newrelic` dev dependency to 10.3.0
+* Updated `@newrelic/eslint-config` to  0.3.0
+* Updated `eslint` dev dependency to 8.43.0
+
+* Updated README links to point to new forum link due to repolinter ruleset change
+
 ### v7.3.1 (2023-05-03)
 
 * Updated `TestAgent.getShim` to require an exported module and pull the shim symbol.
