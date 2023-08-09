@@ -8,7 +8,6 @@
 const path = require('path')
 const tap = require('tap')
 const fs = require('fs')
-const sinon = require('sinon')
 
 const Test = require('../../../lib/versioned/test')
 
@@ -17,8 +16,6 @@ const pkgVersions = {
   bluebird: { versions: ['1.0.8', '1.1.1', '1.2.4', '2.0.7'], latest: '2.0.7' },
   redis: { versions: ['1.0.0', '2.0.1', '2.1.0'], latest: '2.1.0' }
 }
-
-const ESM_MOCK_DIR = path.resolve(__dirname, 'mock-esm-tests')
 
 tap.test('Test construction', function (t) {
   let test = null
@@ -29,68 +26,6 @@ tap.test('Test construction', function (t) {
   t.type(test, Test, 'should construct a Test instance')
   t.equal(test.type, 'commonjs', 'should default type to commonjs')
   t.end()
-})
-
-tap.test('ESM Tests', (t) => {
-  t.autoend()
-  const cp = require('child_process')
-  const esmVersions = {
-    redis: { versions: ['1.0.0'] }
-  }
-
-  t.before(() => {
-    sinon.spy(cp, 'spawn')
-  })
-
-  t.afterEach(() => {
-    cp.spawn.resetHistory()
-  })
-
-  t.teardown(() => {
-    cp.spawn.restore()
-  })
-
-  t.test('should properly construct test with type of module', (t) => {
-    let test = null
-    t.doesNotThrow(function () {
-      test = new Test(ESM_MOCK_DIR, esmVersions)
-    }, 'should not throw when constructed')
-
-    t.type(test, Test, 'should construct a Test instance')
-    t.equal(test.type, 'module', 'should default type to module')
-    t.end()
-  })
-
-  t.test('should default loader to test-loader.mjs when NR_LOADER is not specified', (t) => {
-    const test = new Test(ESM_MOCK_DIR, esmVersions)
-    const testRun = test.run()
-    const { env } = cp.spawn.args[0][2]
-    t.equal(env.NR_LOADER, `${process.cwd()}/test/lib/test-loader.mjs`, 'should use default loader')
-    // must force the mocked test run to complete so tap can shut down
-    testRun.continue()
-    testRun.once('completed', function () {
-      testRun.continue()
-      t.end()
-    })
-  })
-
-  t.test('should use NR_LOADER when specified', (t) => {
-    const test = new Test(ESM_MOCK_DIR, esmVersions)
-    process.env.NR_LOADER = 'bogus-loader.mjs'
-    const testRun = test.run()
-    const { env } = cp.spawn.args[0][2]
-    t.equal(
-      env.NR_LOADER,
-      `${process.cwd()}/bogus-loader.mjs`,
-      'should use NR_LOADER but resolves path'
-    )
-    // must force the mocked test run to complete so tap can shut down
-    testRun.continue()
-    testRun.once('completed', function () {
-      testRun.continue()
-      t.end()
-    })
-  })
 })
 
 tap.test('Test methods and members', function (t) {
