@@ -282,7 +282,7 @@ THE SOFTWARE.
 
 ### semver
 
-This product includes source derived from [semver](https://github.com/npm/node-semver) ([v5.7.1](https://github.com/npm/node-semver/tree/v5.7.1)), distributed under the [ISC License](https://github.com/npm/node-semver/blob/v5.7.1/LICENSE):
+This product includes source derived from [semver](https://github.com/npm/node-semver) ([v7.5.4](https://github.com/npm/node-semver/tree/v7.5.4)), distributed under the [ISC License](https://github.com/npm/node-semver/blob/v7.5.4/LICENSE):
 
 ```
 The ISC License
@@ -308,7 +308,7 @@ IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 ### @newrelic/eslint-config
 
-This product includes source derived from [@newrelic/eslint-config](https://github.com/newrelic/eslint-config-newrelic) ([v0.0.3](https://github.com/newrelic/eslint-config-newrelic/tree/v0.0.3)), distributed under the [Apache-2.0 License](https://github.com/newrelic/eslint-config-newrelic/blob/v0.0.3/LICENSE):
+This product includes source derived from [@newrelic/eslint-config](https://github.com/newrelic/eslint-config-newrelic) ([v0.3.0](https://github.com/newrelic/eslint-config-newrelic/tree/v0.3.0)), distributed under the [Apache-2.0 License](https://github.com/newrelic/eslint-config-newrelic/blob/v0.3.0/LICENSE):
 
 ```
                                  Apache License
@@ -854,10 +854,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 ### eslint
 
-This product includes source derived from [eslint](https://github.com/eslint/eslint) ([v7.32.0](https://github.com/eslint/eslint/tree/v7.32.0)), distributed under the [MIT License](https://github.com/eslint/eslint/blob/v7.32.0/LICENSE):
+This product includes source derived from [eslint](https://github.com/eslint/eslint) ([v8.43.0](https://github.com/eslint/eslint/tree/v8.43.0)), distributed under the [MIT License](https://github.com/eslint/eslint/blob/v8.43.0/LICENSE):
 
 ```
-Copyright JS Foundation and other contributors, https://js.foundation
+Copyright OpenJS Foundation and other contributors, <www.openjsf.org>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -1277,7 +1277,7 @@ This product includes source derived from [lockfile-lint](https://github.com/lir
 
 ### newrelic
 
-This product includes source derived from [newrelic](https://github.com/newrelic/node-newrelic) ([v9.14.0](https://github.com/newrelic/node-newrelic/tree/v9.14.0)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-newrelic/blob/v9.14.0/LICENSE):
+This product includes source derived from [newrelic](https://github.com/newrelic/node-newrelic) ([v10.6.2](https://github.com/newrelic/node-newrelic/tree/v10.6.2)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-newrelic/blob/v10.6.2/LICENSE):
 
 ```
                                  Apache License
@@ -7498,7 +7498,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ### tap
 
-This product includes source derived from [tap](https://github.com/tapjs/node-tap) ([v16.3.4](https://github.com/tapjs/node-tap/tree/v16.3.4)), distributed under the [ISC License](https://github.com/tapjs/node-tap/blob/v16.3.4/LICENSE):
+This product includes source derived from [tap](https://github.com/tapjs/node-tap) ([v16.3.8](https://github.com/tapjs/node-tap/tree/v16.3.8)), distributed under the [ISC License](https://github.com/tapjs/node-tap/blob/v16.3.8/LICENSE):
 
 ```
 The ISC License
