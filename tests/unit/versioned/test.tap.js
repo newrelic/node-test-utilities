@@ -61,11 +61,11 @@ tap.test('ESM Tests', (t) => {
     t.end()
   })
 
-  t.test('should default loader to test-loader.mjs when NR_LOADER is not specified', (t) => {
+  t.test('should not set loader when NR_LOADER is not specified', (t) => {
     const test = new Test(ESM_MOCK_DIR, esmVersions)
     const testRun = test.run()
     const { env } = cp.spawn.args[0][2]
-    t.equal(env.NR_LOADER, `${process.cwd()}/test/lib/test-loader.mjs`, 'should use default loader')
+    t.notOk(env.NR_LOADER)
     // must force the mocked test run to complete so tap can shut down
     testRun.continue()
     testRun.once('completed', function () {

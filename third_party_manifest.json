@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "Fri Apr 28 2023 16:55:25 GMT-0400 (Eastern Daylight Time)",
+  "lastUpdated": "Fri Aug 11 2023 12:38:08 GMT-0400 (Eastern Daylight Time)",
   "projectName": "New Relic Test Utilities",
   "projectUrl": "https://github.com/newrelic/node-test-utilities",
   "includeOptDeps": false,
@@ -96,28 +96,29 @@
       "email": "sindresorhus@gmail.com",
       "url": "sindresorhus.com"
     },
-    "semver@5.7.1": {
+    "semver@7.5.4": {
       "name": "semver",
-      "version": "5.7.1",
-      "range": "^5.5.0",
+      "version": "7.5.4",
+      "range": "^7.5.2",
       "licenses": "ISC",
       "repoUrl": "https://github.com/npm/node-semver",
-      "versionedRepoUrl": "https://github.com/npm/node-semver/tree/v5.7.1",
+      "versionedRepoUrl": "https://github.com/npm/node-semver/tree/v7.5.4",
       "licenseFile": "node_modules/semver/LICENSE",
-      "licenseUrl": "https://github.com/npm/node-semver/blob/v5.7.1/LICENSE",
-      "licenseTextSource": "file"
+      "licenseUrl": "https://github.com/npm/node-semver/blob/v7.5.4/LICENSE",
+      "licenseTextSource": "file",
+      "publisher": "GitHub Inc."
     }
   },
   "devDependencies": {
-    "@newrelic/eslint-config@0.0.3": {
+    "@newrelic/eslint-config@0.3.0": {
       "name": "@newrelic/eslint-config",
-      "version": "0.0.3",
-      "range": "^0.0.3",
+      "version": "0.3.0",
+      "range": "^0.3.0",
       "licenses": "Apache-2.0",
       "repoUrl": "https://github.com/newrelic/eslint-config-newrelic",
-      "versionedRepoUrl": "https://github.com/newrelic/eslint-config-newrelic/tree/v0.0.3",
+      "versionedRepoUrl": "https://github.com/newrelic/eslint-config-newrelic/tree/v0.3.0",
       "licenseFile": "node_modules/@newrelic/eslint-config/LICENSE",
-      "licenseUrl": "https://github.com/newrelic/eslint-config-newrelic/blob/v0.0.3/LICENSE",
+      "licenseUrl": "https://github.com/newrelic/eslint-config-newrelic/blob/v0.3.0/LICENSE",
       "licenseTextSource": "file",
       "publisher": "New Relic Node.js agent team",
       "email": "nodejs@newrelic.com"
@@ -195,15 +196,15 @@
       "licenseTextSource": "file",
       "publisher": "Teddy Katz"
     },
-    "eslint@7.32.0": {
+    "eslint@8.43.0": {
       "name": "eslint",
-      "version": "7.32.0",
-      "range": "^7.32.0",
+      "version": "8.43.0",
+      "range": "^8.43.0",
       "licenses": "MIT",
       "repoUrl": "https://github.com/eslint/eslint",
-      "versionedRepoUrl": "https://github.com/eslint/eslint/tree/v7.32.0",
+      "versionedRepoUrl": "https://github.com/eslint/eslint/tree/v8.43.0",
       "licenseFile": "node_modules/eslint/LICENSE",
-      "licenseUrl": "https://github.com/eslint/eslint/blob/v7.32.0/LICENSE",
+      "licenseUrl": "https://github.com/eslint/eslint/blob/v8.43.0/LICENSE",
       "licenseTextSource": "file",
       "publisher": "Nicholas C. Zakas",
       "email": "nicholas+npm@nczconsulting.com"
@@ -272,15 +273,15 @@
       "email": "liran.tal@gmail.com",
       "url": "https://github.com/lirantal"
     },
-    "newrelic@9.14.0": {
+    "newrelic@10.6.2": {
       "name": "newrelic",
-      "version": "9.14.0",
-      "range": "^9.7.3",
+      "version": "10.6.2",
+      "range": "^10.3.0",
       "licenses": "Apache-2.0",
       "repoUrl": "https://github.com/newrelic/node-newrelic",
-      "versionedRepoUrl": "https://github.com/newrelic/node-newrelic/tree/v9.14.0",
+      "versionedRepoUrl": "https://github.com/newrelic/node-newrelic/tree/v10.6.2",
       "licenseFile": "node_modules/newrelic/LICENSE",
-      "licenseUrl": "https://github.com/newrelic/node-newrelic/blob/v9.14.0/LICENSE",
+      "licenseUrl": "https://github.com/newrelic/node-newrelic/blob/v10.6.2/LICENSE",
       "licenseTextSource": "file",
       "publisher": "New Relic Node.js agent team",
       "email": "nodejs@newrelic.com"
@@ -309,15 +310,15 @@
       "licenseTextSource": "file",
       "publisher": "Christian Johansen"
     },
-    "tap@16.3.4": {
+    "tap@16.3.8": {
       "name": "tap",
-      "version": "16.3.4",
-      "range": "^16.0.1",
+      "version": "16.3.8",
+      "range": "^16.3.8",
       "licenses": "ISC",
       "repoUrl": "https://github.com/tapjs/node-tap",
-      "versionedRepoUrl": "https://github.com/tapjs/node-tap/tree/v16.3.4",
+      "versionedRepoUrl": "https://github.com/tapjs/node-tap/tree/v16.3.8",
       "licenseFile": "node_modules/tap/LICENSE",
-      "licenseUrl": "https://github.com/tapjs/node-tap/blob/v16.3.4/LICENSE",
+      "licenseUrl": "https://github.com/tapjs/node-tap/blob/v16.3.8/LICENSE",
       "licenseTextSource": "file",
       "publisher": "Isaac Z. Schlueter",
       "email": "i@izs.me",
