@@ -14,8 +14,6 @@
 
 ### v7.3.2 (2023-06-22)
 
-Proposed release notes
-
 * Updated `semver` to 7.5.2
 * Updated `newrelic` dev dependency to 10.3.0
 * Updated `@newrelic/eslint-config` to  0.3.0
