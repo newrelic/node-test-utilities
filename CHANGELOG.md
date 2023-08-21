@@ -1,6 +1,18 @@
-### v7.3.2 (2023-06-22)
+### v8.0.0 (2023-08-28)
 
-Proposed release notes
+* **BREAKING CHANGE**: Removed support for Node 14.
+
+* Added support for Node 20.
+
+* Gated usage of loader in versioned tests by NR_LOADER environment variable
+
+* Updated vulnerable dependencies:
+  - word-wrap from 1.2.3 to 1.2.4.
+  - protobufjs from 7.2.2 to 7.2.4.
+  - fast-xml-parser from 4.2.4 to 4.2.5
+  - @aws-sdk/client-lambda from 3.357.0 to 3.363.0
+
+### v7.3.2 (2023-06-22)
 
 * Updated `semver` to 7.5.2
 * Updated `newrelic` dev dependency to 10.3.0
