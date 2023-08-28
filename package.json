@@ -45,7 +45,7 @@
     "koa": "^2.14.2",
     "lint-staged": "^11.0.0",
     "lockfile-lint": "^4.9.6",
-    "newrelic": "^10.3.0",
+    "newrelic": "^11.0.0",
     "prettier": "^2.3.2",
     "sinon": "^11.1.1",
     "tap": "^16.3.8"
