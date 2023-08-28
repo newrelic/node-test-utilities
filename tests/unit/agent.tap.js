@@ -47,17 +47,16 @@ tap.test('new TestAgent with false setState arg', (t) => {
 
 tap.test('TestAgent.makeInstrumented', (t) => {
   const spy = sinon.spy(shimmer, 'bootstrapInstrumentation')
+  const registerHookSpy = sinon.spy(shimmer, 'registerHooks')
 
   t.teardown(() => {
     spy.restore()
+    registerHookSpy.restore()
   })
-
-  const Module = require('module')
-  const origLoad = Module._load
 
   const helper = TestAgent.makeInstrumented()
   t.type(helper, TestAgent, 'should construct a TestAgent')
-  t.not(Module._load, origLoad, 'should patch module')
+  t.equal(registerHookSpy.callCount, 1, 'should call registerHooks')
   t.ok(shimmer.debug, 'should enable debug mode')
   t.notOk(spy.callCount, 'should not called bootstrapInstrumentation')
 
@@ -113,26 +112,32 @@ tap.test('TestAgent instance', (t) => {
   })
 
   t.test('TestAgent#instrument', (t) => {
-    const Module = require('module')
-    const origLoad = Module._load
+    const registerHookSpy = sinon.spy(shimmer, 'registerHooks')
+
+    t.teardown(() => {
+      registerHookSpy.restore()
+    })
 
     helper.instrument()
-    t.not(Module._load, origLoad, 'should patch module')
     t.ok(shimmer.debug, 'should enable debug mode')
+    t.equal(registerHookSpy.callCount, 1, 'should call registerHooks')
 
     t.end()
   })
 
   t.test('TestAgent#unload', (t) => {
-    const Module = require('module')
-    const origLoad = Module._load
+    const removeHookSpy = sinon.spy(shimmer, 'removeHooks')
+
+    t.teardown(() => {
+      removeHookSpy.restore()
+    })
 
     helper.instrument()
     helper.unload()
 
-    t.equal(Module._load, origLoad, 'should unpatch module')
     t.notOk(shimmer.debug, 'should disable debug mode')
     t.equal(TestAgent.instance, null, 'should clear the TestAgent instance')
+    t.equal(removeHookSpy.callCount, 1, 'should call removeHooks')
     t.same(shimmer.registeredInstrumentations, {}, 'should clear registered instrumentation')
 
     t.end()
