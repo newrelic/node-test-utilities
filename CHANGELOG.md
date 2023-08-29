@@ -1,3 +1,7 @@
+### v8.1.0 (2023-08-29)
+
+* Updated the TestAgent to call `shimmer.registerHooks` and `shimmer.removeHooks` to set up instrumentation and remove it.
+
 ### v8.0.0 (2023-08-28)
 
 * **BREAKING CHANGE**: Removed support for Node 14.
