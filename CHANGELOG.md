@@ -1,3 +1,14 @@
+### v8.2.0 (2024-02-01)
+
+* Adds a new module that provides a mock server for AWS Bedrock.
+* Bumps [follow-redirects](https://github.com/follow-redirects/follow-redirects) from 1.15.3 to 1.15.4.
+* Bumps [axios](https://github.com/axios/axios) to 1.6.0 and updates ancestor dependency [newrelic](https://github.com/newrelic/node-newrelic). These dependencies need to be updated together.
+* Updates `axios` from 0.21.4 to 1.6.0
+* Updates `newrelic` from 11.0.0 to 11.5.0
+* Bumps  and [@babel/traverse](https://github.com/babel/babel/tree/HEAD/packages/babel-traverse). These dependencies needed to be updated together.
+* Updates `@babel/traverse` from 7.22.8 to 7.23.2
+* Updates `@babel/traverse` from 7.21.3 to 7.23.2
+
 ### v8.1.0 (2023-08-29)
 
 * Updated the TestAgent to call `shimmer.registerHooks` and `shimmer.removeHooks` to set up instrumentation and remove it.
