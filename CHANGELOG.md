@@ -1,3 +1,7 @@
+### v8.3.0 (2024-03-06)
+
++ Added new Amazon Titan LLM responses to support `token_count` work.
+
 ### v8.2.0 (2024-02-01)
 
 * Adds a new module that provides a mock server for AWS Bedrock.
