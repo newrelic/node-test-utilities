@@ -1,6 +1,6 @@
 ### v8.3.0 (2024-03-06)
 
-+ Added a new Amazon Titan LLM responses to support `token_count` work.
++ Added new Amazon Titan LLM responses to support `token_count` work.
 
 ### v8.2.0 (2024-02-01)
 
