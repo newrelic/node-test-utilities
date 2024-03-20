@@ -467,7 +467,7 @@ Apache License
 
 ### async
 
-This product includes source derived from [async](https://github.com/caolan/async) ([v3.2.5](https://github.com/caolan/async/tree/v3.2.5)), distributed under the [MIT License](https://github.com/caolan/async/blob/v3.2.5/LICENSE):
+This product includes source derived from [async](https://github.com/caolan/async) ([v3.2.4](https://github.com/caolan/async/tree/v3.2.4)), distributed under the [MIT License](https://github.com/caolan/async/blob/v3.2.4/LICENSE):
 
 ```
 Copyright (c) 2010-2018 Caolan McMahon
@@ -1144,7 +1144,7 @@ This product includes source derived from [@newrelic/newrelic-oss-cli](https://g
 
 ### c8
 
-This product includes source derived from [c8](https://github.com/bcoe/c8) ([v7.14.0](https://github.com/bcoe/c8/tree/v7.14.0)), distributed under the [ISC License](https://github.com/bcoe/c8/blob/v7.14.0/LICENSE.txt):
+This product includes source derived from [c8](https://github.com/bcoe/c8) ([v7.13.0](https://github.com/bcoe/c8/tree/v7.13.0)), distributed under the [ISC License](https://github.com/bcoe/c8/blob/v7.13.0/LICENSE.txt):
 
 ```
 Copyright (c) 2017, Contributors
@@ -1166,7 +1166,7 @@ ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 ### eslint-config-prettier
 
-This product includes source derived from [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier) ([v8.10.0](https://github.com/prettier/eslint-config-prettier/tree/v8.10.0)), distributed under the [MIT License](https://github.com/prettier/eslint-config-prettier/blob/v8.10.0/LICENSE):
+This product includes source derived from [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier) ([v8.8.0](https://github.com/prettier/eslint-config-prettier/tree/v8.8.0)), distributed under the [MIT License](https://github.com/prettier/eslint-config-prettier/blob/v8.8.0/LICENSE):
 
 ```
 The MIT License (MIT)
@@ -1273,7 +1273,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 ### eslint
 
-This product includes source derived from [eslint](https://github.com/eslint/eslint) ([v8.56.0](https://github.com/eslint/eslint/tree/v8.56.0)), distributed under the [MIT License](https://github.com/eslint/eslint/blob/v8.56.0/LICENSE):
+This product includes source derived from [eslint](https://github.com/eslint/eslint) ([v8.43.0](https://github.com/eslint/eslint/tree/v8.43.0)), distributed under the [MIT License](https://github.com/eslint/eslint/blob/v8.43.0/LICENSE):
 
 ```
 Copyright OpenJS Foundation and other contributors, <www.openjsf.org>
@@ -1439,7 +1439,7 @@ https://github.com/jmblog/color-themes-for-google-code-prettify
 
 ### koa
 
-This product includes source derived from [koa](https://github.com/koajs/koa) ([v2.15.0](https://github.com/koajs/koa/tree/v2.15.0)), distributed under the [MIT License](https://github.com/koajs/koa/blob/v2.15.0/LICENSE):
+This product includes source derived from [koa](https://github.com/koajs/koa) ([v2.14.2](https://github.com/koajs/koa/tree/v2.14.2)), distributed under the [MIT License](https://github.com/koajs/koa/blob/v2.14.2/LICENSE):
 
 ```
 (The MIT License)
@@ -1498,7 +1498,7 @@ SOFTWARE.
 
 ### lockfile-lint
 
-This product includes source derived from [lockfile-lint](https://github.com/lirantal/lockfile-lint) ([v4.12.1](https://github.com/lirantal/lockfile-lint/tree/v4.12.1)), distributed under the [Apache-2.0 License](https://github.com/lirantal/lockfile-lint/blob/v4.12.1/LICENSE):
+This product includes source derived from [lockfile-lint](https://github.com/lirantal/lockfile-lint) ([v4.10.1](https://github.com/lirantal/lockfile-lint/tree/v4.10.1)), distributed under the [Apache-2.0 License](https://github.com/lirantal/lockfile-lint/blob/v4.10.1/LICENSE):
 
 ```
 
@@ -1696,7 +1696,7 @@ This product includes source derived from [lockfile-lint](https://github.com/lir
 
 ### newrelic
 
-This product includes source derived from [newrelic](https://github.com/newrelic/node-newrelic) ([v11.10.2](https://github.com/newrelic/node-newrelic/tree/v11.10.2)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-newrelic/blob/v11.10.2/LICENSE):
+This product includes source derived from [newrelic](https://github.com/newrelic/node-newrelic) ([v11.13.0](https://github.com/newrelic/node-newrelic/tree/v11.13.0)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-newrelic/blob/v11.13.0/LICENSE):
 
 ```
                                  Apache License
@@ -1904,7 +1904,7 @@ This product includes source derived from [newrelic](https://github.com/newrelic
 
 ### prettier
 
-This product includes source derived from [prettier](https://github.com/prettier/prettier) ([v2.8.8](https://github.com/prettier/prettier/tree/v2.8.8)), distributed under the [MIT License](https://github.com/prettier/prettier/blob/v2.8.8/LICENSE):
+This product includes source derived from [prettier](https://github.com/prettier/prettier) ([v2.8.6](https://github.com/prettier/prettier/tree/v2.8.6)), distributed under the [MIT License](https://github.com/prettier/prettier/blob/v2.8.6/LICENSE):
 
 ```
 # Prettier license
@@ -7917,7 +7917,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ### tap
 
-This product includes source derived from [tap](https://github.com/tapjs/node-tap) ([v16.3.10](https://github.com/tapjs/node-tap/tree/v16.3.10)), distributed under the [ISC License](https://github.com/tapjs/node-tap/blob/v16.3.10/LICENSE):
+This product includes source derived from [tap](https://github.com/tapjs/node-tap) ([v16.3.8](https://github.com/tapjs/node-tap/tree/v16.3.8)), distributed under the [ISC License](https://github.com/tapjs/node-tap/blob/v16.3.8/LICENSE):
 
 ```
 The ISC License
