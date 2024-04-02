@@ -1,4 +1,13 @@
 {
   "repository": "newrelic/node-test-utilities",
-  "entries": []
+  "entries": [
+    {
+      "version": "8.4.0",
+      "changes": {
+        "security": [],
+        "bugfixes": [],
+        "features": []
+      }
+    }
+  ]
 }

@@ -1,3 +1,14 @@
+### v8.4.0 (2024-04-02)
+
+#### Miscellaneous chores
+
+* Added instrumentation tracking to support newrelic issue 2033 ([#195](https://github.com/newrelic/node-test-utilities/pull/195)) ([730e747](https://github.com/newrelic/node-test-utilities/commit/730e747dffb99c0fa9156566eee03b5cc0a06466))
+* Fixed typo in workflow variable ([#196](https://github.com/newrelic/node-test-utilities/pull/196)) ([6535efa](https://github.com/newrelic/node-test-utilities/commit/6535efa80c1d7fb89a08517c70c5dc414601cfb1))
+
+#### Continuous integration
+
+* Updated repo to use conventional commits for releases ([#194](https://github.com/newrelic/node-test-utilities/pull/194)) ([4254669](https://github.com/newrelic/node-test-utilities/commit/4254669539d2cd7af617f5ea58ae5757db66c3b9))
+
 ### v8.3.0 (2024-03-06)
 
 + Added new Amazon Titan LLM responses to support `token_count` work.
