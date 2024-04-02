@@ -2,7 +2,7 @@
 
 #### Miscellaneous chores
 
-* Added instrumentation tracking to support newrelic issue 2033 ([#195](https://github.com/newrelic/node-test-utilities/pull/195)) ([730e747](https://github.com/newrelic/node-test-utilities/commit/730e747dffb99c0fa9156566eee03b5cc0a06466))
+* Added instrumentation tracking to support newrelic [issue 2033](https://github.com/newrelic/node-newrelic/issues/2033) ([#195](https://github.com/newrelic/node-test-utilities/pull/195)) ([730e747](https://github.com/newrelic/node-test-utilities/commit/730e747dffb99c0fa9156566eee03b5cc0a06466))
 * Fixed typo in workflow variable ([#196](https://github.com/newrelic/node-test-utilities/pull/196)) ([6535efa](https://github.com/newrelic/node-test-utilities/commit/6535efa80c1d7fb89a08517c70c5dc414601cfb1))
 
 #### Continuous integration
