@@ -61,7 +61,7 @@ function int(val) {
 }
 
 function printMode(mode) {
-  if (['pretty', 'simple'].indexOf(mode) === -1) {
+  if (['pretty', 'simple', 'quiet'].indexOf(mode) === -1) {
     console.error('Invalid print mode "' + mode + '"')
     process.exit(5)
   }
@@ -90,10 +90,24 @@ function run(files, patterns) {
   const mode = cmd.major ? 'major' : cmd.patch ? 'patch' : 'minor'
 
   // Create our test structures.
-  const viewer =
-    process.env.TRAVIS || cmd.print === 'simple'
-      ? new printers.SimplePrinter(files, { refresh: 100 })
-      : new printers.PrettyPrinter(files, { refresh: 100 })
+  let viewer
+  switch (cmd.print) {
+    case 'default':
+    case 'simple': {
+      viewer = new printers.SimplePrinter(files, { refresh: 100 })
+      break
+    }
+
+    case 'pretty': {
+      viewer = new printers.PrettyPrinter(files, { refresh: 100 })
+      break
+    }
+
+    case 'quiet': {
+      viewer = new printers.QuietPrinter(files, { refresh: 100 })
+      break
+    }
+  }
 
   const runner = new Suite(directories, {
     limit: maxParallelRuns,
