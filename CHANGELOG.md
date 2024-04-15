@@ -1,3 +1,14 @@
+### v8.5.0 (2024-04-15)
+
+#### Features
+
+* Added a quiet mode printer to versioned-tests ([#201](https://github.com/newrelic/node-test-utilities/pull/201)) ([9477251](https://github.com/newrelic/node-test-utilities/commit/94772519120473980ad264f9da7b99651cca2faf))
+
+#### Continuous integration
+
+* Removed `use_new_release` input from prepare release workflow ([#200](https://github.com/newrelic/node-test-utilities/pull/200)) ([0f40f8b](https://github.com/newrelic/node-test-utilities/commit/0f40f8befbf82aea5fd31fcfa57a6464f3bff393))
+* removed changelog.json file ([#198](https://github.com/newrelic/node-test-utilities/pull/198)) ([3a32b2b](https://github.com/newrelic/node-test-utilities/commit/3a32b2b0b0a5df723f631f43470d6e48deb8cbde))
+
 ### v8.4.0 (2024-04-02)
 
 #### Miscellaneous chores
