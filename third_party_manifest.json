@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "Wed Mar 20 2024 10:34:22 GMT-0400 (Eastern Daylight Time)",
+  "lastUpdated": "Mon May 06 2024 12:37:21 GMT-0400 (Eastern Daylight Time)",
   "projectName": "New Relic Test Utilities",
   "projectUrl": "https://github.com/newrelic/node-test-utilities",
   "includeOptDeps": false,
@@ -299,15 +299,15 @@
       "email": "liran.tal@gmail.com",
       "url": "https://github.com/lirantal"
     },
-    "newrelic@11.13.0": {
+    "newrelic@11.16.0": {
       "name": "newrelic",
-      "version": "11.13.0",
-      "range": "^11.14.0",
+      "version": "11.16.0",
+      "range": "^11.16.0",
       "licenses": "Apache-2.0",
       "repoUrl": "https://github.com/newrelic/node-newrelic",
-      "versionedRepoUrl": "https://github.com/newrelic/node-newrelic/tree/v11.13.0",
+      "versionedRepoUrl": "https://github.com/newrelic/node-newrelic/tree/v11.16.0",
       "licenseFile": "node_modules/newrelic/LICENSE",
-      "licenseUrl": "https://github.com/newrelic/node-newrelic/blob/v11.13.0/LICENSE",
+      "licenseUrl": "https://github.com/newrelic/node-newrelic/blob/v11.16.0/LICENSE",
       "licenseTextSource": "file",
       "publisher": "New Relic Node.js agent team",
       "email": "nodejs@newrelic.com"
