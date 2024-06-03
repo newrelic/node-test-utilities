@@ -1,3 +1,9 @@
+### v8.6.0 (2024-06-03)
+
+#### Miscellaneous chores
+
+* Updated mock agent to exclusively rely on InstrumentationTracker ([#203](https://github.com/newrelic/node-test-utilities/pull/203)) ([0e4d810](https://github.com/newrelic/node-test-utilities/commit/0e4d810210ab2c1e228756d29165791fdd1e4374))
+
 ### v8.5.0 (2024-04-15)
 
 #### Features
