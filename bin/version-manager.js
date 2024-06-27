@@ -30,7 +30,6 @@ cmd
   .option('--major', 'Only iterate on major versions of packages.')
   .option('--minor', 'Iterate over minor versions of packages (default).')
   .option('--patch', 'Iterate over every patch version of packages.')
-  .option('-a, --all', 'Installs all packages, not just ones that differ in version')
   .option('--samples <n>', 'Global samples setting to override what is in tests package', int)
   .option('--strict', 'Throw an error if there are test files that are not being run')
   .action(async (testGlobs) => {
@@ -113,7 +112,6 @@ function run(files, patterns) {
     limit: maxParallelRuns,
     installLimit: cmd.install,
     versions: mode,
-    allPkgs: !!cmd.all,
     testPatterns: patterns,
     globalSamples: cmd.samples,
     strict: !!cmd.strict
