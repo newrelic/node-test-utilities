@@ -1,3 +1,21 @@
+### v8.7.0 (2024-06-28)
+
+#### Features
+
+* Added support for Node 22
+
+#### Code refactoring
+
+* Removed --all flag from versioned runner as all runs will be using this since we no longer support Node.js versions that do not ship with npm7 ([#216](https://github.com/newrelic/node-test-utilities/pull/216)) ([0db82d8](https://github.com/newrelic/node-test-utilities/commit/0db82d88dfe189a4c9ca954fb34121fc2de2d702))
+
+#### Miscellaneous chores
+
+* Updated minimum version of some dev dependencies. ([#209](https://github.com/newrelic/node-test-utilities/pull/209)) ([e032b3e](https://github.com/newrelic/node-test-utilities/commit/e032b3ea543cb331623fcf10d891428f7906c2ee))([#210](https://github.com/newrelic/node-test-utilities/pull/210)) ([a6b631f](https://github.com/newrelic/node-test-utilities/commit/a6b631fc9d9e4c08573304febfe9b68d262f1198))([#212](https://github.com/newrelic/node-test-utilities/pull/212)) ([40fae94](https://github.com/newrelic/node-test-utilities/commit/40fae941e0f40852f6b0f0e89e2865580fcec2df))
+
+#### Continuous integration
+
+* Added Node 22 to CI ([#204](https://github.com/newrelic/node-test-utilities/pull/204)) ([e24fdbc](https://github.com/newrelic/node-test-utilities/commit/e24fdbca95cfb9f7ab75cd77a34a7028d893b631))
+
 ### v8.6.0 (2024-06-03)
 
 #### Miscellaneous chores
