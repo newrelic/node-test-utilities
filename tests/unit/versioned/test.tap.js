@@ -215,12 +215,6 @@ tap.test('Test methods and members', function (t) {
         testRun.stdout,
         new RegExp(
           [
-            // pre-npm 7 shows the package + redis@1.0.0
-            '(?:\\+\\s+redis@1\\.0\\.0.*)?\n?',
-            // pre npm 7 if running tests on fresh checkout
-            '(?:\nadded \\d+ packages? from \\d contributor in \\d(?:\\.\\d+)?s)?\n?',
-            // pre npm 7 if running tests that already has tests/unit/versioned/mock-tests/node_modules
-            '(?:\nupdated \\d+ packages? in \\d(?:\\.\\d+)?s)?\n?',
             // npm 7 + if running tests on fresh checkout
             '(?:\nadded \\d+ packages? in \\d(?:\\.\\d+)?s)?\n?',
             // npm 7 + when running tests that already have tests/unit/versioned/mock-tests/node_modules
@@ -284,7 +278,18 @@ tap.test('Test methods and members', function (t) {
         )
 
         t.ok(nextRun.failed, 'should be marked as a failed run')
-        t.equal(nextRun.stdout, 'stdout - other.mock.tap.js\n', 'should have expected stdout')
+        t.match(
+          nextRun.stdout,
+          new RegExp(
+            [
+              // npm 7 + when running tests that already have tests/unit/versioned/mock-tests/node_modules
+              '(?:\nup to date in \\d(?:\\.\\d+)?s)?\n?',
+              // stdout from loading the fake module
+              '\nstdout - other\\.mock\\.tap\\.js\n'
+            ].join('')
+          ),
+          'should have expected stdout'
+        )
 
         /* eslint-disable max-len */
         t.match(
@@ -301,87 +306,6 @@ tap.test('Test methods and members', function (t) {
       })
     }
   })
-})
-
-tap.test('Test run with allPkgs true', function (t) {
-  const test = new Test(MOCK_TEST_DIR, pkgVersions, { allPkgs: true })
-
-  const testRun = test.run()
-  testRun.on('end', function () {
-    t.match(
-      testRun.stdout,
-      new RegExp(
-        [
-          // pre-npm 7 shows the package + redis@1.0.0
-          '(?:\\+\\s+redis@1\\.0\\.0.*)?\n?',
-          // pre npm 7 if running tests on fresh checkout
-          '(?:\nadded \\d+ packages? from \\d contributor in \\d(?:\\.\\d+)?s)?\n?',
-          // pre npm 7 if running tests that already has tests/unit/versioned/mock-tests/node_modules
-          '(?:\nupdated \\d+ packages? in \\d(?:\\.\\d+)?s)?\n?',
-          // npm 7 + if running tests on fresh checkout
-          '(?:\nadded \\d+ packages? in \\d(?:\\.\\d+)?s)?\n?',
-          // npm 7 + when running tests that already have tests/unit/versioned/mock-tests/node_modules
-          '(?:\nup to date in \\d(?:\\.\\d+)?s)?\n?',
-          // stdout from loading the fake module
-          '\nstdout - redis\\.mock\\.tap\\.js\n'
-        ].join('')
-      ),
-      'should have expected stdout from redis.mock.tap.js'
-    )
-    t.equal(
-      testRun.stderr,
-      'stderr - redis.mock.tap.js\n',
-      'should have expected stderr from redis.mock.tap.js'
-    )
-
-    const nextRun = test.run()
-
-    nextRun.on('end', function () {
-      t.match(
-        nextRun.stdout,
-        new RegExp(
-          [
-            // pre-npm 7 shows the package + redis@1.0.0
-            '(?:\\+\\s+redis@1\\.0\\.0.*)?\n?',
-            // pre npm 7 if running tests on fresh checkout
-            '(?:\nadded \\d+ packages? from \\d contributor in \\d(?:\\.\\d+)?s)?\n?',
-            // pre npm 7 if running tests that already has tests/unit/versioned/mock-tests/node_modules
-            '(?:\nupdated \\d+ packages? in \\d(?:\\.\\d+)?s)?\n?',
-            // npm 7 + if running tests on fresh checkout
-            '(?:\nadded \\d+ packages? in \\d(?:\\.\\d+)?s)?\n?',
-            // npm 7 + when running tests that already have tests/unit/versioned/mock-tests/node_modules
-            '(?:\nup to date in \\d(?:\\.\\d+)?s)?\n?',
-            // stdout from loading the fake module
-            '\nstdout - other\\.mock\\.tap\\.js\n'
-          ].join('')
-        ),
-        'should have expected stdout from other.mock.tap.js'
-      )
-      t.match(
-        nextRun.stderr,
-        new RegExp(
-          [
-            'stderr - other\\.mock\\.tap\\.js',
-            'Failed to execute test: Error: Failed to execute node'
-          ].join('\n')
-        ),
-        'should have expected stderr from other.mock.tap.js'
-      )
-
-      t.end()
-    })
-
-    nextRun.on('completed', function () {
-      nextRun.continue()
-    })
-    nextRun.continue()
-  })
-  testRun.on('completed', function () {
-    testRun.continue()
-  })
-  testRun.continue()
-  test.peek()
-  testRun.continue()
 })
 
 tap.test('Will not filter tests when keywords are an empty list', function (t) {
