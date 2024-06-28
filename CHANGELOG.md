@@ -1,9 +1,8 @@
 ### v8.7.0 (2024-06-28)
 
-#### Security improvements
+#### Features
 
-* **deps:** bump ws ([#212](https://github.com/newrelic/node-test-utilities/pull/212)) ([40fae94](https://github.com/newrelic/node-test-utilities/commit/40fae941e0f40852f6b0f0e89e2865580fcec2df))
-    * Signed-off-by: dependabot[bot] <support@github.com> Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+* Added support for Node 22
 
 #### Code refactoring
 
@@ -11,10 +10,7 @@
 
 #### Miscellaneous chores
 
-* **deps-dev:** bump @grpc/grpc-js from 1.9.9 to 1.10.9 ([#209](https://github.com/newrelic/node-test-utilities/pull/209)) ([e032b3e](https://github.com/newrelic/node-test-utilities/commit/e032b3ea543cb331623fcf10d891428f7906c2ee))
-    * Signed-off-by: dependabot[bot] <support@github.com> Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-* **deps-dev:** bump braces from 3.0.2 to 3.0.3 ([#210](https://github.com/newrelic/node-test-utilities/pull/210)) ([a6b631f](https://github.com/newrelic/node-test-utilities/commit/a6b631fc9d9e4c08573304febfe9b68d262f1198))
-    * Signed-off-by: dependabot[bot] <support@github.com> Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+* Updated minimum version of some dev dependencies. ([#209](https://github.com/newrelic/node-test-utilities/pull/209)) ([e032b3e](https://github.com/newrelic/node-test-utilities/commit/e032b3ea543cb331623fcf10d891428f7906c2ee))([#210](https://github.com/newrelic/node-test-utilities/pull/210)) ([a6b631f](https://github.com/newrelic/node-test-utilities/commit/a6b631fc9d9e4c08573304febfe9b68d262f1198))([#212](https://github.com/newrelic/node-test-utilities/pull/212)) ([40fae94](https://github.com/newrelic/node-test-utilities/commit/40fae941e0f40852f6b0f0e89e2865580fcec2df))
 
 #### Continuous integration
 
