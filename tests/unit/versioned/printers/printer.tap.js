@@ -53,12 +53,12 @@ tap.test('maybePrintMissing', function (t) {
     printer.tests.bluebird.test = { missingFiles: ['file1', 'file2', 'file3'] }
     printer.tests.redis.test = { missingFiles: ['file3', 'file4', 'file5'] }
     printer.maybePrintMissing()
-    t.same(console.log.args, [
+    t.match(console.log.args, [
       [
-        `\u001b[31mThe following test suites had test files that were not included in their package.json:\n\u001b[39m`
+        `The following test suites had test files that were not included in their package.json:\n`
       ],
-      [`\u001b[31mbluebird:\n\t- file1\n\t- file2\n\t- file3\u001b[39m`],
-      [`\u001b[31mredis:\n\t- file3\n\t- file4\n\t- file5\u001b[39m`]
+      [`bluebird:\n\t- file1\n\t- file2\n\t- file3`],
+      [`redis:\n\t- file3\n\t- file4\n\t- file5`]
     ])
     t.end()
   })
@@ -109,7 +109,7 @@ tap.test('printVersionedMatrix', function (t) {
         }
       ],
       {
-        bluebird: ['1.0.3', '1.3.4', '2.0.1', '3.8.1', '4.0.0']
+        bluebird: { versions: ['1.0.3', '1.3.4', '2.0.1', '3.8.1', '4.0.0'] }
       }
     )
     const redisMatrix = new TestMatrix(
@@ -125,7 +125,7 @@ tap.test('printVersionedMatrix', function (t) {
         }
       ],
       {
-        redis: ['1.2.3', '1.3.4', '2.0.1']
+        redis: { versions: ['1.2.3', '1.3.4', '2.0.1'] }
       }
     )
     printer.tests.bluebird.test = { matrix: bluebirdMatrix }
@@ -152,7 +152,7 @@ tap.test('printVersionedMatrix', function (t) {
         }
       ],
       {
-        bluebird: ['2.0.0']
+        bluebird: { versions: ['2.0.0'] }
       }
     )
     const redisMatrix = new TestMatrix(
@@ -168,7 +168,7 @@ tap.test('printVersionedMatrix', function (t) {
         }
       ],
       {
-        redis: ['1.2.3', '1.3.4', '2.0.1']
+        redis: { versions: ['1.2.3', '1.3.4', '2.0.1'] }
       }
     )
     printer.tests.bluebird.test = { matrix: bluebirdMatrix }

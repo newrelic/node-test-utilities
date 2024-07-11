@@ -5,7 +5,7 @@
 
 'use strict'
 
-console.log('stdout - redis.mock.tap.js')
-console.error('stderr - redis.mock.tap.js')
+console.log('stdout - other.mock.test.js')
+console.error('stderr - other.mock.test.js')
 /* eslint-disable no-process-exit */
-process.exit(0)
+process.exit(1)

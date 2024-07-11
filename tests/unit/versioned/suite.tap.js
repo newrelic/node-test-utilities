@@ -32,12 +32,12 @@ tap.test('Suite method and members', function (t) {
 
   t.test('Suite#start', function (t) {
     const updates = [
-      { test: 'redis.mock.tap.js', status: 'waiting' },
-      { test: 'redis.mock.tap.js', status: 'installing' },
-      { test: 'redis.mock.tap.js', status: 'running' },
-      { test: 'redis.mock.tap.js', status: 'success' },
-      { test: 'other.mock.tap.js', status: 'running' },
-      { test: 'other.mock.tap.js', status: 'failure' }
+      { test: 'redis.mock.test.js', status: 'waiting' },
+      { test: 'redis.mock.test.js', status: 'installing' },
+      { test: 'redis.mock.test.js', status: 'running' },
+      { test: 'redis.mock.test.js', status: 'success' },
+      { test: 'other.mock.test.js', status: 'running' },
+      { test: 'other.mock.test.js', status: 'failure' }
       // No "done" event because last test failed.
     ]
     let updateIdx = 0
