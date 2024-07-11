@@ -46,9 +46,9 @@ tap.test('globber', (t) => {
     })
 
     t.test('specific file', (t) => {
-      const globs = globber.buildGlobs([`${TEST_DIR}/other.mock.tap.js`])
+      const globs = globber.buildGlobs([`${TEST_DIR}/other.mock.test.js`])
       t.equal(globs.length, 1)
-      t.match(globs, [`${TEST_DIR}/other.mock.tap.js`])
+      t.match(globs, [`${TEST_DIR}/other.mock.test.js`])
       t.end()
     })
   })
@@ -59,7 +59,7 @@ tap.test('globber', (t) => {
     t.test('resolve asterisk', async (t) => {
       const files = await globber.resolveGlobs([`${TEST_DIR}/*.js`])
       t.equal(files.length, 2)
-      t.match(files, [`${TEST_DIR}/other.mock.tap.js`, `${TEST_DIR}/redis.mock.tap.js`])
+      t.match(files, [`${TEST_DIR}/other.mock.test.js`, `${TEST_DIR}/redis.mock.test.js`])
       t.end()
     })
 
@@ -76,17 +76,17 @@ tap.test('globber', (t) => {
     t.test('handle skips', async (t) => {
       const files = await globber.resolveGlobs(
         [`${TEST_DIR}/*.js`],
-        [`${TEST_DIR}/redis.mock.tap.js`]
+        [`${TEST_DIR}/redis.mock.test.js`]
       )
       t.equal(files.length, 1)
-      t.match(files, [`${TEST_DIR}/other.mock.tap.js`])
+      t.match(files, [`${TEST_DIR}/other.mock.test.js`])
       t.end()
     })
 
     t.test('handle duplicates', async (t) => {
       const files = await globber.resolveGlobs([`${TEST_DIR}/*.js`, `${TEST_DIR}/*.js`])
       t.equal(files.length, 2)
-      t.match(files, [`${TEST_DIR}/other.mock.tap.js`, `${TEST_DIR}/redis.mock.tap.js`])
+      t.match(files, [`${TEST_DIR}/other.mock.test.js`, `${TEST_DIR}/redis.mock.test.js`])
       t.end()
     })
   })
