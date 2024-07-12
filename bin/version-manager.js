@@ -48,7 +48,7 @@ cmd
         console.error('No files matched', globs)
         process.exit(0)
       } else {
-        run(files, patterns)
+        await run(files, patterns)
       }
     }
   })
@@ -67,7 +67,7 @@ function printMode(mode) {
   return mode
 }
 
-function run(files, patterns) {
+async function run(files, patterns) {
   let maxParallelRuns = cmd.jobs
   if (!maxParallelRuns) {
     maxParallelRuns = os.cpus().length
@@ -125,28 +125,35 @@ function run(files, patterns) {
   })
 
   // Off to the races!
-  runner.start((err) => {
-    if (err) {
-      console.log('ERROR'.bold.red)
-      console.error(err)
-      process.exit(3)
-    } else if (runner.failures.length) {
-      console.log('FAIL'.bold.red + ' (' + runner.failures.length + ')')
-      runner.failures.forEach((test) => {
-        console.log(
-          `   packages: ${test.currentRun.packageVersions.join(', ').grey} file: ${
-            test.currentRun.test.red
-          }`
-        )
-      })
-      process.exit(4)
-    } else {
-      const missingFiles = runner.tests.filter((test) => test.missingFiles.length)
-      if (missingFiles.length && runner.opts.strict) {
-        console.log('FAIL'.bold.red)
-        process.exit(1)
-      }
-      console.log('PASS'.bold.green)
+  try {
+    await runner.start()
+  } catch(err) {
+    if (runner.listenerCount('error')) {
+      runner.emit('error', err)
     }
-  })
+
+    console.log('ERROR'.bold.red)
+    console.error(err)
+    process.exit(3)
+  }
+
+  if (runner.failures.length) {
+    console.log('FAIL'.bold.red + ' (' + runner.failures.length + ')')
+    runner.failures.forEach((test) => {
+      console.log(
+        `   packages: ${test.currentRun.packageVersions.join(', ').grey} file: ${
+          test.currentRun.test.red
+        }`
+      )
+    })
+    process.exit(4)
+  } else {
+    const missingFiles = runner.tests.filter((test) => test.missingFiles.length)
+    if (missingFiles.length && runner.opts.strict) {
+      console.log('FAIL'.bold.red)
+      process.exit(1)
+    }
+    console.log('PASS'.bold.green)
+  }
+
 }

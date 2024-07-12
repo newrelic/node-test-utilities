@@ -30,7 +30,7 @@ tap.test('Suite method and members', function (t) {
     suite = new Suite([MOCK_TEST_DIR])
   })
 
-  t.test('Suite#start', function (t) {
+  t.test('Suite#start', async function (t) {
     const updates = [
       { test: 'redis.mock.test.js', status: 'waiting' },
       { test: 'redis.mock.test.js', status: 'installing' },
@@ -43,7 +43,7 @@ tap.test('Suite method and members', function (t) {
     let updateIdx = 0
     const UPDATE_TEST_COUNT = 2
 
-    t.plan(UPDATE_TEST_COUNT * updates.length + 3)
+    t.plan(UPDATE_TEST_COUNT * updates.length + 1)
 
     suite.on('update', function (test, status) {
       const expected = updates[updateIdx++]
@@ -57,9 +57,6 @@ tap.test('Suite method and members', function (t) {
       t.pass('should emit end event')
     })
 
-    suite.start(function (err) {
-      t.pass('should call back')
-      t.error(err, 'should not error')
-    })
+    await suite.start()
   })
 })
