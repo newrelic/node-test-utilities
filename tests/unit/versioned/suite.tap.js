@@ -32,7 +32,6 @@ tap.test('Suite method and members', function (t) {
 
   t.test('Suite#start', async function (t) {
     const updates = [
-      { test: 'redis.mock.test.js', status: 'waiting' },
       { test: 'redis.mock.test.js', status: 'installing' },
       { test: 'redis.mock.test.js', status: 'running' },
       { test: 'redis.mock.test.js', status: 'success' },

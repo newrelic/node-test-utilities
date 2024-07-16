@@ -20,7 +20,6 @@ const { buildGlobs, resolveGlobs } = require('../lib/versioned/globber')
 cmd
   .arguments('[test-globs...]')
   .option('-j, --jobs <n>', 'Max parallel test executions. Defaults to max available CPUs.', int)
-  .option('-i, --install <n>', 'Max parallel installations [1]', int, 1)
   .option('-p, --print <mode>', 'Specify print mode [pretty]', printMode, 'pretty')
   .option('-s, --skip <keyword>[,<keyword>]', 'Skip files containing the supplied keyword(s)')
   .option(
@@ -110,7 +109,6 @@ async function run(files, patterns) {
 
   const runner = new Suite(directories, {
     limit: maxParallelRuns,
-    installLimit: cmd.install,
     versions: mode,
     testPatterns: patterns,
     globalSamples: cmd.samples,
