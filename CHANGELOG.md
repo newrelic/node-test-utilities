@@ -1,3 +1,21 @@
+### v9.0.0 (2024-07-31)
+#### ⚠ BREAKING CHANGES
+
+* Dropped support for Node.js 16
+
+#### Features
+
+* Dropped support for Node.js 16 ([#228](https://github.com/newrelic/node-test-utilities/pull/228)) ([e776e55](https://github.com/newrelic/node-test-utilities/commit/e776e555b960083bec1e6ea482a27c469f164076))
+
+#### Code refactoring
+
+* Reduced dependency on async library ([#219](https://github.com/newrelic/node-test-utilities/pull/219)) ([582efe6](https://github.com/newrelic/node-test-utilities/commit/582efe6c58c339d8235dfa165c50230209a42d02))
+* Removed install queue from versioned runner. It will install before running a given test and rely on the jobs limit ([#221](https://github.com/newrelic/node-test-utilities/pull/221)) ([d9c6d1b](https://github.com/newrelic/node-test-utilities/commit/d9c6d1b24e6e58c03a0359545003420685f85793))
+
+#### Continuous integration
+
+* Fixed test script to run all unit tests ([#218](https://github.com/newrelic/node-test-utilities/pull/218)) ([61336d4](https://github.com/newrelic/node-test-utilities/commit/61336d448d1aba16db0bb4bc6fabdd7d080598db))
+
 ### v8.7.0 (2024-06-28)
 
 #### Features
