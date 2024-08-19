@@ -31,6 +31,7 @@ cmd
   .option('--patch', 'Iterate over every patch version of packages.')
   .option('--samples <n>', 'Global samples setting to override what is in tests package', int)
   .option('--strict', 'Throw an error if there are test files that are not being run')
+  .option('-m, --matrix-count', 'Compute the test matrix and only output the count of tests to be run')
   .action(async (testGlobs) => {
     const skip = cmd.skip ? cmd.skip.split(',') : []
     const patterns = cmd.pattern ? cmd.pattern.split(',') : []
@@ -112,14 +113,47 @@ async function run(files, patterns) {
     versions: mode,
     testPatterns: patterns,
     globalSamples: cmd.samples,
-    strict: !!cmd.strict
+    strict: !!cmd.strict,
+    matrixCountOnly: cmd.matrixCount ?? false
   })
   runner.on('update', viewer.update.bind(viewer))
   runner.on('end', viewer.end.bind(viewer))
 
+  const matrixTable = {
+    total: 0,
+    rows: {}
+  }
   console.log('Finding all versions for a package'.yellow)
   runner.on('packageResolved', (pkg, versions) => {
+    matrixTable.total += versions.length
+    matrixTable.rows[pkg] = versions.length
     console.log(`${pkg}(${versions.length})`)
+  })
+
+  runner.on('matrixCountReady', () => {
+    const sortedRows = []
+
+    const keys = Object.keys(matrixTable.rows).sort()
+    let width = 0
+    for (const key of keys) {
+      if (key.length > width) {
+        width = key.length
+      }
+      sortedRows.push([key, matrixTable.rows[key]])
+    }
+
+
+    let lastRow
+    console.log('\n\nModule Test Versions Counts')
+    for (const row of sortedRows) {
+      lastRow = `${row[0].padEnd(width)} ${row[1].toLocaleString('en-US')}`
+      console.log(lastRow)
+    }
+    console.log('-'.repeat(lastRow.length))
+    
+    console.log('total:'.padEnd(width), matrixTable.total.toLocaleString('en-US'))
+
+    process.exit(0)
   })
 
   // Off to the races!
