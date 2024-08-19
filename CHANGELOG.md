@@ -1,3 +1,9 @@
+### v9.1.0 (2024-08-19)
+
+#### Features
+
+* Added a --matrix-count parameter to versioned tests ([#230](https://github.com/newrelic/node-test-utilities/pull/230)) ([72d8c7d](https://github.com/newrelic/node-test-utilities/commit/72d8c7dbc87a51978a9a635b608443da9518c957))
+
 ### v9.0.0 (2024-07-31)
 #### ⚠ BREAKING CHANGES
 
