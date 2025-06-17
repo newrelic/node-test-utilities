@@ -1,3 +1,9 @@
+### v9.2.0 (2025-06-17)
+
+#### Miscellaneous chores
+
+* Add testing against Node 24 ([#235](https://github.com/newrelic/node-test-utilities/pull/235)) ([97f7a9c](https://github.com/newrelic/node-test-utilities/commit/97f7a9c78a962b2647cb0f8507564c057b3bebd0))
+
 ### v9.1.0 (2024-08-19)
 
 #### Features
