@@ -1,3 +1,14 @@
+### v10.0.0 (2025-07-22)
+#### ⚠ BREAKING CHANGES
+
+This version of the Node.js agent is a SemVer MAJOR update and contains the following breaking changes. MAJOR versions may drop support for language runtimes that have reached End-of-Life according to the maintainer. Additionally, MAJOR versions may drop support for and remove certain instrumentation. For more details on these changes please see the [migration guide](https://docs.newrelic.com/docs/apm/agents/nodejs-agent/installation-configuration/update-nodejs-agent/).
+
+* Removed Node.js 18 support
+
+#### Features
+
+* Removed Node.js 18 support ([#234](https://github.com/newrelic/node-test-utilities/pull/234)) ([8678cb0](https://github.com/newrelic/node-test-utilities/commit/8678cb028475a8240dea21c8c3dfd0f5fe05f0dd))
+
 ### v9.2.0 (2025-06-17)
 
 #### Miscellaneous chores
