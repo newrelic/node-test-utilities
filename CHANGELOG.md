@@ -1,3 +1,12 @@
+### v10.0.0 (2025-07-22)
+#### ⚠ BREAKING CHANGES
+
+* Removed Node.js 18 support
+
+#### Features
+
+* Removed Node.js 18 support ([#234](https://github.com/newrelic/node-test-utilities/pull/234)) ([8678cb0](https://github.com/newrelic/node-test-utilities/commit/8678cb028475a8240dea21c8c3dfd0f5fe05f0dd))
+
 ### v9.2.0 (2025-06-17)
 
 #### Miscellaneous chores
